@@ -64,15 +64,6 @@ function realizarEntrega(audio, comentario){ // SOLO ALUMNO
 
 // tarea[id].entregas
 
-
-
-
-
-
-
-
-
-
 const profesorList = [];
 
 const profesorListTest = [

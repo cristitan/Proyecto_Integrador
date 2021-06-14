@@ -9,12 +9,13 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<style>
-		.myClass_hidden{
-   			opacity: 0;
-    		transform: translateY(20px);
+		section{
+			transition: 0.2s ease;
 		}
-		.myClass_show{
-   			opacity: 1;
+		.hidden{
+   			opacity: 0;
+    		transform: translateY(-100%);
+			position: absolute;
 		}
 		.tabs .tab a {
 			color: #536dfe;
@@ -59,115 +60,196 @@
 			border-bottom: 1px solid rgba(140, 158, 255, 1)  !important;
 			box-shadow: none !important;
 		}
+		.ghostBtn{
+			background-color: transparent;
+			color: #5770ff;
+			border: 2px solid #8a9bff;
+		}
+		.ghostBtn:hover{
+			background-color: rgba(140, 158, 255,0.32);
+		}
 	</style>
 </head>
 
-<body class="blue-grey lighten-4">
+<body class="blue-grey lighten-4" id="root">
 	<nav>
 		<div class="nav-wrapper indigo accent-1">
-			<a href="./index.html" class="brand-logo">GuitarApp</a>
+			<a href="./index.html" class="brand-logo"> GuitarApp</a>
 			<a id="navMenu" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li><a href="sass.html">Regitrarse</a></li>
-				<li><a href="badges.html">Logearse</a></li>
+				<li><button class="waves-effect waves-light btn col s4 offset-s3 ghostBtn text-white">Regitrarse</button></li><!--SEGUIR ACÁ-->
+				<li><a>Iniciar Sessión</a></li>
 			</ul>
 		</div>
 	</nav>
 
 	<ul class="sidenav" id="mobile-demo">
 		<li><a href="sass.html">Registrarse</a></li>
-		<li><a href="badges.html">Logearse</a></li>
+		<li><a href="badges.html">Iniciar Sessión</a></li>
 	</ul>
+	<main>
 
-	<div class="row">
-		<div class="col s12 row">
-			<div class="col s1"></div>
-			<h3 class="col s12 l8 indigo-text text-accent-1">
-				<i class="small material-icons" style="font-size: 45px;
-				vertical-align: bottom;">account_circle</i>
-				Resgistrarse como:
-			</h3>
-		</div>
-		<!-- <div class="col s12 row">
-			<div class="col s1"></div>
-			<div class="divider col s6 indigo accent-1"></div>
-		</div> -->
-	</div>
-
-	<main class="row container s12">
-		<ul id="tabs-swipe-demo" id="tabMenu" class="row tabs container s6 white">
-			<li class="tab col s6 m3"><a href="#alumnoForm">Alumno</a></li>
-			<li class="tab col s6 m3"><a class="active" href="#profesorForm">Profesor</a></li>
-		</ul>
-		<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
-			<div id="alumnoForm">
-				<form class="col s12" id="alumnoForm">
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="alumno_first_name" type="text" class="validate">
-							<label for="alumno_first_name">Nombre de Alumno</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="alumno_last_name" type="text" class="validate">
-							<label for="alumno_last_name">Usuario de Alumno</label>
-						</div>
-					</div>
-					<div class="row">
-						<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
-							<input id="alumno_password" type="password" class="validate">
-							<label for="alumno_password">Contraseña</label>
-						</div>
-					</div>
-					
-					<div class="row">
-						<div class="input-field col s12">
-						<select id="profesores">
-						  <option value="" disabled selected>Choose your option</option>
-						  
-						</select>
-						<label>Materialize Select</label>
-					  </div>
-					</div>
-					<div class="row">
-
-						<a class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</a>
-						
-					</div>
-				</form>
+		<section class="vistaPublico" id="registro">
+			<div class="row">
+				<div class="col s12 row">
+					<div class="col s1"></div>
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						<i class="small material-icons" style="font-size: 45px;
+						vertical-align: bottom;">account_circle</i>
+						Resgistrarse como:
+					</h3>
+				</div>
+				<!-- <div class="col s12 row">
+					<div class="col s1"></div>
+					<div class="divider col s6 indigo accent-1"></div>
+				</div> -->
 			</div>
-			<div id="profesorForm">
-				<form class="col s12" id="profesorForm">
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="profesor_first_name" type="text" class="validate">
-							<label for="profesor_first_name">Nombre de Docente</label>
-						</div>
+		
+			<div class="row container s12">
+				<ul id="tabMenuRegistro" class="row tabs container s6 white">
+					<li class="tab col s6 m3"><a href="#alumnoForm">Alumno</a></li>
+					<li class="tab col s6 m3"><a class="active" href="#profesorForm">Profesor</a></li>
+				</ul>
+				<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
+					<div id="alumnoForm">
+						<form class="col s12" id="alumnoForm">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="alumno_first_name" type="text" class="validate">
+									<label for="alumno_first_name">Nombre de Alumno</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="alumno_last_name" type="text" class="validate">
+									<label for="alumno_last_name">Usuario de Alumno</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
+									<input id="alumno_password" type="password" class="validate">
+									<label for="alumno_password">Contraseña</label>
+								</div>
+							</div>
+							
+							<div class="row">
+								<div class="input-field col s12">
+								<select id="profesores">
+								<option value="" disabled selected>Choose your option</option>
+								
+								</select>
+								<label>Materialize Select</label>
+							</div>
+							</div>
+							<div class="row">
+		
+								<a id="btnRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</a>
+								
+							</div>
+						</form>
 					</div>
-					<div class="row">
-						<div class="input-field col s12">
-							<input id="profesor_last_name" type="text" class="validate">
-							<label for="profesor_last_name">Usuario de Docente</label>
-						</div>
+					<div id="profesorForm">
+						<form class="col s12" id="profesorForm">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="profesor_first_name" type="text" class="validate">
+									<label for="profesor_first_name">Nombre de Docente</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="profesor_last_name" type="text" class="validate">
+									<label for="profesor_last_name">Usuario de Docente</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
+									<input id="profesor_password" type="password" class="validate">
+									<label for="profesor_password">Contraseña</label>
+								</div>
+							</div>
+							<div class="row">
+		
+								<button id="btnRegistro_profesor" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
+								
+							</div>
+						</form>
 					</div>
-					<div class="row">
-						<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
-							<input id="profesor_password" type="password" class="validate">
-							<label for="profesor_password">Contraseña</label>
-						</div>
-					</div>
-					<div class="row">
-
-						<button id="btn" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
-						
-					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+
+		</section>
+
+		
+		<section class="vistaPublico" id="login">
+			<div class="row">
+				<div class="col s12 row">
+					<div class="col s1"></div>
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						<i class="small material-icons" style="font-size: 45px;
+						vertical-align: bottom;">account_circle</i>
+						Acceder como:
+					</h3>
+				</div>
+				<!-- <div class="col s12 row">
+					<div class="col s1"></div>
+					<div class="divider col s6 indigo accent-1"></div>
+				</div> -->
+			</div>
+		
+			<div class="row container s12">
+				<ul id="tabMenuLogin" class="row tabs container s6 white">
+					<li class="tab col s6 m3"><a href="#alumnoFormm">Alumno</a></li>
+					<li class="tab col s6 m3"><a class="active" href="#profesorFormm">Profesor</a></li>
+				</ul>
+				<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
+					<div id="alumnoFormm">
+						<form class="col s12" id="login_alumnoLogin">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="login_alumno_last_name" type="text" class="validate">
+									<label for="login_alumno_last_name">Usuario de Alumno</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" style="transition: 0.3s ease;">
+									<input id="login_alumno_password" type="password" class="validate">
+									<label for="login_alumno_password">Contraseña</label>
+								</div>
+							</div>
+							<div class="row">
+								<button id="btnIrRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
+								<a  id="btnLogin_alumno" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</a>
+							</div>
+						</form>
+					</div>
+					<div id="profesorFormm">
+						<form class="col s12" id="login_profesorForm">
+							<div class="row">
+								<div class="input-field col s12">
+									<input id="login_profesor_usuario" type="text" class="validate" minlength="6" required="true">
+									<label for="login_profesor_usuario">Usuario de Docente</label>
+								</div>
+							</div>
+							<div class="row">
+								<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
+									<input id="login_profesor_password" type="password" class="validate">
+									<label for="login_profesor_password">Contraseña</label>
+								</div>
+							</div>
+							<div class="row">
+								<button id="btnIrRegistro_profesor" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
+								<button id="btnLogin_profesor" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
+								
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+
+		</section>
+		
 	</main>
-	
-	
 
 			<!-- <button class="btn waves-effect waves-light col s2 offset-s10" name="action" onClick="()=>{document.getElementById('test').classList.add('myClass_show')}">Submit
 				<i class="material-icons right">send</i>
@@ -175,19 +257,23 @@
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script src="./js/db.js"></script>
-	<script src="./js/registro.js"></script>
+	<script src="./js/db.js"></script><!-- SCRIPT QUE SE ENCARGA DE CRUD A LOS DATOS -->
+	<script src="./js/cambioVista.js"></script><!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
 	<script src="./js/components.js"></script>
 	
 	<script>
+		ocultarTodo();
+		mostrarOneSection("section#login")
 		let sideBar;
 		document.addEventListener('DOMContentLoaded', function () {
 			var elems = document.querySelectorAll('.sidenav');
 			var selectElem = document.querySelectorAll('select');
-			var tabElem = document.querySelectorAll('#tabs-swipe-demo');
+			var tabElemRegistro = document.querySelectorAll('#tabMenuRegistro');
+			var tabElemLogin = document.querySelectorAll('#tabMenuLogin');
 			let sideBar = M.Sidenav.init(elems);
 			let select = M.FormSelect.init(selectElem);
-			let tab = M.Tabs.init(tabElem)//, {swipeable: true})
+			let tabRegistro = M.Tabs.init(tabElemRegistro)//, {swipeable: true})
+			let tabLogin = M.Tabs.init(tabElemLogin)//, {swipeable: true})
 
 		});
 		// document.querySelector("button#btn").addEventListener("click", ()=>{

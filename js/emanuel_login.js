@@ -49,25 +49,76 @@ let alumnos = []
 let profesores = [
     ]
 
-usuarioActual = {}  // usuarioActual es la variable que en la funciòn de login se colocarán
+usuarioActual = { // REFERENCIAS
+	lista: [],
+	indice: 0,
+	usuarioId: ""
+}  // usuarioActual es la variable que en la funciòn de login se colocarán
                                 // los datos del usuario que se consiguió logear.
                                 // no sé bien como se inicializaría, por eso puse usuarioLogeado al menos para darnos cuenta de que es esa clase
+getAlumno(usuarioActual.usuarioId).nivel
 
-class usuarioLogeado {
-    constructor(tipoUsuario, user, nombre, password, docenteAsignado, nivelAlumno) {
-        this.tipoUsuario = tipoUsuario
-        this.user = user
-        this.nombre = nombre
-        this.password = password
-        this.docenteAsignado = docenteAsignado // En caso de que sea un perfil de profesor: docenteAsignado = -1
-        this.nivelAlumno = nivelAlumno // En caso de que sea un perfil de profesor: nivelAlumno = -1
-    }
+// const getAlumno = (lista, usuarioId) => {}
+function getAlumno(usuarioId){
+	for (const alumno of listaAlumnos) {
+		if(alumno.usuario === usuarioId){
+			return alumno
+		}
+	}
 }
-
+function getDocente(usuarioId){
+	for (const docente of listaDocentes) {
+		if(docente.usuario === usuarioId){
+			return docente
+		}
+	}
+}
 document.querySelector('#btnLogin').addEventListener('click', login)
 
+// const contieneSimbolos(text){
+// 	esValid = false
+// 	if(wefgew){
+// 		//
+// 		// esValid = true
+// 	}
+// 	return esValid
+// }
 
-function login(userInput, passwordInput) {
+function login(userInput, passwordInput, tipoUsuario) {
+	// if(userInput.length >= 4 && contieneSimbolos(userInput)){
+	// 	if (passwordInput.length >= 6) {
+	// 		const nuevoDocente = new Docente(userInput, passwordInput, idfugdfb)
+	// 		listaDocente.push(nuevoDocente)
+	// 	} else {
+	// 		console.log("El usuario debe tener más de 4 caracteres")
+	// 		crearAlert("La contraseña debe tener más de 5 caracteres")
+	// 	}
+	// }
+	// else{
+	// 	console.log("El usuario debe tener más de 4 caracteres")
+	// }
+	if(tipoUsuario === "alumno"){
+		for (const [indice, alumno] of listaAlumnos) {
+			if(alumno.user === userInput){
+				console.log("Encontramos al usuario")
+				
+				if(alumno.password === passwordInput){
+					console.log("Logeado!")
+					usuarioActual.lista = listaAlumnos;
+					usuarioActual.indice = indice
+					userLogeado.usuarioId = alumno.usuario
+				}
+				else{
+					console.log("Contraseña incorrecta")
+				}
+			} 
+			else{
+				console.log("Usuario no encontrado")
+			}
+		}
+
+	}
+
     userInput = document.querySelector("#user").value // acá el query selector de input de usuario
     userpasswordInput = document.querySelector("#password").value // acá input de contraseña
     let credencialesCorrectas = false

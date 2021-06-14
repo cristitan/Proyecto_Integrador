@@ -106,11 +106,28 @@ passwordInput = document.querySelector("#password").value // acá input de contr
 		}
 
 	}
-
-  
-  /*   if (usuarioActual.tipoUsuario === docente) {
-        document.querySelector("#test").innerHTML = "LOGIN HECHO"
-    } */
+	else{
+		if(tipoUsuario === "docente"){
+		for (const [indice, alumno] of listaDocentes) {
+			if(docente.user === userInput){
+				console.log("Encontramos al usuario")
+				
+				if(docente.password === passwordInput){
+					console.log("Logeado!")
+					usuarioLogeado.lista = listaDocentes;
+					usuarioLogeado.indice = indice
+					userLogeado.usuarioId = docente.usuario
+				}
+				else{
+					console.log("Contraseña incorrecta")
+				}
+			} 
+			else{
+				console.log("Usuario no encontrado")
+			}
+		}
+	
+	}
 }
 
 

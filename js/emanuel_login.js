@@ -55,14 +55,14 @@ const listaDocentes =  [
 
 ]
 
-usuarioActual = { // REFERENCIAS
+usuariologeado = { // REFERENCIAS
 	lista: [],
 	indice: 0, // 
 	usuarioId: "" // el usuario id para enviar como parametro a getAlumno para encontrar el alumno
 }  
 
 
-// Funcion GetAlumno para encontrar alumnos en el array listaAlumnos.  (Ejemplo: getAlumno(usuarioActual.usuarioId).nivel para obtener el nivel del alumno en funciones)
+// Funcion GetAlumno para encontrar alumnos en el array listaAlumnos.  (Ejemplo: getAlumno(usuarioLogeado.usuarioId).nivel para obtener el nivel del alumno en funciones)
 function getAlumno(usuarioId){
 	for (const alumno of listaAlumnos) {
 		if(alumno.usuario === usuarioId){
@@ -83,6 +83,7 @@ function getDocente(usuarioId){
 function login(userInput, passwordInput, tipoUsuario) {
 	
 userInput = document.querySelector("#user").value // acá el query selector de input de usuario	
+passwordInput = document.querySelector("#password").value // acá input de contraseña
 	
 	if(tipoUsuario === "alumno"){
 		for (const [indice, alumno] of listaAlumnos) {
@@ -91,8 +92,8 @@ userInput = document.querySelector("#user").value // acá el query selector de i
 				
 				if(alumno.password === passwordInput){
 					console.log("Logeado!")
-					usuarioActual.lista = listaAlumnos;
-					usuarioActual.indice = indice
+					usuarioLogeado.lista = listaAlumnos;
+					usuarioLogeado.indice = indice
 					userLogeado.usuarioId = alumno.usuario
 				}
 				else{
@@ -107,7 +108,7 @@ userInput = document.querySelector("#user").value // acá el query selector de i
 	}
 
     
-    userpasswordInput = document.querySelector("#password").value // acá input de contraseña
+    
     let credencialesCorrectas = false
     
     for (let i = 0; i < users.length; i++) {
@@ -117,8 +118,8 @@ userInput = document.querySelector("#user").value // acá el query selector de i
     }
 
     if (credencialesCorrectas === true) {
-       let usuarioActual = new usuarioLogeado
-       usuarioActual =  { 
+       let usuarioLogeado = new usuarioLogeado
+       usuarioLogeado =  { 
             tipoUsuario = users[i].tipoUsuario, // unexpected token ' . '  
             user = users[i].user, // Invalid Shorthand property
             nombre = users[i].nombre,
@@ -126,7 +127,7 @@ userInput = document.querySelector("#user").value // acá el query selector de i
            /*  docenteAsignado = users[i].docenteAsignado,
             nivelAlumno = users[i].nivelAlumno, */
         }
-        usuarioLogeado = usuarioActual
+        usuarioLogeado = usuarioLogeado
     }
   /*   if (usuarioActual.tipoUsuario === docente) {
         document.querySelector("#test").innerHTML = "LOGIN HECHO"

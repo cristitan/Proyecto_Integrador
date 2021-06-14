@@ -1,11 +1,11 @@
 class Alumnos {
-    constructor(user, nombre, password, docenteAsignado, nivelAlumno, entregas) {
+    constructor(user, nombre, password, docenteAsignado) {
         this.user = user
         this.nombre = nombre
         this.password = password
         this.docenteAsignado = docenteAsignado
         this.nivelAlumno = nivelAlumno
-	this.entregas = entregas []   
+	this.entregas = entregas   
     }
 }
 class Docentes {
@@ -107,28 +107,7 @@ passwordInput = document.querySelector("#password").value // acá input de contr
 
 	}
 
-    
-    
-    let credencialesCorrectas = false
-    
-    for (let i = 0; i < users.length; i++) {
-        if (userInput === users[i].user && passwordInput === users[i].password)
-            credencialesCorrectas = true
-        break;
-    }
-
-    if (credencialesCorrectas === true) {
-       let usuarioLogeado = new usuarioLogeado
-       usuarioLogeado =  { 
-            tipoUsuario = users[i].tipoUsuario, // unexpected token ' . '  
-            user = users[i].user, // Invalid Shorthand property
-            nombre = users[i].nombre,
-            password = users[i].password,
-           /*  docenteAsignado = users[i].docenteAsignado,
-            nivelAlumno = users[i].nivelAlumno, */
-        }
-        usuarioLogeado = usuarioLogeado
-    }
+  
   /*   if (usuarioActual.tipoUsuario === docente) {
         document.querySelector("#test").innerHTML = "LOGIN HECHO"
     } */

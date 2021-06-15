@@ -1,18 +1,32 @@
+class Docente {
+	constructor(unNombre, unUsuario, password) {
+		this.nombre = unNombre;
+		this.usuario = unUsuario;
+		this.password = password;
+		this.alumnosAsignados = [];
+		this.tareasPlanteadas = [];
+	}
+}
+class Alumno {
+    constructor(usuario, nombre, password, usuarioDocenteAsignado) {
+        this.usuario = usuario
+        this.nombre = nombre
+        this.password = password
+        this.usuarioDocenteAsignado = usuarioDocenteAsignado
+        this.nivelAlumno = "inicial"
+		this.entregas = []
+    }
+}
 
-// PROFESOR 
-// {
-// 	nombre: string, 
-// 	usuario: string, 
-// 	password: string, 
-// 	profesor: stringID > profesorList, 
-// 	nivel: string
-// }
-
-let userLogeado = "user loggeado"
-
-// Lógica para mostrar y ocultar secciones
-// document.querySelector("wsf").addClass("hidden"); // Todos
-// document.querySelector("wsf").removeClass("hidden") // Para mostrar específico
+const usuarioLogeado = { // REFERENCIAS
+	listaPerteneciente: [],
+	indice: 0, // 
+	usuarioId: "" // ? el usuario id para enviar como parametro a getAlumno para encontrar el alumno
+} // Por qué no poner dataUsuarioLogeado dentro del usuarioLogeado
+const dataUsuarioLogeado = usuarioLogueado.listaPerteneciente[usuarioLogueado.indice]
+// usuarioLogeado.listaPerteneciente = alumnosList
+const alumnosList = [];
+const docentesList = [];
 
 function registrarAlumno(user, nombre, password, profesorUsr){ // WIP = WORK IN PROGRESS
 	const nuevoAlumno = {
@@ -61,12 +75,7 @@ function realizarEntrega(audio, comentario){ // SOLO ALUMNO
 	getTarea(getProfesor(userLogeado.profesor), idTarea).entregas.push(nuevaEntrega);
 }
 
-
-// tarea[id].entregas
-
-const profesorList = [];
-
-const profesorListTest = [
+const docentesListTest = [
 	{
 		nombre: "Santi Fig",
 		usuario: "santFig",
@@ -98,35 +107,60 @@ const profesorListTest = [
 		usuario: "santFig2",
 	}
 ];
-
-// ALUMNO 
-// {
-// 	nombre: string, 
-// 	usuario: string, 
-// 	password: string, 
-// 	profesor: stringID > profesorList, 
-// 	nivel: string,
-// 	entregas: [ejercicioObj],
-// 	promedio: string,
-// 	nivel: string,
-// }
-const alumnoList = [];
-
-const alumnoListTest = [
-	{nombre: "Marcos Medina", usuario: "marcmed", password: "mkmPass21", profesor: "santifag", nivel: "inicial"},
+const alumnosListTest = [
+	{
+		nombre: "Marcos Medina",
+		usuario: "marcmed",
+		password: "mkmPass21",
+		docente: "santifag",
+		nivel: "inicial",
+		entregas: []
+	},
 	{nombre: "Emanuel Díaz", usuario: "emadiaz", password: "emaPass12", profesor: "santifag", nivel: "inicial"},
 	{nombre: "Cristian Poggi", usuario: "crispog", password: "crisPass4", profesor: "santifag", nivel: "inicial", entregas: []},
 ];
 
-// EJERCICIO 
-// {
-// 	titulo: string, 
-// 	usuario: string, 
-// 	password: string, 
-// 	profesor: stringID > profesorList, 
-// 	nivel: string
-// }
+function getDocente(usuarioId){
+    for (const docente of docentesList) {
+        if(docente.usuario === usuarioId){
+            return docente
+        }
+    }
+}
+function getAlumno(usuarioId){
+    for (const alumno of alumnosList) {
+        if(docente.usuario === usuarioId){
+            return alumno
+        }
+    }
+}
 
-const ejerciciosList = [];
+const listaDeTareasTotalesQueTieneElAlumno = [];
+const listaDeTareasPendientesQueTieneElAlumno = [];
+const listaDeTareasRealizadasQueTieneElAlumno = [];
 
-const ejerciciosListTest = [];
+const docenteDelAlumnoLogeado = getDocente(dataUsuarioLogeado.usuarioDocenteAsignado)
+// OBTENER TODAS LAS TAREAS PLANTEADAS POR EL DOCENTE SEGUN NIVEL PARA EL ALUMNO
+for (const tareaPlanteada of docenteDelAlumnoLogeado.tareasPlanteadas) {
+	if(tareaPlanteada.nivel === usuarioLogeado.nivel){ //usuarioLogueado es un alumno
+		listaDeTareasTotalesQueTieneElAlumno.push(tareaPlanteada)
+	}
+}
+
+// OBTENER TODAS LAS TAREAS PLANTEADAS POR EL DOCENTE YA RESUELTAS POR EL ALUMNO
+for (const tarea of listaDeTareasTotalesQueTieneElAlumno) { //Cómo llego al profesor
+	let existe = false;
+	for (const entrega of dataUsuarioLogeado.entregas) {
+		if(tarea.id === entrega.idTarea){
+			existe = true
+			break;
+			// listaDeTareasRealizadasQueTieneElAlumno.push(tarea)
+		}
+	}
+	if (existe){
+		listaDeTareasRealizadasQueTieneElAlumno.push(tarea)
+	}
+	else{
+		listaDeTareasPendientesQueTieneElAlumno.push(tarea)
+	}
+}

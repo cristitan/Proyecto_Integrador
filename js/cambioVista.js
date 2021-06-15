@@ -4,8 +4,9 @@
 // elem.classList.contains("class") – checks for the given class, returns true/false.
 // const botonesParaIrRegistro = //REGISTRAR TODOS LOS BOTONES QUE CAMBIEN A > REGISTRO (REPETIR PARA TODAS LAS VISTAS)
 const body = "body#root"
+const botonesHome = document.querySelectorAll(`${body} button.irPrincipal`)
 const ocultarTodo = ()=>{
-	const allSections = document.querySelectorAll(`${body} section.vistaPublico`);
+	const allSections = document.querySelectorAll(`${body} section`);
 	for (const section of allSections) {
 		section.classList.add("hidden")
 	}
@@ -24,8 +25,9 @@ document.querySelector("body main section#login div#profesorFormm button#btnIrRe
 	mostrarOneSection("section#registro")
 })
 
-
-
+for (const boton of botonesHome) {
+	boton.addEventListener("click", ()=>{mostrarOneSection("section#pantallaPrincipal")})
+}
 // document.querySelector("button#loginAlumno").addEventListener("click", (e)=>{
 // 	e.preventDefault()
 // 	mostrarOneSection(input.value, inputPass.value, "alumno")

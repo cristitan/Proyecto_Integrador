@@ -87,7 +87,7 @@
 		<li><a href="sass.html">Registrarse</a></li>
 		<li><a href="badges.html">Iniciar Sessión</a></li>
 	</ul>
-	<main>
+	<main style="background-color: brown;">
 
 		<section class="vistaPublico" id="registro">
 			<div class="row">
@@ -219,7 +219,7 @@
 							</div>
 							<div class="row">
 								<button id="btnIrRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
-								<a  id="btnLogin_alumno" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</a>
+								<button  id="btnLogin_alumno" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
 							</div>
 						</form>
 					</div>
@@ -240,7 +240,6 @@
 							<div class="row">
 								<button id="btnIrRegistro_profesor" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
 								<button id="btnLogin_profesor" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
-								
 							</div>
 						</form>
 					</div>
@@ -248,7 +247,36 @@
 			</div>
 
 		</section>
-		
+
+		<section id="pantallaPrincipal">
+			<h1>EMA _ Principal</h1>
+			
+			<button id="realizarTarea" class="irPrincipal btn waves-effect waves-light">
+				<i class="material-icons right">send</i>
+				Realizar Tarea
+			</button>
+			<button id="verResueltos" class="irPrincipal btn waves-effect waves-light">
+				<i class="material-icons right">send</i>
+				Ver Tareas Resueltas
+			</button>
+		</section>
+		<section id="realizarEntregaTarea">
+			<h1>CRIS _ PANTALLA DE ENTREGA DE TAREA</h1>
+			<input type="text" id="comentario"/>
+			<button class="irPrincipal btn waves-effect waves-light">
+				<i class="material-icons right">home</i>
+				Ir a pantalla Principal
+			</button>
+		</section>
+		<section id="verEjerciciosResultos">
+			<h1>MARC _ PANTALLA DE EJERCICIOS RESUELTOS</h1>
+			<input type="text" id="comentariorg"/>
+			<button class="irPrincipal btn waves-effect waves-light">
+				<i class="material-icons right">home</i>
+				Ir a pantalla Principal
+			  </button>
+		</section>
+		<a class="btn" id="toast" onclick="">Toast Test!</a>
 	</main>
 
 			<!-- <button class="btn waves-effect waves-light col s2 offset-s10" name="action" onClick="()=>{document.getElementById('test').classList.add('myClass_show')}">Submit
@@ -257,13 +285,24 @@
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script src="./js/db.js"></script><!-- SCRIPT QUE SE ENCARGA DE CRUD A LOS DATOS -->
+	<script src="./js/db.js"></script><!-- SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS -->
 	<script src="./js/cambioVista.js"></script><!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
-	<script src="./js/components.js"></script>
+	<script src="./js/main.js"></script>
 	
 	<script>
 		ocultarTodo();
-		mostrarOneSection("section#login")
+		// mostrarOneSection("section#login")
+		// mostrarOneSection("section#tareasPendienteAlumno")
+		mostrarOneSection("section#pantallaPrincipal")
+
+		document.getElementById("realizarTarea").addEventListener("click", ()=>{
+			mostrarOneSection("section#realizarEntregaTarea")
+		})
+
+		document.getElementById("verResueltos").addEventListener("click", ()=>{
+			mostrarOneSection("section#verEjerciciosResultos")
+		})
+
 		let sideBar;
 		document.addEventListener('DOMContentLoaded', function () {
 			var elems = document.querySelectorAll('.sidenav');
@@ -276,12 +315,15 @@
 			let tabLogin = M.Tabs.init(tabElemLogin)//, {swipeable: true})
 
 		});
+		document.getElementById().addEventListener("click", ()=>{
+			M.toast('I am a toast', 4000, 'blue')
+		})
 		// document.querySelector("button#btn").addEventListener("click", ()=>{
 		// 	 document.getElementById("profesorForm").innerHTML = imgGatito()
 		// })
-		for (const profesor of profesorListTest) {
-			document.querySelector("select#profesores").innerHTML += `<option value="${profesor.usuario}">${profesor.nombre}</option>`
-		}
+		// for (const profesor of profesorListTest) {
+		// 	document.querySelector("select#profesores").innerHTML += `<option value="${profesor.usuario}">${profesor.nombre}</option>`
+		// }
 		
 			// document.querySelector("#navMenu").addEventListener("click", ()=>{
 			// 	sideBar.open();

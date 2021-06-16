@@ -1,3 +1,20 @@
+/* VALIDACIONES */
+
+function validarNombre(nombre) {
+  const symbolChars = "!`@#$%^&*()+=-[]\\';,./{}|\":<>?~_";
+  if (nombre.length < 4) {
+    return false;
+  }
+  for (var i = 0; i < nombre.length; i++) {
+    const letraDeNombre = nombre[i];
+    if (symbolChars.includes(letraDeNombre)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+/* REGISTROS */
 function registrarDocente() {
   // WIP Validaciones
   let nombreDocente = document.querySelector("#profesor_first_name").value;
@@ -19,10 +36,18 @@ function listarDocente() {
 }
 
 // POR AHORA SOLO ES PARA ERRORES
-function mostrarAlerta(texto) {
+// tipoDeAlerta = "success", "alert", "error"
+function mostrarAlerta(texto, tipoDeAlerta) {
+  const statesStyles = {
+    error: ["red-text", "cancel"],
+    alert: ["yellow-text text-darken-3", "error"],
+    success: ["green-text text-darken-3", "check_circle"],
+  };
+  const classToAssign = `toast toast_${tipoDeAlerta}`;
+  console.log(classToAssign);
   M.toast({
-    html: `<span><i class="material-icons left red-text">error_outline</i><b>${texto}</b></span>`,
+    html: `<span><i class="material-icons left ${statesStyles[tipoDeAlerta][0]}">${statesStyles[tipoDeAlerta][1]}</i><b>${texto}</b></span>`,
     displayLength: 4000,
-    class: "toast",
+    classes: classToAssign,
   });
 }

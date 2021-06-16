@@ -17,8 +17,16 @@
 			background-color: rgb(216, 218, 230);
 			color: rgba(10, 0, 0, 0.7);
 			height: 40px;
-			box-shadow: 0px 2px 5px 2px lightcoral;
 			border-radius: 10px;
+		}
+		.toast_error{
+			box-shadow: 0px 2px 5px 2px lightcoral;
+		}
+		.toast_alert{
+			box-shadow: 0px 2px 5px 2px #fbc02d ;
+		}
+		.toast_success{
+			box-shadow: 0px 2px 5px 2px #43a047;
 		}
 		section{
 			transition: 0.2s ease;
@@ -288,7 +296,7 @@
 			  </button>
 		</section>
 	</main>
-	<!-- <a class="btn" id="btnToast" onclick="">Toast Test!</a> -->
+	<a class="btn" id="btnToast" onclick="">Toast Test!</a>
 
 			<!-- <button class="btn waves-effect waves-light col s2 offset-s10" name="action" onClick="()=>{document.getElementById('test').classList.add('myClass_show')}">Submit
 				<i class="material-icons right">send</i>
@@ -327,7 +335,7 @@
 
 		});
 		document.getElementById("btnToast").addEventListener("click", ()=>{
-			mostrarAlerta("Mucho Texto")
+			mostrarAlerta("Entregaste la tarea", "success") // Cambiar estilo para que muestre bien
 		})
 		// document.querySelector("button#btn").addEventListener("click", ()=>{
 		// 	 document.getElementById("profesorForm").innerHTML = imgGatito()

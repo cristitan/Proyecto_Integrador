@@ -9,6 +9,17 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<style>
+		.toast{
+			position: fixed;
+			top: auto !important;
+			bottom: 10px;
+			right: 10px;
+			background-color: rgb(216, 218, 230);
+			color: rgba(10, 0, 0, 0.7);
+			height: 40px;
+			box-shadow: 0px 2px 5px 2px lightcoral;
+			border-radius: 10px;
+		}
 		section{
 			transition: 0.2s ease;
 		}
@@ -276,8 +287,8 @@
 				Ir a pantalla Principal
 			  </button>
 		</section>
-		<a class="btn" id="toast" onclick="">Toast Test!</a>
 	</main>
+	<!-- <a class="btn" id="btnToast" onclick="">Toast Test!</a> -->
 
 			<!-- <button class="btn waves-effect waves-light col s2 offset-s10" name="action" onClick="()=>{document.getElementById('test').classList.add('myClass_show')}">Submit
 				<i class="material-icons right">send</i>
@@ -285,7 +296,7 @@
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<script src="./js/db.js"></script><!-- SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS -->
+	<!-- <script src="./js/db.js"></script>SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS -->
 	<script src="./js/cambioVista.js"></script><!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
 	<script src="./js/main.js"></script>
 	
@@ -315,8 +326,8 @@
 			let tabLogin = M.Tabs.init(tabElemLogin)//, {swipeable: true})
 
 		});
-		document.getElementById().addEventListener("click", ()=>{
-			M.toast('I am a toast', 4000, 'blue')
+		document.getElementById("btnToast").addEventListener("click", ()=>{
+			mostrarAlerta("Mucho Texto")
 		})
 		// document.querySelector("button#btn").addEventListener("click", ()=>{
 		// 	 document.getElementById("profesorForm").innerHTML = imgGatito()

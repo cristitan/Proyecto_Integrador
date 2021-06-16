@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <H1 style="text-align: center; color: red;" >POR AHORA SOLO TENGO SECCIONES DE LA FUNCION 4: EL MODAL DE ENTREGAR TAREAS</H1>
+    <br>
+    <br>
+
+<!-- F04 y F04.01 Seccion a mostrar: El MODAL:
+     INSERTAR TODA ESTA SECCION EN UN MODAL PARA QUE SE VEA ORDENADA 100% COMO LA FOTO -->
+<section id= "f04EntregaModal" style="display: flex; flex-direction: column;"> 
+    <h2 style="align-self: flex-start; margin-left: 10%;">Entregar Tarea</h2>
+    <button class="btnVolverATareas" style="align-self: flex-end; margin-right: 10%;">CANCELAR (X)</button>
+<div style="display: flex; flex-direction: row; justify-content: center; ">
+    
+    <br>
+    <div id="entregarTareaComentarioDiv">
+        <textarea id="entregarTareaComentario" cols="60" rows="20"></textarea></div>
+    <div id="adjuntarArchivo"  style="display: flex; flex-direction: column; margin-left: 5%; border: 2px;">
+        <br>
+        <br>
+        <h3>Adjuntar archivo</h3>
+        <br>
+        <img src="/imgs/upload.jpg" alt="subir" >
+        <br>
+        <input type="file" name="Subir" id="entregarTareaSubir">
+        <br>
+        <br>
+    </div>
+    <br>
+    <br>
+    <button id="btnenviarEntrega" style="display: flex; align-self: flex-end;">Enviar tarea</button>
+</div>
+</section>
+<section id="f04entregaExitosaModal">
+    <h2 style="align-self: flex-start; margin-left: 10%;">¡Perfecto! 
+    </h2>
+    <br>
+    <p style="align-self: flex-start; margin-left: 10%;">Ha realizado su entrega con éxito</p>
+    <button  class="btnVolverATareas" style="align-self: flex-start; margin-left: 10%;" style="align-self: flex-end; margin-right: 10%;">Volver</button>
+</section>
+
+<!-- SCRIPT PARA ESTA SECTION F04: -->
+<script>
+
+// Boton para entregar previo a esto: te lleva a la seccion de F04: entregarEntregaModal
+document.getElementById("btnEntregar").addEventListener("click", ()=>{
+    mostrarOneSection("section#entregarEntregaModal")
+})
+
+// Boton enviar entrega: te lleva a la seccion de envío exitoso de entrega
+document.getElementById("btnenviarEntrega").addEventListener("click", ()=>{
+    mostrarOneSection("section#f04entregaExitosaModal")
+})
+
+// Los botones para volver a la seccion de dashboardTareasAlumno 
+document.getElementsByClassName("btnVolverATareas").addEventListener("click", ()=>{
+    mostrarOneSection("section#dashboardTareasAlumno") // ACÁ SE PODRÍA CORREGIR: ESTA ES LA CLASE PARA EL BOTON DE CANCELAR ENTREGA ; Y EL BOTON DE "VOLVER" DESPUES DE TENER UNA ENTREGA EXITOSA, 
+                                        // AMBOS BOTONES VAN A VOLVER A LLEVARNOS A LA SECCION DEL DASHBOARD DE TAREAS
+})
+
+
+</script>
+
+
+
+</body>
+</html>
+
+
+
+
+
+

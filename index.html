@@ -106,7 +106,7 @@
 		<li><a href="sass.html">Registrarse</a></li>
 		<li><a href="badges.html">Iniciar Sessión</a></li>
 	</ul>
-	<main style="background-color: brown;">
+	<main style="background-color: white;">
 
 		<section class="vistaPublico" id="registro">
 			<div class="row">
@@ -160,6 +160,7 @@
 								<label>Materialize Select</label>
 							</div>
 							</div>
+					
 							<div class="row">
 		
 								<a id="btnRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</a>
@@ -189,7 +190,7 @@
 							</div>
 							<div class="row">
 		
-								<button id="btnRegistro_profesor" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
+								<button id="btnRegistrarDocente" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
 								
 							</div>
 						</form>
@@ -218,8 +219,8 @@
 		
 			<div class="row container s12">
 				<ul id="tabMenuLogin" class="row tabs container s6 white">
-					<li class="tab col s6 m3"><a href="#alumnoFormm">Alumno</a></li>
-					<li class="tab col s6 m3"><a class="active" href="#profesorFormm">Profesor</a></li>
+					<li class="tab col s6 m3"><a class="active" href="#alumnoFormm">Alumno</a></li>
+					<li class="tab col s6 m3"><a  href="#profesorFormm">Profesor</a></li>
 				</ul>
 				<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
 					<div id="alumnoFormm">
@@ -240,6 +241,15 @@
 								<button id="btnIrRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
 								<button  id="btnLogin_alumno" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
 							</div>
+							<div class="input-field col s12">
+								<select>
+								  <option value="" disabled selected>Choose your option</option>
+								  <option value="1">Option 1</option>
+								  <option value="2">Option 2</option>
+								  <option value="3">Option 3</option>
+								</select>
+								<label>Materialize Select</label>
+							  </div>
 						</form>
 					</div>
 					<div id="profesorFormm">
@@ -305,14 +315,16 @@
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 	<!-- <script src="./js/db.js"></script>SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS -->
-	<script src="./js/cambioVista.js"></script><!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
+	<script src="./js/cambioVista.js"></script> <!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
 	<script src="./js/main.js"></script>
+	<!-- <script src="./js/db_Cris.js"></script> -->
 	
 	<script>
 		ocultarTodo();
-		// mostrarOneSection("section#login")
+		//mostrarOneSection("section#login")
 		// mostrarOneSection("section#tareasPendienteAlumno")
-		mostrarOneSection("section#pantallaPrincipal")
+		// mostrarOneSection("section#pantallaPrincipal")
+		 mostrarOneSection("section#registro")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{
 			mostrarOneSection("section#realizarEntregaTarea")
@@ -337,6 +349,7 @@
 		document.getElementById("btnToast").addEventListener("click", ()=>{
 			mostrarAlerta("Entregaste la tarea", "success") // Cambiar estilo para que muestre bien
 		})
+
 		// document.querySelector("button#btn").addEventListener("click", ()=>{
 		// 	 document.getElementById("profesorForm").innerHTML = imgGatito()
 		// })

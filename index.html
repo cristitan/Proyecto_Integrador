@@ -33,7 +33,7 @@
 		}
 		.hidden{
    			opacity: 0;
-    		transform: translateY(-100%);
+    		transform: translateY(-100%) translateX(-100%);
 			position: absolute;
 		}
 		.tabs .tab a {
@@ -106,9 +106,9 @@
 		<li><a href="sass.html">Registrarse</a></li>
 		<li><a href="badges.html">Iniciar Sessión</a></li>
 	</ul>
-	<main style="background-color: white;">
+	<main>
 
-		<section class="vistaPublico" id="registro">
+		<section id="registro">
 			<div class="row">
 				<div class="col s12 row">
 					<div class="col s1"></div>
@@ -127,7 +127,7 @@
 			<div class="row container s12">
 				<ul id="tabMenuRegistro" class="row tabs container s6 white">
 					<li class="tab col s6 m3"><a href="#alumnoForm">Alumno</a></li>
-					<li class="tab col s6 m3"><a class="active" href="#profesorForm">Profesor</a></li>
+					<li class="tab col s6 m3"><a class="active" href="#docenteForm">Docente</a></li>
 				</ul>
 				<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
 					<div id="alumnoForm">
@@ -153,7 +153,7 @@
 							
 							<div class="row">
 								<div class="input-field col s12">
-								<select id="profesores">
+								<select id="docentees">
 								<option value="" disabled selected>Choose your option</option>
 								
 								</select>
@@ -168,28 +168,27 @@
 							</div>
 						</form>
 					</div>
-					<div id="profesorForm">
-						<form class="col s12" id="profesorForm">
+					<div id="docenteForm">
+						<form class="col s12" ><!--id="docenteForm"-->
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="profesor_first_name" type="text" class="validate">
-									<label for="profesor_first_name">Nombre de Docente</label>
+									<input id="docente_first_name" type="text" class="validate">
+									<label for="docente_first_name">Nombre de Docente</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="profesor_user_name" type="text" class="validate">
-									<label for="profesor_user_name">Usuario de Docente</label>
+									<input id="docente_user_name" type="text" class="validate">
+									<label for="docente_user_name">Usuario de Docente</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
-									<input id="profesor_password" type="password" class="validate">
-									<label for="profesor_password">Contraseña</label>
+									<input id="docente_password" type="password" class="validate">
+									<label for="docente_password">Contraseña</label>
 								</div>
 							</div>
 							<div class="row">
-		
 								<button id="btnRegistrarDocente" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
 								
 							</div>
@@ -201,7 +200,7 @@
 		</section>
 
 		
-		<section class="vistaPublico" id="login">
+		<section id="login">
 			<div class="row">
 				<div class="col s12 row">
 					<div class="col s1"></div>
@@ -220,7 +219,7 @@
 			<div class="row container s12">
 				<ul id="tabMenuLogin" class="row tabs container s6 white">
 					<li class="tab col s6 m3"><a class="active" href="#alumnoFormm">Alumno</a></li>
-					<li class="tab col s6 m3"><a  href="#profesorFormm">Profesor</a></li>
+					<li class="tab col s6 m3"><a  href="#docenteFormm">Docente</a></li>
 				</ul>
 				<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
 					<div id="alumnoFormm">
@@ -244,6 +243,8 @@
 							<div class="input-field col s12">
 								<select>
 								  <option value="" disabled selected>Choose your option</option>
+								  <!-- ITERAR SOBRE LISTA DE DOCENTES-->
+								  <!-- <option value="docentesList[i].usuario">{docentesList[i].nombre}</option> -->
 								  <option value="1">Option 1</option>
 								  <option value="2">Option 2</option>
 								  <option value="3">Option 3</option>
@@ -252,23 +253,23 @@
 							  </div>
 						</form>
 					</div>
-					<div id="profesorFormm">
-						<form class="col s12" id="login_profesorForm">
+					<div id="docenteFormm">
+						<form class="col s12" id="login_docenteForm">
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="login_profesor_usuario" type="text" class="validate" minlength="6" required="true">
-									<label for="login_profesor_usuario">Usuario de Docente</label>
+									<input id="login_docente_usuario" type="text" class="validate" minlength="6" required="true">
+									<label for="login_docente_usuario">Usuario de Docente</label>
 								</div>
 							</div>
 							<div class="row">
 								<div class="input-field col s12" id="test" style="transition: 0.3s ease;">
-									<input id="login_profesor_password" type="password" class="validate">
-									<label for="login_profesor_password">Contraseña</label>
+									<input id="login_docente_password" type="password" class="validate">
+									<label for="login_docente_password">Contraseña</label>
 								</div>
 							</div>
 							<div class="row">
-								<button id="btnIrRegistro_profesor" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
-								<button id="btnLogin_profesor" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
+								<button id="btnIrRegistro_docente" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
+								<button id="btnLogin_docente" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
 							</div>
 						</form>
 					</div>
@@ -314,7 +315,7 @@
 
 	<!-- Compiled and minified JavaScript -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-	<!-- <script src="./js/db.js"></script>SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS -->
+	<script src="./js/db.js"></script><!-- SCRIPT QUE SE ENCARGA DE GUARDAR A LOS DATOS-->
 	<script src="./js/cambioVista.js"></script> <!-- SCRIPT QUE SE ENCARGA DE MOSTRAR/OCULtAR LAS VISTAS -->
 	<script src="./js/main.js"></script>
 	<!-- <script src="./js/db_Cris.js"></script> -->
@@ -351,10 +352,10 @@
 		})
 
 		// document.querySelector("button#btn").addEventListener("click", ()=>{
-		// 	 document.getElementById("profesorForm").innerHTML = imgGatito()
+		// 	 document.getElementById("docenteForm").innerHTML = imgGatito()
 		// })
-		// for (const profesor of profesorListTest) {
-		// 	document.querySelector("select#profesores").innerHTML += `<option value="${profesor.usuario}">${profesor.nombre}</option>`
+		// for (const docente of docenteListTest) {
+		// 	document.querySelector("select#docentees").innerHTML += `<option value="${docente.usuario}">${docente.nombre}</option>`
 		// }
 		
 			// document.querySelector("#navMenu").addEventListener("click", ()=>{

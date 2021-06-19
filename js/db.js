@@ -48,6 +48,7 @@ class Alumno {
 
 const usuarioLogeado = {
   // REFERENCIAS
+  tipo: "",
   listaPerteneciente: [],
   indice: 0, //
   usuarioId: "", // ? el usuario id para enviar como parametro a getAlumno para encontrar el alumno
@@ -55,13 +56,87 @@ const usuarioLogeado = {
 let dataUsuarioLogeado = {};
 // usuarioLogeado.listaPerteneciente = alumnosList
 
-const alumnosList = [];
+const alumnosList = [
+  {
+    nombre: "Marcos Medina",
+    usuario: "markmed",
+    password: "mkmPass21",
+    usuarioDocenteAsignado: "santiFagno",
+    nivelAlumno: "inicial",
+    entregas: [1, 2, 3], // Esto deben ser objs
+  },
+  {
+    nombre: "Emanuel Díaz",
+    usuario: "emadiaz",
+    password: "emaPass12",
+    usuarioDocenteAsignado: "santiFagno",
+    nivelAlumno: "inicial",
+    entregas: [1, 2, 3, 5],
+  },
+  {
+    nombre: "Cristian Poggi",
+    usuario: "crispog",
+    password: "crisPass4",
+    usuarioDocenteAsignado: "santiFagno",
+    nivelAlumno: "inicial",
+    entregas: [1, 5, 67, 8],
+  },
+  {
+    nombre: "Adrian Nario",
+    usuario: "elBana",
+    password: "123",
+    usuarioDocenteAsignado: "santiFagno",
+    nivelAlumno: "intermedio",
+    entregas: [23],
+  },
+  {
+    nombre: "Adrian Nario2",
+    usuario: "elBana2",
+    password: "123",
+    usuarioDocenteAsignado: "cariMath",
+    nivelAlumno: "inicial",
+    entregas: [4],
+  },
+];
 const docentesList = [
   {
     nombre: "Santiago Fagnoni",
     usuario: "santiFagno",
     password: "123",
-    alumnosAsignados: [],
+    alumnosAsignados: [
+      {
+        nombre: "Marcos Medina",
+        usuario: "markmed",
+        password: "mkmPass21",
+        usuarioDocenteAsignado: "santiFagno",
+        nivelAlumno: "inicial",
+        entregas: [1, 2, 3], // Esto deben ser objs
+      },
+      {
+        nombre: "Emanuel Díaz",
+        usuario: "emadiaz",
+        password: "emaPass12",
+        usuarioDocenteAsignado: "santiFagno",
+        nivelAlumno: "inicial",
+        entregas: [1, 2, 3, 5],
+      },
+      {
+        nombre: "Cristian Poggi",
+        usuario: "crispog",
+        password: "crisPass4",
+        usuarioDocenteAsignado: "santiFagno",
+        nivelAlumno: "inicial",
+        entregas: [1, 5, 67, 8],
+      },
+      {
+        nombre: "Adrian Nario",
+        usuario: "elBana",
+        password: "123",
+        usuarioDocenteAsignado: "santiFagno",
+        nivelAlumno: "intermedio",
+        entregas: [23],
+      },
+    ],
     tareasPlanteadas: [],
   },
   {

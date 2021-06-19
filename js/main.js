@@ -215,6 +215,7 @@ function login(userNameParam, passwordParam, tipoUsuario) {
       usuarioLogeado.listaPerteneciente = listABuscar;
       usuarioLogeado.indice = indiceUsuarioEncontrado;
       usuarioLogeado.usuarioId = usuarioEncontrado.usuario;
+      usuarioLogeado.tipo = tipoUsuario;
       dataUsuarioLogeado = usuarioEncontrado;
       mostrarAlerta("BIENVENIDO " + dataUsuarioLogeado.nombre, "success");
     } else {
@@ -236,6 +237,30 @@ function login(userNameParam, passwordParam, tipoUsuario) {
     mostrarOneSection("section#dashboardDocente");
   }
 }
+
+/* ACTUALIZACIONES DE DATOS */
+
+//DASHBOARD Docente
+const actualizarDatos_DashboardDocente = () => {
+  if (usuarioLogeado.tipo === "docente") {
+    const contenedorListAlumnos = document.querySelector(
+      "body main section#dashboardDocente div#contenedorListaAlumnos"
+    );
+    const listaAlumnosTodos =
+      contenedorListaAlumnos.querySelector("div#alumnosTodos");
+    const listaAlumnosInicial =
+      contenedorListaAlumnos.querySelector("div#alumnosInicial");
+    const listaAlumnosIntermedio = contenedorListaAlumnos.querySelector(
+      "div#alumnosIntermedio"
+    );
+    const listaAlumnosAvanzado = contenedorListaAlumnos.querySelector(
+      "div#alumnosAvanzado"
+    );
+  } else {
+    mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
+    mostrarOneSection("section#pantallaError");
+  }
+};
 
 // ADDEVENTLISTENER
 

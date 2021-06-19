@@ -93,6 +93,18 @@
 		.ghostBtn:hover{
 			background-color: rgba(140, 158, 255,0.32);
 		}
+		.deliveredExersicesNumber{
+			font-size: 30px;
+			border-radius: 1000px;
+			border: 3px solid rgba(140, 158, 255, 1);
+			width: 50px;
+			height: 50px;
+			padding: 50px;
+		}
+		.centeredFlex{
+			display: flex;
+			justify-content: center;
+			align-items: center;}
 	</style>
 </head>
 
@@ -310,11 +322,12 @@
 				Ir a pantalla Principal
 			  </button>
 		</section>
+
+		<!-- DASHBOARDS -->
 		<section id="dashboardAlumno">
 			<h1>MARC _ PANTALLA DE DASHBOARD ALUMNO</h1>
 			<h2 id="userNameAlumno">nombre de usuario</h2>
 		</section>
-		
 		<section id="dashboardDocente">
 			<div class="row">
 				<div class="col s12 row">
@@ -322,10 +335,6 @@
 						Dashboard > Docente
 					</h3>
 				</div>
-				<!-- <div class="col s12 row">
-					<div class="col s1"></div>
-					<div class="divider col s6 indigo accent-1"></div>
-				</div> -->
 			</div>
 			<div class="row" style="margin: auto 10px;">
 				<div class="col s12 l6 offset-l1 col ">
@@ -339,31 +348,374 @@
 						</ul>
 					</div>
 					<div class="row s12">
-						<div class="tabs-content carousel carousel-slider white roundedBorders z-depth-3" style="height: 600px; margin-top: 30px;">
+						<div id="contenedorListaAlumnos" class="tabs-content carousel carousel-slider white roundedBorders z-depth-3" style="height: 600px; margin-top: 30px;">
 							<div id="alumnosTodos" class="col s12 row">
-								<ul>
+								<ul class=" flow-text " style="font-size: 18px;">
 									<li>
-										<div class="col s12 row indigo lighten-5 roundedBorders2">AFAWF</div>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
 									</li>
 									<li>
-										<div class="col s12 row indigo lighten-5 roundedBorders2">AFAfwWF</div>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
 									</li>
 									<li>
-										<div class="col s12 row indigo lighten-5 roundedBorders2">AFAwegWF</div>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
 									</li>
 									<li>
-										<div class="col s12 row indigo lighten-5 roundedBorders2">AFAwegWF</div>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
 									</li>
 								</ul>
 							</div>
-							<div id="alumnosInicial">
-								acá se mostrararán los alumnos de nivel inicial
+							<div id="alumnosInicial" class="col s12 row">
+								<ul class=" flow-text " style="font-size: 18px;">
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+								</ul>
 							</div>
-							<div id="alumnosIntermedio">
-								acá se mostrararán los alumnos de nivel Intermedio
+							<div id="alumnosIntermedio" class="col s12 row">
+								<ul class=" flow-text " style="font-size: 18px;">
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+								</ul>
 							</div>
-							<div id="alumnosAvanzado">
-								acá se mostrararán los alumnos de nivel Avanzado
+							<div id="alumnosAvanzado" class="col s12 row">
+								<ul class=" flow-text " style="font-size: 18px;">
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+									<li>
+										<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+      										
+											<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+												account_circle
+											</i>
+											<div class="col s4" style="height: 55px;">
+												<span class="col s12">Nombre Completo</span>
+												<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+											</div>
+											<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+												<span class="col s12">
+													Entregas Realizadas: <b>7</b>
+												</span>
+											</div>
+											<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+												<button
+												class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+												>Ver Perfil</button>
+											</div>
+										</div>
+									</li>
+								</ul>
 							</div>
 						</div>
 					</div>
@@ -376,8 +728,59 @@
 					<button  id="btnDocenteIrReporteIndividual" class="waves-effect waves-light btn row col s12 ghostBtn roundedBorders2" style="height: 80px;">
 						Reporte Individual
 					</button>
+					<div class="row col s12 white roundedBorders2">
+						<h6 class="row col s12">Ejercicios entregados para tí:</h6>
+						<div class="row col s4 offset-s4 indigo-text text-accent-2 centeredFlex">
+							<p class="deliveredExersicesNumber centeredFlex">56</p>
+						</div>
+					</div>
+					<div class="row col s12 white roundedBorders2">
+						<h6 class="row col s12">Top entrega de ejercicios:</h6>
+						
+						<div id="alumnosTopEntregas" class="col s12 row">
+							<ul class=" flow-text " style="font-size: 18px;">
+								<li>
+									<div class="col s12 row indigo lighten-5 roundedBorders2">
+										<span
+											class="col s8 indigo lighten-5 roundedBorders2"
+										>Nombre Alumno1</span>
+										<span
+										class="col s1 offset-s3 indigo-text text-accent-1" style="font-weight: bold;"
+										>10</span>
+									</div>
+								</li>
+								<li>
+									<div class="col s12 row indigo lighten-5 roundedBorders2">
+										<span
+											class="col s8 indigo lighten-5 roundedBorders2"
+										>Nombre Alumno2</span>
+										<span
+										class="col s1 offset-s3 indigo-text text-accent-1" style="font-weight: bold;"
+										>10</span>
+									</div>
+								</li>
+								<li>
+									<div class="col s12 row indigo lighten-5 roundedBorders2">
+										<span
+											class="col s8 indigo lighten-5 roundedBorders2"
+										>Nombre Alumno3</span>
+										<span
+										class="col s1 offset-s3 indigo-text text-accent-1" style="font-weight: bold;"
+										>10</span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
+		</section>
+
+		<!--Error-->
+		
+		<section id="pantallaError">
+			<h1>Ups! Algo salió mal :(</h1>
+		</section>
 	</main>
 	<a class="btn" id="btnToast" onclick="">Toast Test!</a>
 

@@ -7,16 +7,16 @@ class Docente {
     this.tareasPlanteadas = [];
   }
 }
-// class Alumno {
-//   constructor(nombre, usuario, password, usuarioDocenteAsignado) {
-//     this.usuario = usuario;
-//     this.nombre = nombre;
-//     this.password = password;
-//     this.usuarioDocenteAsignado = usuarioDocenteAsignado;
-//     this.nivelAlumno = "inicial";
-//     this.entregas = [];
-//   }
-// }
+class Alumno {
+  constructor(nombre, usuario, password, usuarioDocenteAsignado) {
+    this.usuario = usuario;
+    this.nombre = nombre;
+    this.password = password;
+    this.usuarioDocenteAsignado = usuarioDocenteAsignado;
+    this.nivelAlumno = "inicial";
+    this.entregas = [];
+  }
+}
 // class Entrega {
 //   constructor(
 //     usuarioAlumno,
@@ -52,12 +52,33 @@ const usuarioLogeado = {
   indice: 0, //
   usuarioId: "", // ? el usuario id para enviar como parametro a getAlumno para encontrar el alumno
 }; // Por qué no poner dataUsuarioLogeado dentro del usuarioLogeado
-const dataUsuarioLogeado =
-  usuarioLogeado.listaPerteneciente[usuarioLogeado.indice];
+let dataUsuarioLogeado = {};
 // usuarioLogeado.listaPerteneciente = alumnosList
 
 const alumnosList = [];
-const docentesList = [];
+const docentesList = [
+  {
+    nombre: "Santiago Fagnoni",
+    usuario: "santiFagno",
+    password: "123",
+    alumnosAsignados: [],
+    tareasPlanteadas: [],
+  },
+  {
+    nombre: "Carina",
+    usuario: "cariMath",
+    password: "cariMath314",
+    alumnosAsignados: [],
+    tareasPlanteadas: [],
+  },
+  {
+    nombre: "Daniel Baccino",
+    usuario: "daniBac",
+    password: "mBot5",
+    alumnosAsignados: [],
+    tareasPlanteadas: [],
+  },
+];
 
 // // WIP = WORK IN PROGRESS
 // function crearTarea(profesorUsr, titulo, descripion, img, notaMax, nivel) {
@@ -166,20 +187,20 @@ const docentesList = [];
 //   },
 // ];
 
-// function getDocente(usuarioId) {
-//   for (const docente of docentesList) {
-//     if (docente.usuario === usuarioId) {
-//       return docente;
-//     }
-//   }
-// }
-// function getAlumno(usuarioId) {
-//   for (const alumno of alumnosList) {
-//     if (docente.usuario === usuarioId) {
-//       return alumno;
-//     }
-//   }
-// }
+function getDocente(usuarioId) {
+  for (const docente of docentesList) {
+    if (docente.usuario === usuarioId) {
+      return docente;
+    }
+  }
+}
+function getAlumno(usuarioId) {
+  for (const alumno of alumnosList) {
+    if (docente.usuario === usuarioId) {
+      return alumno;
+    }
+  }
+}
 
 // const listaDeTareasTotalesQueTieneElAlumno = [];
 // const listaDeTareasPendientesQueTieneElAlumno = [];
@@ -188,11 +209,14 @@ const docentesList = [];
 // const docenteDelAlumnoLogeado = getDocente(
 //   dataUsuarioLogeado.usuarioDocenteAsignado
 // );
-// // OBTENER TODAS LAS TAREAS PLANTEADAS POR EL DOCENTE SEGUN NIVEL PARA EL ALUMNO
-// for (const tareaPlanteada of docenteDelAlumnoLogeado.tareasPlanteadas) {
-//   if (tareaPlanteada.nivel === usuarioLogeado.nivel) {
-//     //usuarioLogueado es un alumno
-//     listaDeTareasTotalesQueTieneElAlumno.push(tareaPlanteada);
+
+// function {
+//   // OBTENER TODAS LAS TAREAS PLANTEADAS POR EL DOCENTE SEGUN NIVEL PARA EL ALUMNO
+//   for (const tareaPlanteada of docenteDelAlumnoLogeado.tareasPlanteadas) {
+//     if (tareaPlanteada.nivel === usuarioLogeado.nivel) {
+//       //usuarioLogueado es un alumno
+//       listaDeTareasTotalesQueTieneElAlumno.push(tareaPlanteada);
+//     }
 //   }
 // }
 

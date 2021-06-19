@@ -1,4 +1,3 @@
-// POR AHORA SOLO ES PARA ERRORES
 // tipoDeAlerta = "success", "alert", "error"
 function mostrarAlerta(texto, tipoDeAlerta) {
   const statesStyles = {
@@ -157,14 +156,6 @@ function registrarDocente() {
     mostrarAlerta("Algo salió mal :(", "error");
   }
 }
-
-document
-  .querySelector("#btnRegistrarDocente")
-  .addEventListener("click", (e) => {
-    e.preventDefault();
-    registrarDocente();
-  });
-
 /* ------------------------------------------  Alumno  -------------------------------------- */
 function registrarAlumno() {
   // WIP = WORK IN PROGRESS
@@ -207,3 +198,78 @@ function listarAlumnos() {
     console.log(alumnoList[i]);
   }
 }
+
+function login(userNameParam, passwordParam, tipoUsuario) {
+  const listABuscar = tipoUsuario === "alumno" ? alumnosList : docentesList;
+  // z asignar lista a buscar
+  // z validar si existe usuario (buscando iterando en la lista)
+
+  const indiceUsuarioEncontrado = listABuscar.findIndex(
+    (usuarioElem) => usuarioElem.usuario === userNameParam
+  );
+
+  if (indiceUsuarioEncontrado !== -1) {
+    const usuarioEncontrado = listABuscar[indiceUsuarioEncontrado];
+
+    if (usuarioEncontrado.password === passwordParam) {
+      usuarioLogeado.listaPerteneciente = listABuscar;
+      usuarioLogeado.indice = indiceUsuarioEncontrado;
+      usuarioLogeado.usuarioId = usuarioEncontrado.usuario;
+      dataUsuarioLogeado = usuarioEncontrado;
+      mostrarAlerta("BIENVENIDO " + dataUsuarioLogeado.nombre, "success");
+    } else {
+      mostrarAlerta("Contraseña incorrecta", "error");
+      return false;
+    }
+    // / /si contraseña correcta > asignar usuario a usuarioLogeado, mostrarseccion
+    // / /si no es correcta > mandar erro
+  } else {
+    mostrarAlerta("Usuario no encontrado en lista de " + tipoUsuario, "error");
+    return false;
+  }
+
+  // EJECUTAR FUNCION DE ACTUALIZAR DATA
+
+  if (tipoUsuario === "alumno") {
+    mostrarOneSection("section#dashboardAlumno");
+  } else {
+    mostrarOneSection("section#dashboardDocente");
+  }
+}
+
+// ADDEVENTLISTENER
+
+// Botón logeo Docente
+document
+  .querySelector("button#btnLogin_docente")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    const userNameDocente = document.querySelector(
+      "body main section#login input#login_docente_usuario"
+    ).value; // CORREGIR
+    const passwordDocente = document.querySelector(
+      "body main section#login input#login_docente_password"
+    ).value; // CORREGIR
+
+    login(userNameDocente, passwordDocente, "docente");
+    // mostrarOneSection("section#dashboardDocente");
+  });
+
+// Botón logeo Alumno
+document
+  .querySelector("button#btnLogin_alumno")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    // const userNameDocente = input.value; // CORREGIR
+    // const passwordDocente = input.value; // CORREGIR
+    login(userNameDocente, passwordDocente, "alumno");
+    mostrarOneSection("section#dashboardAlumno");
+  });
+
+// Botón Registro Docente
+document
+  .querySelector("#btnRegistrarDocente")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    registrarDocente();
+  });

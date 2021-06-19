@@ -96,8 +96,12 @@
 			<a href="./index.html" class="brand-logo"> GuitarApp</a>
 			<a id="navMenu" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 			<ul class="right hide-on-med-and-down">
-				<li><button class="waves-effect waves-light btn col s4 offset-s3 ghostBtn indigo-text text-lighten-5">Regitrarse</button></li><!--SEGUIR ACÁ-->
-				<li><a>Iniciar Sessión</a></li>
+				<li><button id="navBtn_Registro" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn indigo-text text-lighten-5">Regitrarse</button></li><!--SEGUIR ACÁ-->
+				<li style="margin-left: 20px;margin-right: 10px;">
+					<button id="navBtn_Login" class="waves-effect  waves-light btn col s4 offset-s3 indigo lighten-5 indigo-text text-lighten-2">
+						Iniciar Sesión
+					</button>
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -153,17 +157,21 @@
 							
 							<div class="row">
 								<div class="input-field col s12">
-								<select id="docentees">
-								<option value="" disabled selected>Choose your option</option>
-								
-								</select>
-								<label>Materialize Select</label>
-							</div>
+									<select>
+									  <option value="" disabled selected>Choose your option</option>
+									  <!-- ITERAR SOBRE LISTA DE DOCENTES-->
+									  <!-- <option value="docentesList[i].usuario">{docentesList[i].nombre}</option> -->
+									  <option value="1">Option 1</option>
+									  <option value="2">Option 2</option>
+									  <option value="3">Option 3</option>
+									</select>
+									<label>Seleccione Docente</label>
+								  </div>
 							</div>
 					
 							<div class="row">
 		
-								<a id="btnRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</a>
+								<button id="btnRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s8 indigo accent-1"><i class="material-icons right">send</i>Registrarse</button>
 								
 							</div>
 						</form>
@@ -226,8 +234,8 @@
 						<form class="col s12" id="login_alumnoLogin">
 							<div class="row">
 								<div class="input-field col s12">
-									<input id="login_alumno_last_name" type="text" class="validate">
-									<label for="login_alumno_last_name">Usuario de Alumno</label>
+									<input id="login_alumno_usuario" type="text" class="validate">
+									<label for="login_alumno_usuario">Usuario de Alumno</label>
 								</div>
 							</div>
 							<div class="row">
@@ -240,17 +248,7 @@
 								<button id="btnIrRegistro_alumno" class="waves-effect waves-light btn col s4 offset-s3 ghostBtn">Registrarse</button>	
 								<button  id="btnLogin_alumno" class="waves-effect waves-light btn col s4 offset-s1 indigo accent-1"><i class="material-icons right">send</i>Acceder</button>
 							</div>
-							<div class="input-field col s12">
-								<select>
-								  <option value="" disabled selected>Choose your option</option>
-								  <!-- ITERAR SOBRE LISTA DE DOCENTES-->
-								  <!-- <option value="docentesList[i].usuario">{docentesList[i].nombre}</option> -->
-								  <option value="1">Option 1</option>
-								  <option value="2">Option 2</option>
-								  <option value="3">Option 3</option>
-								</select>
-								<label>Materialize Select</label>
-							  </div>
+							
 						</form>
 					</div>
 					<div id="docenteFormm">
@@ -306,6 +304,14 @@
 				Ir a pantalla Principal
 			  </button>
 		</section>
+		<section id="dashboardDocente">
+			<h1>MARC _ PANTALLA DE DASHBOARD DOCENTE</h1>
+			<h2 id="userNameDocente">nombre de usuario</h2>
+		</section>
+		<section id="dashboardAlumno">
+			<h1>MARC _ PANTALLA DE DASHBOARD ALUMNO</h1>
+			<h2 id="userNameAlumno">nombre de usuario</h2>
+		</section>
 	</main>
 	<a class="btn" id="btnToast" onclick="">Toast Test!</a>
 
@@ -325,7 +331,7 @@
 		//mostrarOneSection("section#login")
 		// mostrarOneSection("section#tareasPendienteAlumno")
 		// mostrarOneSection("section#pantallaPrincipal")
-		 mostrarOneSection("section#registro")
+		 mostrarOneSection("section#login")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{
 			mostrarOneSection("section#realizarEntregaTarea")
@@ -355,7 +361,7 @@
 		// 	 document.getElementById("docenteForm").innerHTML = imgGatito()
 		// })
 		// for (const docente of docenteListTest) {
-		// 	document.querySelector("select#docentees").innerHTML += `<option value="${docente.usuario}">${docente.nombre}</option>`
+		// 	document.querySelector("select#docentes").innerHTML += `<option value="${docente.usuario}">${docente.nombre}</option>`
 		// }
 		
 			// document.querySelector("#navMenu").addEventListener("click", ()=>{

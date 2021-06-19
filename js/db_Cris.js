@@ -1,3 +1,10 @@
+
+const alumnosList = [];
+const docentesList = [];
+const tareasList = [];
+const entregasList = [];
+
+
 class Docente {
   constructor(unNombre, unUsuario, password) {
     this.nombre = unNombre;
@@ -64,13 +71,6 @@ const dataUsuarioLogeado =
 // usuarioLogeado.listaPerteneciente = alumnosList
 
 
- const alumnosList = [];
-
-
-
- const docentesList = [];
-
-
 // // WIP = WORK IN PROGRESS
 function crearTarea(profesorUsr, titulo, descripion, img, notaMax, nivel) {
   // SOLO PROFESOR
@@ -86,21 +86,7 @@ function crearTarea(profesorUsr, titulo, descripion, img, notaMax, nivel) {
   profesorUsr.tareasPlanteadas.push(nuevaTarea);
 }
 
-// // WIP = WORK IN PROGRESS
-// function realizarEntrega(audio, comentario) {
-//   // SOLO ALUMNO
-//   const nuevaEntrega = {
-//     userAlumno: userLogeado.user,
-//     idTarea: idTarea,
-//     password: password,
-//     alumnos: [],
-//     tareasPlanteadas: [],
-//   };
-//   getAlumno(userLogeado.user).entregas.push(nuevaEntrega);
-//   getTarea(getProfesor(userLogeado.profesor), idTarea).entregas.push(
-//     nuevaEntrega
-//   );
-// }
+
 
 // const docentesListTest = [
 //   {

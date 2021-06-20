@@ -237,28 +237,29 @@ function registrarAlumno() {
   let nombre = document.querySelector("#alumno_first_name").value;
   let usuario = document.querySelector("#alumno_user_name").value;
   let password = document.querySelector("#alumno_password").value;
-  // AGREGAR NIVEL let password = document.querySelector("#").value;
-  // Tomar valor del select
+  console.log('value docente asignado', document.querySelector("#docente_asignado").value);
+  let alumnosAsignados = docentesList[document.querySelector("#docente_asignado").value].alumnosAsignados;
 
-  let nuevoAlumno = new Alumno(nombre, usuario, password);
+  let nuevoAlumno = new Alumno(nombre, usuario, password, docentesList[document.querySelector("#docente_asignado").value]);
 
   let validadorPushNombre = validarNombre(nombre);
-  let validadorPushUser = validarUserAlumno(usuario);
+  //let validadorPushUser = validarUserAlumno(usuario);
   let validadorPushPass = validarPass(password);
 
-  if (validadorPushNombre && validadorPushUser && validadorPushPass) {
-    docenteList.push(nuevoDocente);
+  if (validadorPushNombre && validadorPushPass) {
+    alumnosList.push(nuevoAlumno);
+    alumnosAsignados.push(nuevoAlumno);
     listarDocentes();
   } else if (!validadorPushNombre) {
     mostrarAlerta(
       "Error:  Nombre incorrecto. Por favor, ingrese un nombre sin símbolos. ",
       "error"
     );
-  } else if (!validadorPushUser) {
-    mostrarAlerta(
-      "Error, ya existe este usuario, elija otro nombre de usuario. ",
-      "error"
-    );
+  // } else if (!validadorPushUser) {
+  //   mostrarAlerta(
+  //     "Error, ya existe este usuario, elija otro nombre de usuario. ",
+  //     "error"
+  //   );
   } else if (!validadorPushPass) {
     mostrarAlerta(
       "Error, su contraseña no cumple con los requisitos. Asegúrese de que tenga al menos 4 carácteres, una minúscula, una mayúscula y un número. ",
@@ -267,9 +268,33 @@ function registrarAlumno() {
   }
 }
 
+//Funcion para desplegar los docentes en el select
+
+function selectDocentes() {
+  console.log("voy a cargar el select");
+    
+  document.querySelector("select#docente_asignado").innerHTML = "";
+
+  //docentesList.sort();
+  for (let i = 0; i < docentesList.length; i++) {
+    let unDocente = docentesList[i];
+    console.log('unDocente nombre', unDocente.nombre, i)
+    document.querySelector("select#docente_asignado").innerHTML += `<option value=${i}> 
+    ${unDocente.nombre}
+    </option>`;
+  }
+
+  var selectElem = document.querySelectorAll('select');
+  let select = M.FormSelect.init(selectElem);
+}
+
+
+
+// Funcion para listar los alumnos registrados al momento en la consola.
+
 function listarAlumnos() {
-  for (let i = 0; i < alumnoList.length; i++) {
-    console.log(alumnoList[i]);
+  for (let i = 0; i < alumnosList.length; i++) {
+    console.log(alumnosList[i]);
   }
 }
 
@@ -352,3 +377,11 @@ document
     e.preventDefault();
     registrarDocente();
   });
+
+// Botón Registro Alumno
+document
+.querySelector("#btnRegistro_alumno")
+.addEventListener("click", (e) => {
+  e.preventDefault();
+  registrarAlumno();
+});

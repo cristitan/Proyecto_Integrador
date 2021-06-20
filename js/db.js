@@ -312,3 +312,5 @@ function getAlumno(usuarioId) {
 //     listaDeTareasPendientesQueTieneElAlumno.push(tarea);
 //   }
 // }
+
+// Funcion para desplegar docentes en el select del registro de alumnos.

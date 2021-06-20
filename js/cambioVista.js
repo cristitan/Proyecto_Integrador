@@ -43,6 +43,8 @@ document
 document
   .querySelector("nav div ul li button#navBtn_Registro")
   .addEventListener("click", () => {
+    console.log("voy a registrar alumno");
+    selectDocentes();
     mostrarOneSection("section#registro");
   });
 

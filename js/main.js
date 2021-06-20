@@ -99,7 +99,9 @@ function validarPass(password) {
 }
 
 /* ACTUALIZACIONES DE DATOS */
+
 //DASHBOARD Docente
+
 const actualizarDatos_DashboardDocente = () => {
   if (usuarioLogeado.tipo === "docente") {
     const agregarItemAlumno = (nombre, nivel, cantidadTareas) => {
@@ -214,13 +216,20 @@ function registrarDocente() {
   const validadorPushPass = validarPass(passwordDocente);
 
   if (validadorPushNombre && validadorPushUser && validadorPushPass) {
-    docenteList.push(nuevoDocente);
-    listarDocente();
+    docentesList.push(nuevoDocente);
+    listarDocentes();
     mostrarAlerta("Se ha registrado correctamente!", "success");
   } else {
     mostrarAlerta("Algo salió mal :(", "error");
   }
 }
+
+function listarDocentes() {
+  for (let i = 0; i < docentesList.length; i++) {
+    console.log(docentesList[i]);
+  }
+}
+
 // Alumno
 function registrarAlumno() {
   // WIP = WORK IN PROGRESS
@@ -239,7 +248,7 @@ function registrarAlumno() {
 
   if (validadorPushNombre && validadorPushUser && validadorPushPass) {
     docenteList.push(nuevoDocente);
-    listarDocentees();
+    listarDocentes();
   } else if (!validadorPushNombre) {
     mostrarAlerta(
       "Error:  Nombre incorrecto. Por favor, ingrese un nombre sin símbolos. ",

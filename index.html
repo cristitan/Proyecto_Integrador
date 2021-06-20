@@ -175,13 +175,9 @@
 							
 							<div class="row">
 								<div class="input-field col s12">
-									<select>
+									<select id="select#profesor_asignado">
 									  <option value="" disabled selected>Choose your option</option>
-									  <!-- ITERAR SOBRE LISTA DE DOCENTES-->
-									  <!-- <option value="docentesList[i].usuario">{docentesList[i].nombre}</option> -->
-									  <option value="1">Option 1</option>
-									  <option value="2">Option 2</option>
-									  <option value="3">Option 3</option>
+				
 									</select>
 									<label>Seleccione Docente</label>
 								  </div>
@@ -619,10 +615,10 @@
 	
 	<script>
 		ocultarTodo();
-		//mostrarOneSection("section#login")
+		mostrarOneSection("section#login")
 		// mostrarOneSection("section#tareasPendienteAlumno")
 		// mostrarOneSection("section#pantallaPrincipal")
-		 mostrarOneSection("section#dashboardDocente")
+		//mostrarOneSection("section#dashboardDocente")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{
 			mostrarOneSection("section#realizarEntregaTarea")

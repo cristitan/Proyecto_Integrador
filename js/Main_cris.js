@@ -227,7 +227,7 @@ function registrarAlumno() {
     let usuario = document.querySelector("#alumno_user_name").value;
     let password = document.querySelector("#alumno_password").value;
     // AGREGAR NIVEL let password = document.querySelector("#").value;
-    // Tomar valor del select
+    let profesor = document.querySelector("select#profesor_asignado").value;
 
     let nuevoAlumno = new Alumno(nombre, usuario, password);
     

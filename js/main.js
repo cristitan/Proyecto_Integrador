@@ -13,8 +13,7 @@ function mostrarAlerta(texto, tipoDeAlerta) {
   });
 }
 
-/*-------------------------------------- VALIDACIONES ----------------------------------------- */
-
+/* VALIDACIONES */
 function validarNombre(nombre) {
   const symbolChars = "!`@#$%^&*()+=-[]\\';,./{}|\":<>?~_";
   if (nombre.length < 4) {
@@ -30,7 +29,6 @@ function validarNombre(nombre) {
   }
   return true;
 }
-
 function validarUsuario(userName, list) {
   // list es la lista que pase como parámetro, docentesList, alumnosList
   for (const elemUsuario of list) {
@@ -46,30 +44,6 @@ function validarUsuario(userName, list) {
   // entonces retornamos true
   return true;
 }
-
-// function validarUserDocente(user) {
-//   for (let i = 0; i < docenteList.length; i++) {
-//     if (user === docenteList[i].usuario) {
-//       return false
-//     }
-//   }
-//   return true
-// }
-
-// function validarUserAlumno(user) {
-//   for (let i = 0; i < alumnoList.length; i++) {
-//     if (user === alumnoList[i].usuario) {
-//       return false
-//     }
-//   }
-//   return true
-// }
-
-// btn_RegistrarDocente.addEventListener("click", ()=>{
-//   // ---
-//   validarUsuario(inputUser.value, docentesList)
-// })
-
 function chequearMinus(texto) {
   for (const letra of texto) {
     if (letra.charCodeAt(0) >= 97 && letra.charCodeAt(0) <= 122) {
@@ -86,7 +60,6 @@ function chequearMayus(texto) {
   }
   return false;
 }
-
 function chequearNumero(textoAValidar) {
   const numeros = "0123456789";
   for (const numero of numeros) {
@@ -125,9 +98,101 @@ function validarPass(password) {
   }
 }
 
-/* ------------------------------------------ REGISTROS --------------------------------------- */
-/* ------------------------------------------  Docente  -------------------------------------- */
-// MOVER REGISTRO A DB PARA TENER CRUD?
+/* ACTUALIZACIONES DE DATOS */
+//DASHBOARD Docente
+const actualizarDatos_DashboardDocente = () => {
+  if (usuarioLogeado.tipo === "docente") {
+    const agregarItemAlumno = (nombre, nivel, cantidadTareas) => {
+      return `
+        <li>
+          <div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">							
+            <i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+              account_circle
+            </i>
+            <div class="col s4" style="height: 55px;">
+              <span class="col s12">${nombre}</span>
+              <span class="col s12" style="font-size: 12px;">Nivel ${nivel}</span>
+            </div>
+            <div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+              <span class="col s12">
+                Entregas Realizadas: <b>${cantidadTareas}</b>
+              </span>
+            </div>
+            <div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+              <button class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2">
+                Ver Perfil
+              </button>
+            </div>
+          </div>
+        </li>
+        `;
+    };
+    const dashboard = document.querySelector(
+      "body main section#dashboardDocente"
+    );
+    const contenedorListaAlumnos = dashboard.querySelector(
+      "div#contenedorListaAlumnos"
+    );
+    const listaAlumnosTodos = contenedorListaAlumnos.querySelector(
+      "div#alumnosTodos ul"
+    );
+    const listaAlumnosInicial = contenedorListaAlumnos.querySelector(
+      "div#alumnosInicial ul"
+    );
+    const listaAlumnosIntermedio = contenedorListaAlumnos.querySelector(
+      "div#alumnosIntermedio ul"
+    );
+    const listaAlumnosAvanzado = contenedorListaAlumnos.querySelector(
+      "div#alumnosAvanzado ul"
+    );
+    const entregasParaDocente = dashboard.querySelector(
+      "#deliveredExersicesNumber p"
+    );
+
+    let totalDeliveredExercises = 0;
+
+    listaAlumnosTodos.innerHTML = "";
+    listaAlumnosInicial.innerHTML = "";
+    listaAlumnosIntermedio.innerHTML = "";
+    listaAlumnosAvanzado.innerHTML = "";
+    for (const alumno of dataUsuarioLogeado.alumnosAsignados) {
+      totalDeliveredExercises += alumno.entregas.length;
+      listaAlumnosTodos.innerHTML += agregarItemAlumno(
+        alumno.nombre,
+        alumno.nivelAlumno,
+        alumno.entregas.length
+      );
+      if (alumno.nivelAlumno === "inicial") {
+        listaAlumnosInicial.innerHTML += agregarItemAlumno(
+          alumno.nombre,
+          alumno.nivelAlumno,
+          alumno.entregas.length
+        );
+      }
+      if (alumno.nivelAlumno === "intermedio") {
+        listaAlumnosIntermedio.innerHTML += agregarItemAlumno(
+          alumno.nombre,
+          alumno.nivelAlumno,
+          alumno.entregas.length
+        );
+      }
+      if (alumno.nivelAlumno === "avanzado") {
+        listaAlumnosAvanzado.innerHTML += agregarItemAlumno(
+          alumno.nombre,
+          alumno.nivelAlumno,
+          alumno.entregas.length
+        );
+      }
+    }
+    entregasParaDocente.innerHTML = totalDeliveredExercises;
+  } else {
+    mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
+    mostrarOneSection("section#pantallaError");
+  }
+};
+
+/* REGISTROS */
+// Docente
 function registrarDocente() {
   const nombreDocente = document.querySelector(
     "input#docente_first_name"
@@ -156,7 +221,7 @@ function registrarDocente() {
     mostrarAlerta("Algo salió mal :(", "error");
   }
 }
-/* ------------------------------------------  Alumno  -------------------------------------- */
+// Alumno
 function registrarAlumno() {
   // WIP = WORK IN PROGRESS
 
@@ -217,7 +282,11 @@ function login(userNameParam, passwordParam, tipoUsuario) {
       usuarioLogeado.usuarioId = usuarioEncontrado.usuario;
       usuarioLogeado.tipo = tipoUsuario;
       dataUsuarioLogeado = usuarioEncontrado;
-      mostrarAlerta("BIENVENIDO " + dataUsuarioLogeado.nombre, "success");
+      mostrarAlerta(
+        "Bienvenido <b>" + dataUsuarioLogeado.nombre + "</b>",
+        "success"
+      );
+      actualizarDatos_DashboardDocente();
     } else {
       mostrarAlerta("Contraseña incorrecta", "error");
       return false;
@@ -237,30 +306,6 @@ function login(userNameParam, passwordParam, tipoUsuario) {
     mostrarOneSection("section#dashboardDocente");
   }
 }
-
-/* ACTUALIZACIONES DE DATOS */
-
-//DASHBOARD Docente
-const actualizarDatos_DashboardDocente = () => {
-  if (usuarioLogeado.tipo === "docente") {
-    const contenedorListAlumnos = document.querySelector(
-      "body main section#dashboardDocente div#contenedorListaAlumnos"
-    );
-    const listaAlumnosTodos =
-      contenedorListaAlumnos.querySelector("div#alumnosTodos");
-    const listaAlumnosInicial =
-      contenedorListaAlumnos.querySelector("div#alumnosInicial");
-    const listaAlumnosIntermedio = contenedorListaAlumnos.querySelector(
-      "div#alumnosIntermedio"
-    );
-    const listaAlumnosAvanzado = contenedorListaAlumnos.querySelector(
-      "div#alumnosAvanzado"
-    );
-  } else {
-    mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
-    mostrarOneSection("section#pantallaError");
-  }
-};
 
 // ADDEVENTLISTENER
 

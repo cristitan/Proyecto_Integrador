@@ -8,6 +8,7 @@
 // const botonesParaIrRegistro = //REGISTRAR TODOS LOS BOTONES QUE CAMBIEN A > REGISTRO (REPETIR PARA TODAS LAS VISTAS)
 const body = "body#root";
 const botonesHome = document.querySelectorAll(`${body} button.irPrincipal`);
+
 const ocultarTodo = () => {
   const allSections = document.querySelectorAll(`${body} section`);
   for (const section of allSections) {
@@ -19,6 +20,21 @@ const mostrarOneSection = (identificador) => {
   const sectionAMostrar = document.querySelector(`${body} ${identificador}`);
   ocultarTodo();
   sectionAMostrar.classList.remove("hidden");
+};
+
+// Función para navItems (para ocultar cada navItem)  @cambioVista.js
+const ocultarAllNavItems = () => {
+  const allNavItems = document.querySelectorAll(`body ul.navItem`);
+  for (const navItem of allNavItems) {
+    navItem.classList.add("hidden");
+  }
+};
+
+// Función para mostrar los NavItems seleccionados @cambioVista.js; primero oculta los
+const mostrarNavItem = (identificador) => {
+  const navItemsAMostrar = document.querySelector(`body ${identificador}`);
+  ocultarAllNavItems();
+  navItemsAMostrar.classList.remove("hidden");
 };
 
 for (const boton of botonesHome) {

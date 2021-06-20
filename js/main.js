@@ -87,8 +87,10 @@ function validarPass(password) {
     return true;
   } else {
     mostrarAlerta(
-      `Contraseña inválida. Corrija: ${!tieneLargo && "cantidad de caracteres,"
-      } ${!tieneMinuscula && "al menos una minúscula,"} ${!tieneMayuscula && "al menos una mayuscula,"
+      `Contraseña inválida. Corrija: ${
+        !tieneLargo && "cantidad de caracteres,"
+      } ${!tieneMinuscula && "al menos una minúscula,"} ${
+        !tieneMayuscula && "al menos una mayuscula,"
       } ${!tieneNumero && "al menos un número,"}`,
       "error"
     );
@@ -96,7 +98,51 @@ function validarPass(password) {
   }
 }
 
+function obtenerTopAlumnos(arrayAlumnosAsignados) {
+  const alumnosOrdenados = arrayAlumnosAsignados.sort(function (a, b) {
+    if (a.entregas.length > b.entregas.length) {
+      return -1;
+    }
+    if (a.entregas.length < b.entregas.length) {
+      return 1;
+    }
+    return 0;
+  });
+  const topAlumnos = []; // SE VA A GUARDAR EL/LOS ALUMNO/S CON MÁS ENTREGAS
+  for (i = 0; i < alumnosOrdenados.length; i++) {
+    if (i === 0) {
+      topAlumnos.push(alumnosOrdenados[i]);
+    }
+    if (
+      alumnosOrdenados[i + 1] &&
+      alumnosOrdenados[i].entregas.length ===
+        alumnosOrdenados[i + 1].entregas.length
+    ) {
+      topAlumnos.push(alumnosOrdenados[i + 1]);
+    } else {
+      return topAlumnos;
+    }
+  }
+}
+
 /* ACTUALIZACIONES DE DATOS */
+// Navbar cuando se loggea usuario
+
+//Función a la que llamar cada vez que se abre o cierra sesion @dondeEstéFunciónLogin @dondeEstéFunciónLogOut
+// Si se llama a esta función cuando hay un usuarioLogeado; va a mostrar los botones correspondientes
+// También si hay un usuarioLogeado; va a printear "Hola, Fulanito" en el html en el primer li con la ID correspondiente.
+function actualizarNavItems() {
+  if (usuarioLogeado.usuarioId) {
+    const welcomeElement = document.querySelector(
+      "body nav div ul#usuarioConocido #bienvenidoUser"
+    );
+    welcomeElement.innerHTML = "";
+    welcomeElement.innerHTML = `${dataUsuarioLogeado.nombre}`;
+    mostrarNavItem("ul#usuarioConocido");
+  } else {
+    mostrarNavItem("ul#vistaPublico");
+  }
+}
 
 //DASHBOARD Docente
 
@@ -127,6 +173,23 @@ const actualizarDatos_DashboardDocente = () => {
         </li>
         `;
     };
+    const agregarItemTopAlumno = (nombre, cantidadTareas) => {
+      return `
+      <li>
+        <div class="col s12 row indigo lighten-5 roundedBorders2">
+          <span class="col s8 indigo lighten-5 roundedBorders2">
+            ${nombre}
+          </span>
+          <span
+            class="col s1 offset-s3 indigo-text text-accent-1"
+            style="font-weight: bold;"
+          >
+            ${cantidadTareas}
+          </span>
+        </div>
+      </li>
+        `;
+    };
     const dashboard = document.querySelector(
       "body main section#dashboardDocente"
     );
@@ -148,13 +211,21 @@ const actualizarDatos_DashboardDocente = () => {
     const entregasParaDocente = dashboard.querySelector(
       "#deliveredExersicesNumber p"
     );
+    const alumnosTopEntregas = dashboard.querySelector(
+      "#alumnosTopEntregas ul"
+    );
 
+    const topAlumnos = obtenerTopAlumnos(dataUsuarioLogeado.alumnosAsignados);
+
+    // reinicio numero de entregas hechas para el docente
     let totalDeliveredExercises = 0;
 
+    // reinicio listas de alumnos
     listaAlumnosTodos.innerHTML = "";
     listaAlumnosInicial.innerHTML = "";
     listaAlumnosIntermedio.innerHTML = "";
     listaAlumnosAvanzado.innerHTML = "";
+    // Actualizo listas de alumnos
     for (const alumno of dataUsuarioLogeado.alumnosAsignados) {
       totalDeliveredExercises += alumno.entregas.length;
       listaAlumnosTodos.innerHTML += agregarItemAlumno(
@@ -184,7 +255,16 @@ const actualizarDatos_DashboardDocente = () => {
         );
       }
     }
+    // Actualizo numero de entregas hechas para el docente
     entregasParaDocente.innerHTML = totalDeliveredExercises;
+    //
+    alumnosTopEntregas.innerHTML = "";
+    for (const alumno of topAlumnos) {
+      alumnosTopEntregas.innerHTML += agregarItemTopAlumno(
+        alumno.nombre,
+        alumno.entregas.length
+      );
+    }
   } else {
     mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
     mostrarOneSection("section#pantallaError");
@@ -228,8 +308,6 @@ function listarDocentes() {
   }
 }
 
-
-
 /* ------------------------------------------  Registro de Tarea  -------------------------------------- */
 
 //WIP WIP WIP
@@ -244,41 +322,26 @@ function listarDocentes() {
 //   });
 
 function registrarTarea() {
-  const titulo = document.querySelector(
-    "#titulo_tarea"
-  ).value;
-  const descripcion = document.querySelector(
-    "#descripcion_tarea"
-  ).value;
+  const titulo = document.querySelector("#titulo_tarea").value;
+  const descripcion = document.querySelector("#descripcion_tarea").value;
 
-  const nuevaTarea = new Tarea(
-    titulo,
-    descripcion,
-    NIVELES.INICIAL,
-    0,
-    12
-  );
-
+  const nuevaTarea = new Tarea(titulo, descripcion, NIVELES.INICIAL, 0, 12);
 
   tareasList.push(nuevaTarea);
-
 
   listarTareas();
 
   // // WIP Validaciones
 
-  // mostrarAlerta("Se ha registrado correctamente!", "success");    
+  // mostrarAlerta("Se ha registrado correctamente!", "success");
   // mostrarAlerta("Algo salió mal :(", "error");
-
 }
-
 
 function listarTareas() {
   for (let i = 0; i < tareasList.length; i++) {
     console.log(tareasList[i]);
   }
 }
-
 
 // Alumno
 function registrarAlumno() {
@@ -287,10 +350,20 @@ function registrarAlumno() {
   let nombre = document.querySelector("#alumno_first_name").value;
   let usuario = document.querySelector("#alumno_user_name").value;
   let password = document.querySelector("#alumno_password").value;
-  console.log('value docente asignado', document.querySelector("#docente_asignado").value);
-  let alumnosAsignados = docentesList[document.querySelector("#docente_asignado").value].alumnosAsignados;
+  console.log(
+    "value docente asignado",
+    document.querySelector("#docente_asignado").value
+  );
+  let alumnosAsignados =
+    docentesList[document.querySelector("#docente_asignado").value]
+      .alumnosAsignados;
 
-  let nuevoAlumno = new Alumno(nombre, usuario, password, docentesList[document.querySelector("#docente_asignado").value]);
+  let nuevoAlumno = new Alumno(
+    nombre,
+    usuario,
+    password,
+    docentesList[document.querySelector("#docente_asignado").value]
+  );
 
   let validadorPushNombre = validarNombre(nombre);
   //let validadorPushUser = validarUserAlumno(usuario);
@@ -323,22 +396,24 @@ function registrarAlumno() {
 function selectDocentes() {
   console.log("voy a cargar el select");
 
-  document.querySelector("select#docente_asignado").innerHTML = "";
+  document.querySelector(
+    "select#docente_asignado"
+  ).innerHTML = `<option disabled selected>Choose your option</option>`;
 
   //docentesList.sort();
   for (let i = 0; i < docentesList.length; i++) {
     let unDocente = docentesList[i];
-    console.log('unDocente nombre', unDocente.nombre, i)
-    document.querySelector("select#docente_asignado").innerHTML += `<option value=${i}> 
+    console.log("unDocente nombre", unDocente.nombre, i);
+    document.querySelector(
+      "select#docente_asignado"
+    ).innerHTML += `<option value=${i}> 
     ${unDocente.nombre}
     </option>`;
   }
 
-  var selectElem = document.querySelectorAll('select');
+  var selectElem = document.querySelectorAll("select");
   let select = M.FormSelect.init(selectElem);
 }
-
-
 
 // Funcion para listar los alumnos registrados al momento en la consola.
 
@@ -370,7 +445,12 @@ function login(userNameParam, passwordParam, tipoUsuario) {
         "Bienvenido <b>" + dataUsuarioLogeado.nombre + "</b>",
         "success"
       );
-      actualizarDatos_DashboardDocente();
+      actualizarNavItems();
+      if (usuarioLogeado.tipo === "docente") {
+        actualizarDatos_DashboardDocente();
+      } else {
+        // actualizarDatos_DashboardAlumno(); WIP
+      }
     } else {
       mostrarAlerta("Contraseña incorrecta", "error");
       return false;
@@ -390,8 +470,27 @@ function login(userNameParam, passwordParam, tipoUsuario) {
     mostrarOneSection("section#dashboardDocente");
   }
 }
+function cerrarSesion() {
+  //limpiamos las propiedades de usuarioLogeado, para no tener los datos del usuario marcados en la app y que la funcion mostrarNavItem no detecte al usuarioLogeado
+  usuarioLogeado.listaPerteneciente = [];
+  usuarioLogeado.indice = 0;
+  usuarioLogeado.usuarioId = "";
+  mostrarNavItem("navItem#vistaPublico"); // ahora los items van a ser los de navItems para usuarioDesconocido: los botones de inicio y Registro
+  mostrarOneSection("section#login"); // Volvemos a la seccion login al cerrar sesion
+}
+
+document
+  .querySelector("body nav ul button#btnCerrarSesion")
+  .addEventListener("click", cerrarSesion);
 
 // ADDEVENTLISTENER
+
+// Botón reporte individual
+document
+  .querySelector("button#btnDocenteIrReporteIndividual")
+  .addEventListener("click", () => {
+    mostrarOneSection("section#reporteIndividual");
+  });
 
 // Botón logeo Docente
 document
@@ -429,9 +528,7 @@ document
   });
 
 // Botón Registro Alumno
-document
-  .querySelector("#btnRegistro_alumno")
-  .addEventListener("click", (e) => {
-    e.preventDefault();
-    registrarAlumno();
-  });
+document.querySelector("#btnRegistro_alumno").addEventListener("click", (e) => {
+  e.preventDefault();
+  registrarAlumno();
+});

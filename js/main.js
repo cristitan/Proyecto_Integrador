@@ -87,10 +87,8 @@ function validarPass(password) {
     return true;
   } else {
     mostrarAlerta(
-      `Contraseña inválida. Corrija: ${
-        !tieneLargo && "cantidad de caracteres,"
-      } ${!tieneMinuscula && "al menos una minúscula,"} ${
-        !tieneMayuscula && "al menos una mayuscula,"
+      `Contraseña inválida. Corrija: ${!tieneLargo && "cantidad de caracteres,"
+      } ${!tieneMinuscula && "al menos una minúscula,"} ${!tieneMayuscula && "al menos una mayuscula,"
       } ${!tieneNumero && "al menos un número,"}`,
       "error"
     );
@@ -230,6 +228,58 @@ function listarDocentes() {
   }
 }
 
+
+
+/* ------------------------------------------  Registro de Tarea  -------------------------------------- */
+
+//WIP WIP WIP
+
+//Falta agregar id de tarea USAMOS DATE??
+
+// document
+//   .querySelector("#btnRegistrarTarea")
+//   .addEventListener("click", (e) => {
+//     e.preventDefault();
+//     registrarTarea();
+//   });
+
+function registrarTarea() {
+  const titulo = document.querySelector(
+    "#titulo_tarea"
+  ).value;
+  const descripcion = document.querySelector(
+    "#descripcion_tarea"
+  ).value;
+
+  const nuevaTarea = new Tarea(
+    titulo,
+    descripcion,
+    NIVELES.INICIAL,
+    0,
+    12
+  );
+
+
+  tareasList.push(nuevaTarea);
+
+
+  listarTareas();
+
+  // // WIP Validaciones
+
+  // mostrarAlerta("Se ha registrado correctamente!", "success");    
+  // mostrarAlerta("Algo salió mal :(", "error");
+
+}
+
+
+function listarTareas() {
+  for (let i = 0; i < tareasList.length; i++) {
+    console.log(tareasList[i]);
+  }
+}
+
+
 // Alumno
 function registrarAlumno() {
   // WIP = WORK IN PROGRESS
@@ -255,11 +305,11 @@ function registrarAlumno() {
       "Error:  Nombre incorrecto. Por favor, ingrese un nombre sin símbolos. ",
       "error"
     );
-  // } else if (!validadorPushUser) {
-  //   mostrarAlerta(
-  //     "Error, ya existe este usuario, elija otro nombre de usuario. ",
-  //     "error"
-  //   );
+    // } else if (!validadorPushUser) {
+    //   mostrarAlerta(
+    //     "Error, ya existe este usuario, elija otro nombre de usuario. ",
+    //     "error"
+    //   );
   } else if (!validadorPushPass) {
     mostrarAlerta(
       "Error, su contraseña no cumple con los requisitos. Asegúrese de que tenga al menos 4 carácteres, una minúscula, una mayúscula y un número. ",
@@ -272,7 +322,7 @@ function registrarAlumno() {
 
 function selectDocentes() {
   console.log("voy a cargar el select");
-    
+
   document.querySelector("select#docente_asignado").innerHTML = "";
 
   //docentesList.sort();
@@ -380,8 +430,8 @@ document
 
 // Botón Registro Alumno
 document
-.querySelector("#btnRegistro_alumno")
-.addEventListener("click", (e) => {
-  e.preventDefault();
-  registrarAlumno();
-});
+  .querySelector("#btnRegistro_alumno")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    registrarAlumno();
+  });

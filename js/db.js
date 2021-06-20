@@ -13,7 +13,7 @@ class Alumno {
     this.nombre = nombre;
     this.password = password;
     this.usuarioDocenteAsignado = usuarioDocenteAsignado;
-    this.nivelAlumno = "inicial";
+    this.nivelAlumno = NIVELES.INICIAL;
     this.entregas = [];
   }
 }
@@ -37,14 +37,19 @@ class Alumno {
 //   }
 // }
 
-// class Tarea_Planteada {
-//   constructor(id, titulo, descripcion, imagen) {
-//     this.id = id;
-//     this.titulo = titulo;
-//     this.descripcion = descripcion;
-//     this.imagen = imagen;
-//   }
-// }
+class Tarea {
+  constructor(unTitulo, unaDescripcion, unNivel, idDocente, notaMax) {
+   
+    this.idTarea = docentesList[idDocente].lenght; //Falta agreagar id del docente logueado
+    this.titulo = unTitulo;
+    this.descripcion = unaDescripcion;
+    this.nivel = unNivel;
+    this.notaMax = notaMax; // falta parametrizar
+    // WIP this.imagen = unaImagen;
+    this.entregas = [];
+    this.estado = ESTADOS_TAREAS.NUEVO;
+  }
+}
 
 const usuarioLogeado = {
   // REFERENCIAS
@@ -55,6 +60,21 @@ const usuarioLogeado = {
 }; // Por qué no poner dataUsuarioLogeado dentro del usuarioLogeado
 let dataUsuarioLogeado = {};
 // usuarioLogeado.listaPerteneciente = alumnosList
+
+
+// Definición de arrays, string y variables
+
+const NIVELES = {
+  INICIAL: 'inicial',
+  INTERMEDIO: 'intermedio',
+  AVANZADO: 'avanzado'
+}
+
+const ESTADOS_TAREAS = {
+  NUEVO: 'Nuevo',
+  ENTREGADO: 'Entregado',
+  CORREGIDO: 'Corregido'
+}
 
 const alumnosList = [
   {
@@ -94,7 +114,7 @@ const alumnosList = [
     usuario: "elBana2",
     password: "123",
     usuarioDocenteAsignado: "cariMath",
-    nivelAlumno: "inicial",
+    nivelAlumno: NIVELES.INICIAL,
     entregas: [4],
   },
 ];

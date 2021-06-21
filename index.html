@@ -93,6 +93,15 @@
 		.ghostBtn:hover{
 			background-color: rgba(140, 158, 255,0.32);
 		}
+		.circleNumber_DashboardAlumno{
+			font-size: 30px;
+			border-radius: 1000px;
+			border: 3px solid rgba(140, 158, 255, 1);
+			width: 50px;
+			height: 50px;
+			padding: 50px;
+			margin: 0;
+		}
 		.deliveredExersicesNumber{
 			font-size: 30px;
 			border-radius: 1000px;
@@ -327,9 +336,258 @@
 
 		<!-- DASHBOARDS -->
 		<section id="dashboardAlumno">
-			<h1>MARC _ PANTALLA DE DASHBOARD ALUMNO</h1>
-			<h2 id="userNameAlumno">nombre de usuario</h2>
+			<div class="row">
+				<div class="col s12 row">
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						Dashboard > Alumno
+					</h3>
+				</div>
+			</div>
+			<div class="row" style="margin: auto 10px;">
+				
+				<!--Parte de estadísticas-->
+				<div class="row col s12 l10 offset-l1">
+					<div class="row">
+							<h5 class="col s12 l8 indigo-text text-accent-1">
+								Estadísticas
+							</h5>
+					</div>
+					<div class="row white roundedBorders">
+						<div class="col s3">
+							<div class="col s12 row">
+								<h6 class="col s12 l8 ">
+									<b>Total</b>
+								</h6>
+							</div>
+							<div class="row">
+								<span class="col s5 " style="text-align: right;">Ejercicios Resueltos</span>
+								<b class="col s4 offset-s1 indigo-text text-accent-2" id="dashboardAlumno_ejerciciosResueltos">45%</b>
+							</div>
+							<div class="row">
+								<span class="col s5 " style="text-align: right;">Promedio</span>
+								<b class="col s4 offset-s1 indigo-text text-accent-2" id="dashboardAlumno_promedio">81</b>
+							</div>
+							<div class="row">
+								<span class="col s5 " style="text-align: right;">Pendientes</span>
+								<b class="col s4 offset-s1 indigo-text text-accent-2" id="dashboardAlumno_pendientes">2</b>
+							</div>
+						</div>
+						<div class="col s3">
+								<div class="col s12 row">
+									<h6 class="col s12 l8">
+										<b>Tareas Realizadas</b>
+									</h6>
+								</div>
+							<div class="row col s12 "> dataUsuarioLogeado.entregas.length
+								<div class="row col s4 offset-s4 indigo-text text-accent-2 centeredFlex">
+									<p class="circleNumber_DashboardAlumno centeredFlex" id="dashboardAlumno_tareasRealizadas">7</p>
+								</div>
+							</div>
+						</div>
+						<div class="col s3 ">
+								<div class="col s12 row">
+									<h6 class="col s12 l8">
+										<b>Entregas Corregidas</b>
+									</h6>
+								</div>
+							<div class="row col s12 ">
+								<div class="row col s4 offset-s4 indigo-text text-accent-2 centeredFlex">
+									<p class="circleNumber_DashboardAlumno centeredFlex" id="dashboardAlumno_entregasCorregidas">5</p>
+								</div>
+							</div>
+						</div>
+						<div class="col s3 ">
+								<div class="col s12 row">
+									<h6 class="col s12 l8">
+										<b>Tareas Totales</b>
+									</h6>
+								</div>
+							<div class="row col s12 "> dataUsuarioLogeado.entregas.length
+								<div class="row col s4 offset-s4 indigo-text text-accent-2 centeredFlex">
+									<p class="circleNumber_DashboardAlumno centeredFlex" id="dashboardAlumno_tareasTotales">9</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!--Parte de Ultimas tareas-->
+				<div class="row col s12 l10 offset-l1">
+					<div class="row">
+						<h5 class="col s12 l8 indigo-text text-accent-1">
+							Tareas
+						</h5>
+					</div>
+					<div class="row" style="margin: auto 20px;">
+						<div class="col s12">
+							<div class="row s12">
+								<ul id="tabTareasAlumno" class="col s12 row tabs white roundedBorders2">
+									<li class="tab col s2"><a class="active" href="#tareasTodo">Todo</a></li>
+									<li class="tab col s2"><a  href="#tareasPendientes">Pendientes</a></li>
+									<li class="tab col s2"><a  href="#tareasRealizadas">Realizadas</a></li>
+								</ul>
+							</div>
+							<div class="row s12 white roundedBorders z-depth-3">
+								<div class="row col s11 offset-s1">
+										<form class="col s12">
+											<div class="input-field col s6 offset-s6">
+											  <i class="material-icons prefix">search</i>
+											  <textarea id="icon_prefix2" class="materialize-textarea"></textarea>
+											  <label for="icon_prefix2">buscar</label>
+											</div>
+										</form>
+								</div>
+								<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
+									<div id="tareasTodo" class="col s12 row">
+										<ul class=" flow-text " style="font-size: 18px;">
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s8" style="height: 55px;">
+														<span class="col s12">Titulo de tarea 1</span>
+														<span class="col s12" style="font-size: 16px;">Descripción larga de tarea mucho textooo xDD</span>
+													</div>
+													<div class="col s3 centeredFlex" style="height: 55px;" >
+															
+														<button  id="btnDocenteIrReporteIndividual" class="waves-effect waves-light btn col s5 ghostBtn roundedBorders2">
+															Ver Mas
+														</button>
+														<button
+														class="waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
+														>Entregar</button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s8" style="height: 55px;">
+														<span class="col s12">Titulo de tarea 1</span>
+														<span class="col s12" style="font-size: 16px;">Descripción larga de tarea mucho textooo xDD</span>
+													</div>
+													<div class="col s3 centeredFlex" style="height: 55px;" >
+															
+														<button  id="btnDocenteIrReporteIndividual" class="waves-effect waves-light btn col s5 ghostBtn roundedBorders2">
+															Ver Mas
+														</button>
+														<button
+														class="waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
+														>Entregar</button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s8" style="height: 55px;">
+														<span class="col s12">Titulo de tarea 1</span>
+														<span class="col s12" style="font-size: 16px;">Descripción larga de tarea mucho textooo xDD</span>
+													</div>
+													<div class="col s3 centeredFlex" style="height: 55px;" >
+															
+														<button  id="btnDocenteIrReporteIndividual" class="waves-effect waves-light btn col s5 ghostBtn roundedBorders2">
+															Ver Mas
+														</button>
+														<button
+														class="waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
+														>Entregar</button>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div id="tareasPendientes" class="col s12 row">
+										<ul class=" flow-text " style="font-size: 18px;">
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s4" style="height: 55px;">
+														<span class="col s12">Nombre Completo</span>
+														<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+													</div>
+													<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+														<span class="col s12">
+															Entregas Realizadas: <b>7</b>
+														</span>
+													</div>
+													<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+														<button
+														class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+														>Ver Perfil</button>
+													</div>
+												</div>
+											</li>
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s4" style="height: 55px;">
+														<span class="col s12">Nombre Completo</span>
+														<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+													</div>
+													<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+														<span class="col s12">
+															Entregas Realizadas: <b>7</b>
+														</span>
+													</div>
+													<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+														<button
+														class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+														>Ver Perfil</button>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+									<div id="tareasRealizadas" class="col s12 row">
+										<ul class=" flow-text " style="font-size: 18px;">
+											<li>
+												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+													  
+													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+														account_circle
+													</i>
+													<div class="col s4" style="height: 55px;">
+														<span class="col s12">Nombre Completo</span>
+														<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+													</div>
+													<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+														<span class="col s12">
+															Entregas Realizadas: <b>7</b>
+														</span>
+													</div>
+													<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+														<button
+														class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+														>Ver Perfil</button>
+													</div>
+												</div>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</section>
+
+
 		<section id="dashboardDocente">
 			<div class="row">
 				<div class="col s12 row">
@@ -614,10 +872,10 @@
 		
 		ocultarTodo();
 		actualizarNavItems();
-		mostrarOneSection("section#login")
+		// mostrarOneSection("section#login")
 		// mostrarOneSection("section#tareasPendienteAlumno")
 		// mostrarOneSection("section#pantallaPrincipal")
-		// mostrarOneSection("section#dashboardDocente")
+		mostrarOneSection("section#dashboardAlumno")
 		// mostrarNavItem("ul#usuarioConocido")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{
@@ -635,11 +893,13 @@
 			var tabElemRegistro = document.querySelectorAll('#tabMenuRegistro');
 			var tabElemLogin = document.querySelectorAll('#tabMenuLogin');
 			var tabElemDashboardDocente = document.querySelectorAll('#tabDashboardDocente');
+			var tabElemTareasAlumno = document.querySelectorAll('#tabTareasAlumno');
 			let sideBar = M.Sidenav.init(elems);
 			let select = M.FormSelect.init(selectElem);
 			let tabRegistro = M.Tabs.init(tabElemRegistro)//, {swipeable: true})
 			let tabLogin = M.Tabs.init(tabElemLogin)//, {swipeable: true})
 			let tabDashboardDocente = M.Tabs.init(tabElemDashboardDocente)//, {swipeable: true})
+			let tabTareasAlumno = M.Tabs.init(tabElemTareasAlumno)//, {swipeable: true})
 
 		});
 

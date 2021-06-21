@@ -441,16 +441,6 @@ function login(userNameParam, passwordParam, tipoUsuario) {
       usuarioLogeado.usuarioId = usuarioEncontrado.usuario;
       usuarioLogeado.tipo = tipoUsuario;
       dataUsuarioLogeado = usuarioEncontrado;
-      mostrarAlerta(
-        "Bienvenido <b>" + dataUsuarioLogeado.nombre + "</b>",
-        "success"
-      );
-      actualizarNavItems();
-      if (usuarioLogeado.tipo === "docente") {
-        actualizarDatos_DashboardDocente();
-      } else {
-        // actualizarDatos_DashboardAlumno(); WIP
-      }
     } else {
       mostrarAlerta("Contraseña incorrecta", "error");
       return false;
@@ -461,12 +451,15 @@ function login(userNameParam, passwordParam, tipoUsuario) {
     mostrarAlerta("Usuario no encontrado en lista de " + tipoUsuario, "error");
     return false;
   }
-
-  // EJECUTAR FUNCION DE ACTUALIZAR DATA
-
+  mostrarAlerta(
+    "Bienvenido <b>" + dataUsuarioLogeado.nombre + "</b>",
+    "success"
+  );
+  actualizarNavItems();
   if (tipoUsuario === "alumno") {
     mostrarOneSection("section#dashboardAlumno");
   } else {
+    actualizarDatos_DashboardDocente();
     mostrarOneSection("section#dashboardDocente");
   }
 }
@@ -475,7 +468,7 @@ function cerrarSesion() {
   usuarioLogeado.listaPerteneciente = [];
   usuarioLogeado.indice = 0;
   usuarioLogeado.usuarioId = "";
-  mostrarNavItem("navItem#vistaPublico"); // ahora los items van a ser los de navItems para usuarioDesconocido: los botones de inicio y Registro
+  mostrarNavItem("ul#vistaPublico"); // ahora los items van a ser los de navItems para usuarioDesconocido: los botones de inicio y Registro
   mostrarOneSection("section#login"); // Volvemos a la seccion login al cerrar sesion
 }
 

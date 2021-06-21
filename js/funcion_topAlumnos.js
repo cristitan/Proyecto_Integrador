@@ -1,30 +1,27 @@
-
-function ordenarTopAlumnos (arrayAlumnos) { 
-    arrayAlumnos.sort(function (a, b) {
-        if (a.entregas.length > b.entregas.length) {
-          return 1;
-        }
-        if (a.entregas.length < b.entregas.length) {
-          return -1;
-        }
-    } 
-
-} // POR ALGUNA RAZON ESTE CIERRE DE LA FUNCION ME MARCA ERROR SIEMPRE, Y SI LE AGREGO OTRO CORCHETE } SIGUE SALTANDO ERROR, AYUDA?
-
-
-top3Alumnos = []
-
-
-function obtenerTop3Alumnos (arrayAlumnos) {
-    top3Alumnos.length = 0 // primero al ejecutar la variable, limpiamos la lista de top3Alumnos para que no se acumulen cada vez q se ejecuta.
-    for (i = 0; i < arrayAlumnos.length; i++) { 
-        // Que haga recorrida, si el número de indice actual es igual o mayor que el largo del array -2 (caso que se da en los últimos 3 objetos del array) entonces pushearlo a la lista top
-        if (i >= (arrayAlumnos.length -2 ) {  // Sería -2 o -3??? 
-            top3Alumnos.push(arrayAlumnos[i])
-        }
+function obtenerTopAlumnos(arrayAlumnosAsignados) {
+  const alumnosOrdenados = arrayAlumnosAsignados.sort(function (a, b) {
+    if (a.entregas.length > b.entregas.length) {
+      return -1;
     }
-
+    if (a.entregas.length < b.entregas.length) {
+      return 1;
+    }
+    return 0;
+  });
+  const topAlumnos = []; // SE VA A GUARDAR EL/LOS ALUMNO/S CON MÁS ENTREGAS
+  for (i = 0; i < alumnosOrdenados.length; i++) {
+    if (i === 0) {
+      topAlumnos.push(alumnosOrdenados[i]);
+    }
+    if (
+      alumnosOrdenados[i + 1] &&
+      alumnosOrdenados[i].entregas.length ===
+        alumnosOrdenados[i + 1].entregas.length
+    ) {
+      topAlumnos.push(alumnosOrdenados[i + 1]);
+    } else {
+      return topAlumnos;
+    }
+  }
 }
-
-
- 
+[{ entregas: 5 }, { entregas: 5 }, { entregas: 5 }, { entregas: 5 }];

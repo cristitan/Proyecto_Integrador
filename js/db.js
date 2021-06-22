@@ -39,7 +39,6 @@ class Alumno {
 
 class Tarea {
   constructor(unTitulo, unaDescripcion, unNivel, idDocente, notaMax) {
-   
     this.idTarea = docentesList[idDocente].lenght; //Falta agreagar id del docente logueado
     this.titulo = unTitulo;
     this.descripcion = unaDescripcion;
@@ -61,20 +60,19 @@ const usuarioLogeado = {
 let dataUsuarioLogeado = {};
 // usuarioLogeado.listaPerteneciente = alumnosList
 
-
 // Definición de arrays, string y variables
 
 const NIVELES = {
-  INICIAL: 'inicial',
-  INTERMEDIO: 'intermedio',
-  AVANZADO: 'avanzado'
-}
+  INICIAL: "inicial",
+  INTERMEDIO: "intermedio",
+  AVANZADO: "avanzado",
+};
 
 const ESTADOS_TAREAS = {
-  NUEVO: 'Nuevo',
-  ENTREGADO: 'Entregado',
-  CORREGIDO: 'Corregido'
-}
+  NUEVO: "Nuevo",
+  ENTREGADO: "Entregado",
+  CORREGIDO: "Corregido",
+};
 
 const alumnosList = [
   {
@@ -282,6 +280,7 @@ const docentesList = [
 //   },
 // ];
 
+// GET
 function getDocente(usuarioId) {
   for (const docente of docentesList) {
     if (docente.usuario === usuarioId) {

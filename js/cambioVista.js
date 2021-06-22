@@ -56,10 +56,10 @@ document
   .addEventListener("click", () => {
     mostrarOneSection("section#login");
   });
+
 document
   .querySelector("nav div ul li button#navBtn_Registro")
   .addEventListener("click", () => {
-    console.log("voy a registrar alumno");
     selectDocentes();
     mostrarOneSection("section#registro");
   });
@@ -79,4 +79,10 @@ document
   .addEventListener("click", (e) => {
     e.preventDefault();
     mostrarOneSection("section#registro");
+  });
+
+document
+  .querySelector("body main section#dashboardDocente button#btnDocenteIrTareas")
+  .addEventListener("click", () => {
+    mostrarOneSection("section#tareasDocente");
   });

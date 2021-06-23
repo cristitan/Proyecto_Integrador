@@ -155,7 +155,15 @@ const docentesList = [
         entregas: [23],
       },
     ],
-    tareasPlanteadas: [],
+    tareasPlanteadas: [
+      {
+        nivel: "inicial",
+        titulo: "Tarea 1 de Santi",
+        img: "ahdfisadf",
+        descripcion:
+          "Para que el alumno pueda salir de la plataforma y proteger sus datos y su cuenta, dándole privacidad a sus datos personales y del curso.",
+      },
+    ],
   },
   {
     nombre: "Carina",

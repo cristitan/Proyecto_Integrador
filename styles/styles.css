@@ -104,3 +104,10 @@ div.select-wrapper input.select-dropdown.dropdown-trigger {
   justify-content: center;
   align-items: center;
 }
+.reporteIndividual_label{
+  text-align: end;
+  font-size: 18px;
+}
+.reporteIndividual_data{
+  font-size: 17px;
+}

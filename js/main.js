@@ -400,6 +400,53 @@ function selectDocentes() {
   var selectElem = document.querySelectorAll("select#docente_asignado");
   M.FormSelect.init(selectElem);
 }
+//Funcion para desplegar los docentes en el select
+function selectReporteAlumnos() {
+  const onChangeHandle = (e)=>{
+    const dataAlumno = dataUsuarioLogeado.alumnosAsignados[e.target.value];
+    const nombreOutputElem = document.querySelector("#reporteIndividual_nombre");
+    const nivelOutputElem = document.querySelector("#reporteIndividual_nivel");
+    const ejerciciosPlanteadosOutputElem = document.querySelector("#reporteIndividual_tareasPlanteadas");
+    const ejerciciosResueltosOutputElem = document.querySelector("#reporteIndividual_tareasEntregadas");
+    let ejerciosPlanteadosEspecificos = 0;
+
+    for (const tarea of dataUsuarioLogeado.tareasPlanteadas){
+      if(tarea.nivel === dataAlumno.nivelAlumno){
+        ejerciosPlanteadosEspecificos++
+      }
+    }
+    for (const option of nivelOutputElem.children) {
+      option.removeAttribute("disabled")
+    }
+    for (const option of nivelOutputElem.children) {
+      console.log(option.getAttribute("value"), dataAlumno.nivelAlumno)
+      option.setAttribute("disabled", true)
+      if(option.getAttribute("value") === dataAlumno.nivelAlumno){
+        break
+      }
+    }
+
+    nombreOutputElem.innerHTML = dataAlumno.nombre;
+    nivelOutputElem.value = dataAlumno.nivelAlumno;
+    ejerciciosPlanteadosOutputElem.innerHTML = ejerciosPlanteadosEspecificos;
+    ejerciciosResueltosOutputElem.innerHTML = dataAlumno.entregas.length;
+    
+    M.FormSelect.init(nivelOutputElem);
+  }
+
+  const selectElem = document.querySelector(
+    "select#alumnosAsignados"
+  )
+  selectElem.addEventListener("change", onChangeHandle)
+
+  selectElem.innerHTML = `<option disabled selected>Choose your option</option>`;
+  for (let i = 0; i < dataUsuarioLogeado.alumnosAsignados.length; i++) {
+    let unAlumno = dataUsuarioLogeado.alumnosAsignados[i];
+    selectElem.innerHTML += `<option value=${i}>${unAlumno.nombre}</option>`;
+  }
+
+  M.FormSelect.init(selectElem);
+}
 
 // Funcion para listar los alumnos registrados al momento en la consola.
 
@@ -467,12 +514,13 @@ document
 
 // ADDEVENTLISTENER
 
-// Botón reporte individual
+// DASHBOARD DOCENTE > Botón reporte individual 
 document
-  .querySelector("button#btnDocenteIrReporteIndividual")
-  .addEventListener("click", () => {
-    mostrarOneSection("section#reporteIndividual");
-  });
+.querySelector("body main section#dashboardDocente button#btnDocenteIrReporteIndividual")
+.addEventListener("click", () => {
+  mostrarOneSection("section#reporteIndividualDocente");
+  selectReporteAlumnos()
+});
 
 // Botón logeo Docente
 document
@@ -504,6 +552,7 @@ document
     login(userNameAlumno, passwordAlumno, "alumno");
     mostrarOneSection("section#dashboardAlumno");
   });
+
 
 // Botón Registro Docente
 document

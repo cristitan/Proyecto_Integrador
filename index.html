@@ -901,6 +901,58 @@
 			</div>
 
 		</section>
+		<section id="reporteIndividualDocente">
+			<div class="row">
+				<div class="col s12 row">
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						Reporte Individual de Alumno
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 l10 offset-l1">
+					<div class="col s5 red">
+						<div class="input-field col s12">
+							<select id="alumnosAsignados">
+											
+							</select>
+							<label>Seleccione Alumno</label>
+						</div>
+
+					</div>
+					<div class="col s12 l6 offset-l1 white roundedBorders2 z-depth-3">
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Nombre:</span>
+							<span class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_nombre">Santiago</span>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Nivel:</span>
+							<div class="input-field col s6 flow-text reporteIndividual_data">
+								<select  id="reporteIndividual_nivel" class="col s6 flow-text reporteIndividual_data">
+									<option value="inicial">Inicial</option>
+									<option value="intermedio">Intermedio</option>
+									<option value="avanzado">Avanzado</option>
+								</select>
+							</div>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Ejercicios Planteados:</span>
+							<b class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_tareasPlanteadas">7</b>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Ejercicios Resueltos:</span>
+							<b class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_tareasEntregadas">5</b>
+						</div>
+						<div class="input-field col s12">
+							<button class="waves-effect waves-light btn row col s12 offset-l4 l4 indigo accent-1 roundedBorders2" name="action">
+								Cambiar Nivel
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!--Error-->
 		
@@ -927,7 +979,8 @@
 		// mostrarOneSection("section#tareasPendienteAlumno")
 		// mostrarOneSection("section#pantallaPrincipal")
 		// mostrarOneSection("section#dashboardAlumno")
-		mostrarOneSection("section#tareasDocente")
+		// mostrarOneSection("section#tareasDocente")
+		mostrarOneSection("section#reporteIndividualDocente")
 		// mostrarNavItem("ul#usuarioConocido")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{

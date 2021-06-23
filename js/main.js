@@ -571,6 +571,7 @@ function cerrarSesion() {
   usuarioLogeado.listaPerteneciente = [];
   usuarioLogeado.indice = 0;
   usuarioLogeado.usuarioId = "";
+  dataUsuarioLogeado = {}; 
   mostrarNavItem("ul#vistaPublico"); // ahora los items van a ser los de navItems para usuarioDesconocido: los botones de inicio y Registro
   mostrarOneSection("section#login"); // Volvemos a la seccion login al cerrar sesion
 }

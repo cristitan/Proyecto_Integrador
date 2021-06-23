@@ -13,7 +13,8 @@ function mostrarAlerta(texto, tipoDeAlerta) {
   });
 }
 
-/* VALIDACIONES */
+/* ********************* VALIDACIONES *****************/
+
 function validarNombre(nombre) {
   const symbolChars = "!`@#$%^&*()+=-[]\\';,./{}|\":<>?~_";
   if (nombre.length < 4) {
@@ -68,6 +69,29 @@ function chequearNumero(textoAValidar) {
     }
   }
   return false;
+}
+
+//Wiping...
+
+function validarTareas () {
+
+  if (titulo.length < 20 || titulo.length >= 200) {
+
+    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");
+    return false;
+    
+  } else if (descripcion.length <= 20 || titulo.length >= 200){
+    
+    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");  
+    return false;
+    
+  } else if (titulo.value === "" || descripcion.value === "") {
+    
+    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");
+    return false;
+
+  } 
+
 }
 
 function validarPass(password) {
@@ -342,6 +366,8 @@ function listarTareas() {
     console.log(tareasList[i]);
   }
 }
+
+
 
 // Alumno
 function registrarAlumno() {

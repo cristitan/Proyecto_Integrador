@@ -8,113 +8,7 @@
 	<title>Document</title> <!-- Compiled and minified CSS -->
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<style>
-		.roundedBorders{
-			border-radius: 15px;
-		}
-		.roundedBorders2{
-			border-radius: 8px;
-		}
-		.toast{
-			position: fixed;
-			top: auto !important;
-			bottom: 10px;
-			right: 10px;
-			background-color: rgb(216, 218, 230);
-			color: rgba(10, 0, 0, 0.7);
-			height: 40px;
-			border-radius: 10px;
-		}
-		.toast_error{
-			box-shadow: 0px 2px 5px 2px lightcoral;
-		}
-		.toast_alert{
-			box-shadow: 0px 2px 5px 2px #fbc02d ;
-		}
-		.toast_success{
-			box-shadow: 0px 2px 5px 2px #43a047;
-		}
-		section{
-			transition: 0.2s ease;
-		}
-		.hidden{
-   			opacity: 0;
-    		transform: translateY(-100%) translateX(-100%);
-			position: absolute;
-		}
-		.tabs .tab a {
-			color: #536dfe;
-		}
-
-		.tabs .tab a:hover {
-			color:#536dfe;
-			background-color: rgba(140, 158, 255, 0.1);
-		}
-
-		.tabs .tab a.active {
-			color:#536dfe;
-			background-color: rgba(140, 158, 255, 0.3);
-		}
-		.tabs .tab a:focus.active {
-			color:#536dfe;
-			background-color: rgba(140, 158, 255, 0.1);
-		}
-
-		.tabs .indicator {
-			background-color:#536dfe;
-		}
-		/* label focus color */
-		.input-field > label{
-			color: #536dfe;
-		}
-		.input-field input:focus + label{
-			color: #536dfe !important;
-		}
-		.input-field > input:focus{
-			border-bottom: 1px solid rgba(140, 158, 255, 1)  !important;
-			box-shadow: 0px 2px 2px ;
-		}
-		.input-field > input{
-			border-bottom: 1px solid rgba(140, 158, 255, 1)  !important;
-			box-shadow: none !important;
-		}
-		div.select-wrapper li span{
-			color: #536dfe;
-		}
-		div.select-wrapper input.select-dropdown.dropdown-trigger{
-			border-bottom: 1px solid rgba(140, 158, 255, 1)  !important;
-			box-shadow: none !important;
-		}
-		.ghostBtn{
-			background-color: transparent;
-			color: #5770ff;
-			border: 2px solid #8a9bff;
-		}
-		.ghostBtn:hover{
-			background-color: rgba(140, 158, 255,0.32);
-		}
-		.circleNumber_DashboardAlumno{
-			font-size: 30px;
-			border-radius: 1000px;
-			border: 3px solid rgba(140, 158, 255, 1);
-			width: 50px;
-			height: 50px;
-			padding: 50px;
-			margin: 0;
-		}
-		.deliveredExersicesNumber{
-			font-size: 30px;
-			border-radius: 1000px;
-			border: 3px solid rgba(140, 158, 255, 1);
-			width: 50px;
-			height: 50px;
-			padding: 50px;
-		}
-		.centeredFlex{
-			display: flex;
-			justify-content: center;
-			align-items: center;}
-	</style>
+	<link rel="stylesheet" href="./styles/styles.css">
 </head>
 
 <body class="blue-grey lighten-4" id="root">
@@ -242,7 +136,6 @@
 
 		</section>
 
-		
 		<section id="login">
 			<div class="row">
 				<div class="col s12 row">
@@ -334,7 +227,7 @@
 			<h1>MARC _ PANTALLA DE REPORTE Individual</h1>
 		</section>
 
-		<!-- DASHBOARDS -->
+		<!-- ALUMNO -->
 		<section id="dashboardAlumno">
 			<div class="row">
 				<div class="col s12 row">
@@ -587,7 +480,7 @@
 			</div>
 		</section>
 
-
+		<!-- DOCENTE -->
 		<section id="dashboardDocente">
 			<div class="row">
 				<div class="col s12 row">
@@ -850,6 +743,213 @@
 				</div>
 			</div>
 		</section>
+		<section id="tareasDocente">
+			<div class="row">
+				<div class="col s12 row">
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						Tareas > Docente
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+
+				<div id="modalCrearTarea" class="modal" >
+					<div class="modal-content">
+						<h4>Modal Header</h4>
+						<label>
+							Titulo
+							<input type="text"/>
+						</label>
+						<label>
+							Descripción
+							<textarea name="descripcion" id="" cols="30" rows="10"></textarea>
+						</label>
+						<div class="row">
+							<div class="input-field col s12">
+								<select id="nivel">
+									<option value="" disabled selected>Seleccione Nivel</option>
+									<option value="1">Inicial</option>		
+									<option value="2">Intermedio</option>		
+									<option value="3">Avanzado</option>		
+								</select>
+								<label>Nivel</label>
+							  </div>
+						</div>
+						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos iure excepturi fuga quidem voluptatibus, tenetur voluptatem pariatur beatae culpa consequuntur ipsa accusamus repellat, error totam enim eum aperiam dolor?</p>
+					</div>
+					<div class="modal-footer">
+						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Crear</a>
+					</div>
+				</div>
+				
+				<div class="col s10 offset-s1">
+					<div class="row">
+						<button id="crearTareaBtn" class="waves-effect waves-light btn col s2 offset-s10 indigo-text text-lighten-5 indigo accent-1 roundedBorders2">
+							Crear Tarea
+							<i class="material-icons right">add</i>
+						</button>
+					</div>
+					<div class="col s10 offset-s1">
+						<ul class="collapsible popout">
+							<li>
+								<div class="collapsible-header">Titulo</div>
+								<div class="collapsible-body">
+									<ul class=" flow-text " style="font-size: 18px;">
+										<li>
+											<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+												  
+												<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+													account_circle
+												</i>
+												<div class="col s4" style="height: 55px;">
+													<span class="col s12">Nombre Completo</span>
+													<span class="col s12" style="font-size: 12px;">Nivel Intermedio</span>
+												</div>
+												<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+													<span class="col s12">
+														Entregas Realizadas: <b>7</b>
+													</span>
+												</div>
+												<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+													<button
+													class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+													>Ver Perfil</button>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+												  
+												<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+													account_circle
+												</i>
+												<div class="col s4" style="height: 55px;">
+													<span class="col s12">Nombre Completo</span>
+													<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+												</div>
+												<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+													<span class="col s12">
+														Entregas Realizadas: <b>7</b>
+													</span>
+												</div>
+												<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+													<button
+													class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+													>Ver Perfil</button>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+												  
+												<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+													account_circle
+												</i>
+												<div class="col s4" style="height: 55px;">
+													<span class="col s12">Nombre Completo</span>
+													<span class="col s12" style="font-size: 12px;">Nivel Avanzado</span>
+												</div>
+												<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+													<span class="col s12">
+														Entregas Realizadas: <b>7</b>
+													</span>
+												</div>
+												<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+													<button
+													class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+													>Ver Perfil</button>
+												</div>
+											</div>
+										</li>
+										<li>
+											<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+												  
+												<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+													account_circle
+												</i>
+												<div class="col s4" style="height: 55px;">
+													<span class="col s12">Nombre Completo</span>
+													<span class="col s12" style="font-size: 12px;">Nivel Inicial</span>
+												</div>
+												<div class="col s4 indigo-text text-accent-2 centeredFlex" style="height: 55px;">
+													<span class="col s12">
+														Entregas Realizadas: <b>7</b>
+													</span>
+												</div>
+												<div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
+													<button
+													class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+													>Ver Perfil</button>
+												</div>
+											</div>
+										</li>
+									</ul>
+								</div>
+							</li>
+							<li>
+								<div class="collapsible-header"><i class="material-icons">place</i>Second</div>
+								<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+							</li>
+							<li>
+								<div class="collapsible-header"><i class="material-icons">whatshot</i>Third</div>
+								<div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+							</li>
+						</ul>
+					</div>
+				</div>
+				
+			</div>
+
+		</section>
+		<section id="reporteIndividualDocente">
+			<div class="row">
+				<div class="col s12 row">
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						Reporte Individual de Alumno
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="row col s12 l10 offset-l1">
+					<div class="row col s12 l5">
+						<div class="input-field col s12">
+							<select id="alumnosAsignados">
+											
+							</select>
+							<label>Seleccione Alumno</label>
+						</div>
+
+					</div>
+					<div class="col s12 l6 offset-l1 white roundedBorders2 z-depth-3">
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Nombre:</span>
+							<span class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_nombre">Santiago</span>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Nivel:</span>
+							<div class="input-field col s6 flow-text reporteIndividual_data">
+								<select  id="reporteIndividual_nivel" class="col s6 flow-text reporteIndividual_data">
+								</select>
+							</div>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Ejercicios Planteados:</span>
+							<b class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_tareasPlanteadas">7</b>
+						</div>
+						<div class="input-field col s12">
+							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Ejercicios Resueltos:</span>
+							<b class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_tareasEntregadas">5</b>
+						</div>
+						<div class="input-field col s12">
+							<button class="waves-effect waves-light btn row col s12 offset-l4 l4 indigo accent-1 roundedBorders2" id="cambiarNivel" >
+								Cambiar Nivel
+							</button>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
 
 		<!--Error-->
 		
@@ -875,7 +975,9 @@
 		// mostrarOneSection("section#login")
 		// mostrarOneSection("section#tareasPendienteAlumno")
 		// mostrarOneSection("section#pantallaPrincipal")
-		mostrarOneSection("section#dashboardAlumno")
+		// mostrarOneSection("section#dashboardAlumno")
+		// mostrarOneSection("section#tareasDocente")
+		mostrarOneSection("section#reporteIndividualDocente")
 		// mostrarNavItem("ul#usuarioConocido")
 
 		document.getElementById("realizarTarea").addEventListener("click", ()=>{
@@ -895,11 +997,25 @@
 			var tabElemDashboardDocente = document.querySelectorAll('#tabDashboardDocente');
 			var tabElemTareasAlumno = document.querySelectorAll('#tabTareasAlumno');
 			let sideBar = M.Sidenav.init(elems);
-			let select = M.FormSelect.init(selectElem);
+
 			let tabRegistro = M.Tabs.init(tabElemRegistro)//, {swipeable: true})
 			let tabLogin = M.Tabs.init(tabElemLogin)//, {swipeable: true})
+
 			let tabDashboardDocente = M.Tabs.init(tabElemDashboardDocente)//, {swipeable: true})
 			let tabTareasAlumno = M.Tabs.init(tabElemTareasAlumno)//, {swipeable: true})
+
+			var elemsModal = document.querySelectorAll('.modal');
+			var instancesModal = M.Modal.init(elemsModal);
+			
+			var singleModalElem = document.querySelector('#modalCrearTarea');
+			var instanceModal = M.Modal.getInstance(singleModalElem, {startingTop: "0%", endingTop: '10%'});
+			const modalbtn = document.querySelector('#crearTareaBtn')
+			modalbtn.addEventListener('click', () => {
+				instanceModal.open();
+				var selectElem = document.querySelectorAll("select#nivel");
+  				M.FormSelect.init(selectElem);
+				// Do other stuff
+			})
 
 		});
 

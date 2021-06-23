@@ -31,6 +31,10 @@ function validarNombre(nombre) {
   return true;
 }
 function validarUsuario(userName, list) {
+  if (!userName) {
+    mostrarAlerta("Ingrese usuario", "error");
+    return false; // como ya existe, entonces retornamos false
+  }
   // list es la lista que pase como parámetro, docentesList, alumnosList
   for (const elemUsuario of list) {
     // usuario es el elemento guardado e iterado del list
@@ -298,38 +302,43 @@ const actualizarDatos_DashboardDocente = () => {
 /* REGISTROS */
 // Docente
 function registrarDocente() {
-  const nombreDocente = document.querySelector(
-    "input#docente_first_name"
-  ).value;
-  const usuarioDocente = document.querySelector(
-    "input#docente_user_name"
-  ).value;
-  const passwordDocente = document.querySelector(
-    "input#docente_password"
-  ).value;
-  const nuevoDocente = new Docente(
-    nombreDocente,
-    usuarioDocente,
-    passwordDocente
-  );
+  const inputName = document.querySelector("input#docente_first_name");
+  const inputUser = document.querySelector("input#docente_user_name");
+  const inputPass = document.querySelector("input#docente_password");
+  const nombreDocente = inputName.value;
+  const usuarioDocente = inputUser.value;
+  const passwordDocente = inputPass.value;
+  const esNombreCorrecto = validarNombre(nombreDocente);
+  const esUsuarioDisponible = validarUsuario(usuarioDocente, docentesList);
+  const esPasswordCorrecta = validarPass(passwordDocente);
 
-  const validadorPushNombre = validarNombre(nombreDocente);
-  const validadorPushUser = validarUsuario(usuarioDocente, docentesList);
-  const validadorPushPass = validarPass(passwordDocente);
-
-  if (validadorPushNombre && validadorPushUser && validadorPushPass) {
+  if (esNombreCorrecto && esUsuarioDisponible && esPasswordCorrecta) {
+    const nuevoDocente = new Docente(
+      nombreDocente,
+      usuarioDocente,
+      passwordDocente
+    );
     docentesList.push(nuevoDocente);
     listarDocentes();
+    mostrarOneSection("section#login");
     mostrarAlerta("Se ha registrado correctamente!", "success");
-  } else {
-    mostrarAlerta("Algo salió mal :(", "error");
   }
+
+  inputName.value = "";
+  inputUser.value = "";
+  inputPass.value = "";
 }
 
 function listarDocentes() {
   for (let i = 0; i < docentesList.length; i++) {
     console.log(docentesList[i]);
   }
+}
+
+function cambiarNivelAlumno(alumnoData, nivel){
+  const alumno = getAlumno(alumnoData.usuario);
+  alumnoData.nivelAlumno = nivel;
+  alumno.nivelAlumno = nivel;
 }
 
 /* ------------------------------------------  Registro de Tarea  -------------------------------------- */
@@ -372,64 +381,47 @@ function listarTareas() {
 // Alumno
 function registrarAlumno() {
   // WIP = WORK IN PROGRESS
-
-  let nombre = document.querySelector("#alumno_first_name").value;
-  let usuario = document.querySelector("#alumno_user_name").value;
-  let password = document.querySelector("#alumno_password").value;
-  console.log(
-    "value docente asignado",
-    document.querySelector("#docente_asignado").value
-  );
-  let alumnosAsignados =
-    docentesList[document.querySelector("#docente_asignado").value]
-      .alumnosAsignados;
-
-  let nuevoAlumno = new Alumno(
-    nombre,
-    usuario,
-    password,
-    docentesList[document.querySelector("#docente_asignado").value]
-  );
-
-  let validadorPushNombre = validarNombre(nombre);
-  //let validadorPushUser = validarUserAlumno(usuario);
-  let validadorPushPass = validarPass(password);
-
-  if (validadorPushNombre && validadorPushPass) {
-    alumnosList.push(nuevoAlumno);
-    alumnosAsignados.push(nuevoAlumno);
-    listarDocentes();
-  } else if (!validadorPushNombre) {
-    mostrarAlerta(
-      "Error:  Nombre incorrecto. Por favor, ingrese un nombre sin símbolos. ",
-      "error"
-    );
-    // } else if (!validadorPushUser) {
-    //   mostrarAlerta(
-    //     "Error, ya existe este usuario, elija otro nombre de usuario. ",
-    //     "error"
-    //   );
-  } else if (!validadorPushPass) {
-    mostrarAlerta(
-      "Error, su contraseña no cumple con los requisitos. Asegúrese de que tenga al menos 4 carácteres, una minúscula, una mayúscula y un número. ",
-      "error"
-    );
+  const inputName = document.querySelector("#alumno_first_name");
+  const inputUser = document.querySelector("#alumno_user_name");
+  const inputPass = document.querySelector("#alumno_password");
+  const selectDocente = document.querySelector("#docente_asignado");
+  const nombre = inputName.value;
+  const usuario = inputUser.value;
+  const password = inputPass.value;
+  const docenteAsignar = docentesList[selectDocente.value];
+  const esNombreCorrecto = validarNombre(nombre);
+  const esUsuarioDisponible = validarUsuario(usuario, alumnosList);
+  const esPasswordCorrecta = validarPass(password);
+  if (!docenteAsignar) {
+    mostrarAlerta("Por favor, seleccione un Docente", "error");
+    return false;
   }
+  if (esNombreCorrecto && esUsuarioDisponible && esPasswordCorrecta) {
+    const nuevoAlumno = new Alumno(
+      nombre,
+      usuario,
+      password,
+      docenteAsignar.usuario
+    );
+    alumnosList.push(nuevoAlumno);
+    docenteAsignar.alumnosAsignados.push(nuevoAlumno);
+    listarAlumnos();
+    mostrarOneSection("section#login");
+    mostrarAlerta("Se ha registrado correctamente!", "success");
+  }
+  inputName.value = "";
+  inputUser.value = "";
+  inputPass.value = "";
 }
 
 //Funcion para desplegar los docentes en el select
-
 function selectDocentes() {
-  console.log("voy a cargar el select");
-
   document.querySelector(
     "select#docente_asignado"
   ).innerHTML = `<option disabled selected>Choose your option</option>`;
 
-  //docentesList.sort();
   for (let i = 0; i < docentesList.length; i++) {
     let unDocente = docentesList[i];
-    console.log("unDocente nombre", unDocente.nombre, i);
     document.querySelector(
       "select#docente_asignado"
     ).innerHTML += `<option value=${i}> 
@@ -437,15 +429,100 @@ function selectDocentes() {
     </option>`;
   }
 
-  var selectElem = document.querySelectorAll("select");
-  let select = M.FormSelect.init(selectElem);
+  var selectElem = document.querySelectorAll("select#docente_asignado");
+  M.FormSelect.init(selectElem);
+}
+//Funcion para desplegar los docentes en el select
+function selectReporteAlumnos() {
+  let onLvlChangeHandler
+  let nivelOutputElem
+  const onAlumnoChangeHandler = (e)=>{
+    const dataAlumno = dataUsuarioLogeado.alumnosAsignados[e.target.value];
+    const nombreOutputElem = document.querySelector("#reporteIndividual_nombre");
+    nivelOutputElem = document.querySelector("#reporteIndividual_nivel");
+    nivelOutputElem.removeEventListener("change", onLvlChangeHandler)
+    const ejerciciosPlanteadosOutputElem = document.querySelector("#reporteIndividual_tareasPlanteadas");
+    const ejerciciosResueltosOutputElem = document.querySelector("#reporteIndividual_tareasEntregadas");
+    const cambiarNivelBtn = document.querySelector("#cambiarNivel");
+    let lvlSelectInstance = M.FormSelect.init(nivelOutputElem)
+    // funcion que se ejecuta al selecionar un nivel
+    onLvlChangeHandler = (e) => {
+      cambiarNivelBtn.removeAttribute("disabled")
+      cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+      cambiarNivelBtn.addEventListener("click", clickBtnHandler)
+    }
+
+    // función que reinicia los options del select
+    const habilitarOptions = ()=>{
+      nivelOutputElem.innerHTML = `<option value="inicial">Inicial</option>
+      <option value="intermedio">Intermedio</option>
+      <option value="avanzado">Avanzado</option>`;
+      nivelOutputElem.value = dataAlumno.nivelAlumno;
+      for (const option of nivelOutputElem.children) {
+        option.setAttribute("disabled", true)
+        if(option.getAttribute("value") === dataAlumno.nivelAlumno){
+          break
+        }
+      }
+      
+      lvlSelectInstance = M.FormSelect.init(nivelOutputElem);
+    }
+
+    // función que se ejecuta al presionar el botón de Cambiar Nivel
+    const clickBtnHandler = () => {
+      cambiarNivelAlumno(dataAlumno, nivelOutputElem.value)
+      mostrarAlerta(`Se ha cambiado el nivel de <b>${dataAlumno.nombre}</b> a <b>${nivelOutputElem.value}</b>`, "success")
+      cambiarNivelBtn.setAttribute("disabled", true);
+      cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+      lvlSelectInstance.destroy();
+      habilitarOptions();
+    }
+    
+    let ejerciosPlanteadosEspecificos = 0;
+
+
+    // reinicio al botpon para que no tenga funcionalidad y esté deshabilitado
+    cambiarNivelBtn.setAttribute("disabled", true);
+    cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+
+    // asigno evento de change al select de nivel
+    nivelOutputElem.addEventListener("change", onLvlChangeHandler)
+    // muestro valor del select según el nivel del alumno
+    for (const tarea of dataUsuarioLogeado.tareasPlanteadas){
+      if(tarea.nivel === dataAlumno.nivelAlumno){
+        ejerciosPlanteadosEspecificos++
+      }
+    }
+    //reinicio los options para mostrar cuáles están habilitados y cuales no
+    habilitarOptions();
+    nombreOutputElem.innerHTML = dataAlumno.nombre;
+    ejerciciosPlanteadosOutputElem.innerHTML = ejerciosPlanteadosEspecificos;
+    ejerciciosResueltosOutputElem.innerHTML = dataAlumno.entregas.length;
+
+  }
+
+  const selectElem = document.querySelector(
+    "select#alumnosAsignados"
+  )
+  selectElem.addEventListener("change", onAlumnoChangeHandler)
+
+  selectElem.innerHTML = `<option disabled selected>Choose your option</option>`;
+  for (let i = 0; i < dataUsuarioLogeado.alumnosAsignados.length; i++) {
+    let unAlumno = dataUsuarioLogeado.alumnosAsignados[i];
+    selectElem.innerHTML += `<option value=${i}>${unAlumno.nombre}</option>`;
+  }
+
+  M.FormSelect.init(selectElem);
 }
 
 // Funcion para listar los alumnos registrados al momento en la consola.
 
 function listarAlumnos() {
-  for (let i = 0; i < alumnosList.length; i++) {
-    console.log(alumnosList[i]);
+  // for (let i = 0; i < alumnosList.length; i++) {
+  //   console.log(alumnosList[i]);
+  // }
+  for (const alumno of alumnosList) {
+    console.log(alumno);
   }
 }
 
@@ -504,12 +581,13 @@ document
 
 // ADDEVENTLISTENER
 
-// Botón reporte individual
+// DASHBOARD DOCENTE > Botón reporte individual 
 document
-  .querySelector("button#btnDocenteIrReporteIndividual")
-  .addEventListener("click", () => {
-    mostrarOneSection("section#reporteIndividual");
-  });
+.querySelector("body main section#dashboardDocente button#btnDocenteIrReporteIndividual")
+.addEventListener("click", () => {
+  mostrarOneSection("section#reporteIndividualDocente");
+  selectReporteAlumnos()
+});
 
 // Botón logeo Docente
 document
@@ -532,11 +610,16 @@ document
   .querySelector("button#btnLogin_alumno")
   .addEventListener("click", (e) => {
     e.preventDefault();
-    // const userNameDocente = input.value; // CORREGIR
-    // const passwordDocente = input.value; // CORREGIR
-    login(userNameDocente, passwordDocente, "alumno");
+    const userNameAlumno = document.querySelector(
+      "body main section#login input#login_alumno_usuario"
+    ).value;
+    const passwordAlumno = document.querySelector(
+      "body main section#login input#login_alumno_password"
+    ).value;
+    login(userNameAlumno, passwordAlumno, "alumno");
     mostrarOneSection("section#dashboardAlumno");
   });
+
 
 // Botón Registro Docente
 document
@@ -551,3 +634,31 @@ document.querySelector("#btnRegistro_alumno").addEventListener("click", (e) => {
   e.preventDefault();
   registrarAlumno();
 });
+
+/*
+
+Docente crea tarea:
+Docente crea tarea > crear obj Tarea > tareaID > docente.tareasPlanteadas.push(tarea) tarea.entregas = []
+
+Alumno realiza entrega:
+alumno ve lista de tareas > click > muestra tarea segun tareaID 
+alumno realizar entrega > crear obj Entrga > entrega.id_tarea = tareaID > llena datos desde los campos >>
+>> dataUsuarioLogeado.entregas.push(newEntrega);
+>> (getDocente(dataUsuarioLogeado.docenteUser).tareasPlanteadas[i] === tareaID).entregas.push(newEntrega)
+
+Docente hace corrección:
+Mostrar tareas planteadas > mostrar tarea[i].entregas[j] > cargar datos de entrega en modal
+docente hace corrección > crea obj newDevolucion{nota: number, comentario: string} > carga con datos de los inputs >>
+> tarea[i].entregas[j].devolucion = newDevolucion; getAlumno(tarea[i].entregas[j].usr_alumno).entregas
+
+Alumno ve su Dashboard:
+dataUsuarioLogeado.entregas[i] 
+    si corregido > mostrar datos de tarea + dataUsuarioLogeado.entregas[i].devolucion
+    si no corregido > mostrar datos de tarea
+
+Cómo mostrar cantidad de Entregas Corregidas:
+iterar dataUsuarioLogeado.entregas[i].devolucion
+    si existe > totalEntregasCorregidas+1
+    return totalEntregasCorregidas
+
+*/

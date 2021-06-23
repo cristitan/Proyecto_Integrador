@@ -51,19 +51,22 @@ for (const boton of botonesHome) {
 // 	mostrarOneSection(input.value, inputPass.value, "docente")
 // })
 
+// BTN LOGIN NAV
 document
   .querySelector("nav div ul li button#navBtn_Login")
   .addEventListener("click", () => {
     mostrarOneSection("section#login");
   });
+
+// BTN REGISTRO DOCENTE
 document
   .querySelector("nav div ul li button#navBtn_Registro")
   .addEventListener("click", () => {
-    console.log("voy a registrar alumno");
     selectDocentes();
     mostrarOneSection("section#registro");
   });
 
+// BTN IR A REGISTRO TAB_DOCENTE
 document
   .querySelector(
     "body main section#login div#docenteFormm button#btnIrRegistro_docente"
@@ -72,6 +75,7 @@ document
     e.preventDefault();
     mostrarOneSection("section#registro");
   });
+// BTN IR A REGISTRO TAB_ALUMNO
 document
   .querySelector(
     "body main section#login div#alumnoFormm button#btnIrRegistro_alumno"
@@ -80,3 +84,16 @@ document
     e.preventDefault();
     mostrarOneSection("section#registro");
   });
+
+  // Dashboard Docente
+  document
+  .querySelector("body main section#dashboardDocente button#btnDocenteIrTareas")
+  .addEventListener("click", () => {
+    mostrarOneSection("section#tareasDocente");
+  });
+  // Reporte individual
+  // document
+  //   .querySelector("body main section#dashboardDocente button#btnDocenteIrReporteIndividual")
+  //   .addEventListener("click", () => {
+  //     mostrarOneSection("section#reporteIndividualDocente");
+  //   });

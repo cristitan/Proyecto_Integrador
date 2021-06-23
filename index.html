@@ -910,8 +910,8 @@
 				</div>
 			</div>
 			<div class="row">
-				<div class="col s12 l10 offset-l1">
-					<div class="col s5 red">
+				<div class="row col s12 l10 offset-l1">
+					<div class="row col s12 l5">
 						<div class="input-field col s12">
 							<select id="alumnosAsignados">
 											
@@ -929,9 +929,6 @@
 							<span class="col s4 reporteIndividual_label flow-text indigo-text text-accent-2">Nivel:</span>
 							<div class="input-field col s6 flow-text reporteIndividual_data">
 								<select  id="reporteIndividual_nivel" class="col s6 flow-text reporteIndividual_data">
-									<option value="inicial">Inicial</option>
-									<option value="intermedio">Intermedio</option>
-									<option value="avanzado">Avanzado</option>
 								</select>
 							</div>
 						</div>
@@ -944,7 +941,7 @@
 							<b class="col s6 flow-text reporteIndividual_data" id="reporteIndividual_tareasEntregadas">5</b>
 						</div>
 						<div class="input-field col s12">
-							<button class="waves-effect waves-light btn row col s12 offset-l4 l4 indigo accent-1 roundedBorders2" name="action">
+							<button class="waves-effect waves-light btn row col s12 offset-l4 l4 indigo accent-1 roundedBorders2" id="cambiarNivel" >
 								Cambiar Nivel
 							</button>
 						</div>

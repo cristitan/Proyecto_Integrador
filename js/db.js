@@ -298,7 +298,7 @@ function getDocente(usuarioId) {
 }
 function getAlumno(usuarioId) {
   for (const alumno of alumnosList) {
-    if (docente.usuario === usuarioId) {
+    if (alumno.usuario === usuarioId) {
       return alumno;
     }
   }

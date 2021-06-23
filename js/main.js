@@ -311,6 +311,12 @@ function listarDocentes() {
   }
 }
 
+function cambiarNivelAlumno(alumnoData, nivel){
+  const alumno = getAlumno(alumnoData.usuario);
+  alumnoData.nivelAlumno = nivel;
+  alumno.nivelAlumno = nivel;
+}
+
 /* ------------------------------------------  Registro de Tarea  -------------------------------------- */
 
 //WIP WIP WIP
@@ -402,42 +408,77 @@ function selectDocentes() {
 }
 //Funcion para desplegar los docentes en el select
 function selectReporteAlumnos() {
-  const onChangeHandle = (e)=>{
+  let onLvlChangeHandler
+  let nivelOutputElem
+  const onAlumnoChangeHandler = (e)=>{
     const dataAlumno = dataUsuarioLogeado.alumnosAsignados[e.target.value];
     const nombreOutputElem = document.querySelector("#reporteIndividual_nombre");
-    const nivelOutputElem = document.querySelector("#reporteIndividual_nivel");
+    nivelOutputElem = document.querySelector("#reporteIndividual_nivel");
+    nivelOutputElem.removeEventListener("change", onLvlChangeHandler)
     const ejerciciosPlanteadosOutputElem = document.querySelector("#reporteIndividual_tareasPlanteadas");
     const ejerciciosResueltosOutputElem = document.querySelector("#reporteIndividual_tareasEntregadas");
+    const cambiarNivelBtn = document.querySelector("#cambiarNivel");
+    let lvlSelectInstance = M.FormSelect.init(nivelOutputElem)
+    // funcion que se ejecuta al selecionar un nivel
+    onLvlChangeHandler = (e) => {
+      cambiarNivelBtn.removeAttribute("disabled")
+      cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+      cambiarNivelBtn.addEventListener("click", clickBtnHandler)
+    }
+
+    // función que reinicia los options del select
+    const habilitarOptions = ()=>{
+      nivelOutputElem.innerHTML = `<option value="inicial">Inicial</option>
+      <option value="intermedio">Intermedio</option>
+      <option value="avanzado">Avanzado</option>`;
+      nivelOutputElem.value = dataAlumno.nivelAlumno;
+      for (const option of nivelOutputElem.children) {
+        option.setAttribute("disabled", true)
+        if(option.getAttribute("value") === dataAlumno.nivelAlumno){
+          break
+        }
+      }
+      
+      lvlSelectInstance = M.FormSelect.init(nivelOutputElem);
+    }
+
+    // función que se ejecuta al presionar el botón de Cambiar Nivel
+    const clickBtnHandler = () => {
+      cambiarNivelAlumno(dataAlumno, nivelOutputElem.value)
+      mostrarAlerta(`Se ha cambiado el nivel de <b>${dataAlumno.nombre}</b> a <b>${nivelOutputElem.value}</b>`, "success")
+      cambiarNivelBtn.setAttribute("disabled", true);
+      cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+      lvlSelectInstance.destroy();
+      habilitarOptions();
+    }
+    
     let ejerciosPlanteadosEspecificos = 0;
 
+
+    // reinicio al botpon para que no tenga funcionalidad y esté deshabilitado
+    cambiarNivelBtn.setAttribute("disabled", true);
+    cambiarNivelBtn.removeEventListener("click", clickBtnHandler)
+
+    // asigno evento de change al select de nivel
+    nivelOutputElem.addEventListener("change", onLvlChangeHandler)
+    // muestro valor del select según el nivel del alumno
     for (const tarea of dataUsuarioLogeado.tareasPlanteadas){
       if(tarea.nivel === dataAlumno.nivelAlumno){
         ejerciosPlanteadosEspecificos++
       }
     }
-    for (const option of nivelOutputElem.children) {
-      option.removeAttribute("disabled")
-    }
-    for (const option of nivelOutputElem.children) {
-      console.log(option.getAttribute("value"), dataAlumno.nivelAlumno)
-      option.setAttribute("disabled", true)
-      if(option.getAttribute("value") === dataAlumno.nivelAlumno){
-        break
-      }
-    }
-
+    //reinicio los options para mostrar cuáles están habilitados y cuales no
+    habilitarOptions();
     nombreOutputElem.innerHTML = dataAlumno.nombre;
-    nivelOutputElem.value = dataAlumno.nivelAlumno;
     ejerciciosPlanteadosOutputElem.innerHTML = ejerciosPlanteadosEspecificos;
     ejerciciosResueltosOutputElem.innerHTML = dataAlumno.entregas.length;
-    
-    M.FormSelect.init(nivelOutputElem);
+
   }
 
   const selectElem = document.querySelector(
     "select#alumnosAsignados"
   )
-  selectElem.addEventListener("change", onChangeHandle)
+  selectElem.addEventListener("change", onAlumnoChangeHandler)
 
   selectElem.innerHTML = `<option disabled selected>Choose your option</option>`;
   for (let i = 0; i < dataUsuarioLogeado.alumnosAsignados.length; i++) {

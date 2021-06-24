@@ -20,3 +20,5 @@ Primer obligatorio
 - [ ] 8. -  "El documento tiene que estar comentado"
 
 - [ ] 9. - FUNCION DE MOSTRAR TAREAS PLANTEADAS POR EL DOCENTE - EN DASHBOARD ALUMNO
+
+- [ ] 10. - Crear Funcion Búsqueda

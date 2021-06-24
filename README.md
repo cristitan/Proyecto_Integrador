@@ -5,7 +5,7 @@ Primer obligatorio
 
 - [ ] 1. - Dashboard Alumno (ejerciciosResueltos;porcentajeResueltos, ejerciciosCorregidos)
 
-- [ ] 2. - Crear/implementar CrearTarea
+- [ ] 2. - Crear función para display las TAREAS en Dashboard Alumno
 
 - [ ] 3. - Afinar mock de VerTareasPlanteadas (funcion ya hecha en pseudocódigo db.js , hay que terminarla)
 

@@ -752,33 +752,61 @@
 				</div>
 			</div>
 			<div class="row">
+				<div class="col s12 row">
+					<button class="volverDashboardDocente waves-effect waves-light btn col s6 offset-s6 l2 offset-l10 indigo-text text-accent-2 roundedBorders2 ghostBtn">
+						Volver
+						<i class="material-icons left">arrow_back</i>
+					</button>
+				</div>
+			</div>
+			<div class="row">
 
 				<div id="modalCrearTarea" class="modal" >
 					<div class="modal-content">
-						<h4>Modal Header</h4>
+						<h4>Crear Tarea</h4>
 						<label>
 							Titulo
-							<input type="text"/>
+							<input type="text" id="tituloTarea"/>
 						</label>
 						<label>
 							Descripción
-							<textarea name="descripcion" id="" cols="30" rows="10"></textarea>
+							<textarea name="descripcion" cols="30" rows="10" id="descripcionTarea"></textarea>
 						</label>
 						<div class="row">
 							<div class="input-field col s12">
-								<select id="nivel">
+								<select id="nivelDeTarea">
 									<option value="" disabled selected>Seleccione Nivel</option>
-									<option value="1">Inicial</option>		
-									<option value="2">Intermedio</option>		
-									<option value="3">Avanzado</option>		
+									<option value="inicial">Inicial</option>		
+									<option value="intermedio">Intermedio</option>		
+									<option value="avanzado">Avanzado</option>		
 								</select>
 								<label>Nivel</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="input-field col s12">
+								<select id="imgSelect" class="icons">
+									<option value="" disabled selected>Seleccione Imagen</option>
+									<option value="assets/imgs/ej1.png" data-icon="assets/imgs/ej1.png">
+										Imagen Ejercicio1
+									</option>
+									<option value="assets/imgs/ej2.png" data-icon="assets/imgs/ej2.png">Imagen Ejercicio2</option>
+									<option value="assets/imgs/ej3.png" data-icon="assets/imgs/ej3.png" >Imagen Ejercicio3</option>
+									<option value="assets/imgs/ej4.png" data-icon="assets/imgs/ej4.png">Imagen Ejercicio4</option>
+									<option value="assets/imgs/ej5.png" data-icon="assets/imgs/ej5.png">Imagen Ejercicio5</option>
+									<option value="assets/imgs/ej6.png" data-icon="assets/imgs/ej6.png">Imagen Ejercicio6</option>
+									<option value="assets/imgs/ej7.png" data-icon="assets/imgs/ej7.png">Imagen Ejercicio7</option>
+									<option value="assets/imgs/ej8.png" data-icon="assets/imgs/ej7.png">Imagen Ejercicio8</option>
+									<option value="assets/imgs/ej9.png" data-icon="assets/imgs/ej7.png">Imagen Ejercicio9</option>
+								</select>
+								<label>Imagen</label>
 							  </div>
 						</div>
-						<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti quos iure excepturi fuga quidem voluptatibus, tenetur voluptatem pariatur beatae culpa consequuntur ipsa accusamus repellat, error totam enim eum aperiam dolor?</p>
 					</div>
 					<div class="modal-footer">
-						<a href="#!" class="modal-close waves-effect waves-green btn-flat">Crear</a>
+						<button id="crearTareaSubmit" class="waves-effect waves-light btn col s2 offset-s10 indigo-text text-lighten-5 indigo accent-1 roundedBorders2">
+							Crear
+						</button>
 					</div>
 				</div>
 				
@@ -907,6 +935,14 @@
 					<h3 class="col s12 l8 indigo-text text-accent-1">
 						Reporte Individual de Alumno
 					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 row">
+					<button class="volverDashboardDocente waves-effect waves-light btn col s6 offset-s6 l2 offset-l10 indigo-text text-accent-2 roundedBorders2 ghostBtn">
+						Volver
+						<i class="material-icons left">arrow_back</i>
+					</button>
 				</div>
 			</div>
 			<div class="row">

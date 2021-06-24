@@ -7,7 +7,8 @@
 
 // const botonesParaIrRegistro = //REGISTRAR TODOS LOS BOTONES QUE CAMBIEN A > REGISTRO (REPETIR PARA TODAS LAS VISTAS)
 const body = "body#root";
-const botonesHome = document.querySelectorAll(`${body} button.irPrincipal`);
+const botonesDashboardAlumno = document.querySelectorAll(`${body} button.volverDashboardAlumno`);
+const botonesDashboardDocente = document.querySelectorAll(`${body} button.volverDashboardDocente`);
 
 const ocultarTodo = () => {
   const allSections = document.querySelectorAll(`${body} section`);
@@ -37,9 +38,14 @@ const mostrarNavItem = (identificador) => {
   navItemsAMostrar.classList.remove("hidden");
 };
 
-for (const boton of botonesHome) {
+for (const boton of botonesDashboardAlumno) {
   boton.addEventListener("click", () => {
-    mostrarOneSection("section#pantallaPrincipal");
+    mostrarOneSection("section#dashboardAlumno");
+  });
+}
+for (const boton of botonesDashboardDocente) {
+  boton.addEventListener("click", () => {
+    mostrarOneSection("section#dashboardDocente");
   });
 }
 // document.querySelector("button#loginAlumno").addEventListener("click", (e)=>{

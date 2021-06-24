@@ -13,7 +13,7 @@ function mostrarAlerta(texto, tipoDeAlerta) {
   });
 }
 
-/* ********************* VALIDACIONES *****************/
+/* VALIDACIONES */
 
 function validarNombre(nombre) {
   const symbolChars = "!`@#$%^&*()+=-[]\\';,./{}|\":<>?~_";
@@ -74,30 +74,6 @@ function chequearNumero(textoAValidar) {
   }
   return false;
 }
-
-//Wiping...
-
-function validarTareas () {
-
-  if (titulo.length < 20 || titulo.length >= 200) {
-
-    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");
-    return false;
-    
-  } else if (descripcion.length <= 20 || titulo.length >= 200){
-    
-    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");  
-    return false;
-    
-  } else if (titulo.value === "" || descripcion.value === "") {
-    
-    mostrarAlerta("El Nombre debe tener al menos 4 caracteres", "error");
-    return false;
-
-  } 
-
-}
-
 function validarPass(password) {
   const tieneLargo = password.length > 4;
   // console.log("tieneLargo > ", tieneLargo);
@@ -125,6 +101,31 @@ function validarPass(password) {
     return false;
   }
 }
+function validarTareas(titulo, descripcion, img, nivel) {
+  const sumaTotal = titulo.length + descripcion.length
+  if (!titulo) {
+    mostrarAlerta("El titulo no puede ir vacío", "error");
+    return false;
+  }
+  if (!descripcion) {
+    mostrarAlerta("La descripcion no puede ir vacía", "error");
+    return false;
+  }
+  if (sumaTotal < 20 || sumaTotal > 200){
+    mostrarAlerta("Entre el título y la descripción debe haber entre 20 y 200 caracteres", "error");  
+    return false;
+  }
+  if (!img) {
+    mostrarAlerta("Seleccione una imagen", "error");
+    return false;
+  }
+  if (!nivel) {
+    mostrarAlerta("Seleccione un nivel", "error");
+    return false;
+  }
+  return true
+}
+
 
 function obtenerTopAlumnos(arrayAlumnosAsignados) {
   const alumnosOrdenados = arrayAlumnosAsignados.sort(function (a, b) {
@@ -193,7 +194,7 @@ const actualizarDatos_DashboardDocente = () => {
               </span>
             </div>
             <div class="col s2 offset-s1  centeredFlex" style="height: 55px;" >
-              <button class="waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2">
+              <button class="verPerfilAlumno waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2">
                 Ver Perfil
               </button>
             </div>
@@ -245,6 +246,7 @@ const actualizarDatos_DashboardDocente = () => {
 
     const topAlumnos = obtenerTopAlumnos(dataUsuarioLogeado.alumnosAsignados);
 
+    const botonesDashboardDocenteVerPerfilAlumno = document.querySelectorAll(`body button.verPerfilAlumno`);
     // reinicio numero de entregas hechas para el docente
     let totalDeliveredExercises = 0;
 
@@ -292,6 +294,11 @@ const actualizarDatos_DashboardDocente = () => {
         alumno.nombre,
         alumno.entregas.length
       );
+    }
+    for (const boton of botonesDashboardDocenteVerPerfilAlumno) {
+      boton.addEventListener("click", () => {
+        mostrarAlerta("WIP. Vaya a <i><b>Reporte Individual</b></i>.", "alert")
+      });
     }
   } else {
     mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
@@ -342,32 +349,26 @@ function cambiarNivelAlumno(alumnoData, nivel) {
 }
 
 /* ------------------------------------------  Registro de Tarea  -------------------------------------- */
+function crearTarea() {
+  
+  const titulo = document.querySelector("#tituloTarea").value;
+  const descripcion = document.querySelector("#descripcionTarea").value;
+  const img = document.querySelector("#imgSelect").value;
+  const nivel = document.querySelector("#nivelDeTarea").value;
 
-//WIP WIP WIP
-
-//Falta agregar id de tarea USAMOS DATE??
-
-// document
-//   .querySelector("#btnRegistrarTarea")
-//   .addEventListener("click", (e) => {
-//     e.preventDefault();
-//     registrarTarea();
-//   });
-
-function registrarTarea() {
-  const titulo = document.querySelector("#titulo_tarea").value;
-  const descripcion = document.querySelector("#descripcion_tarea").value;
-
-  const nuevaTarea = new Tarea(titulo, descripcion, NIVELES.INICIAL, 0, 12);
-
-  tareasList.push(nuevaTarea);
-
-  listarTareas();
-
-  // // WIP Validaciones
-
-  // mostrarAlerta("Se ha registrado correctamente!", "success");
-  // mostrarAlerta("Algo salió mal :(", "error");
+  
+  if(validarTareas(titulo, descripcion, img, nivel)){
+    const nuevaTarea = new Tarea(
+      dataUsuarioLogeado.tareasPlanteadas.length + 1,
+      titulo,
+      descripcion,
+      nivel,
+      usuarioLogeado.usuarioId,
+      img
+    );
+    dataUsuarioLogeado.tareasPlanteadas.push(nuevaTarea);
+    mostrarAlerta("Se ha registrado una nueva tarea", "success");
+  }
 }
 
 function listarTareas() {
@@ -414,7 +415,7 @@ function registrarAlumno() {
   inputPass.value = "";
 }
 
-//Funcion para desplegar los docentes en el select
+//Funcion para desplegar los docentes en el select de registro de alumno
 function selectDocentes() {
   document.querySelector(
     "select#docente_asignado"
@@ -432,7 +433,9 @@ function selectDocentes() {
   var selectElem = document.querySelectorAll("select#docente_asignado");
   M.FormSelect.init(selectElem);
 }
-//Funcion para desplegar los docentes en el select
+
+
+//Funcion para desplegar los alumno en el select de reporte individual
 function selectReporteAlumnos() {
   let onLvlChangeHandler;
   let nivelOutputElem;
@@ -623,7 +626,6 @@ document
       "body main section#login input#login_alumno_password"
     ).value;
     login(userNameAlumno, passwordAlumno, "alumno");
-    mostrarOneSection("section#dashboardAlumno");
   });
 
 // Botón Registro Docente
@@ -667,6 +669,7 @@ iterar dataUsuarioLogeado.entregas[i].devolucion
     return totalEntregasCorregidas
 
 */
+
 ocultarTodo();
 actualizarNavItems();
 mostrarOneSection("section#login")
@@ -676,7 +679,7 @@ mostrarOneSection("section#login")
 // mostrarOneSection("section#tareasDocente")
 // mostrarOneSection("section#reporteIndividualDocente");
 // mostrarNavItem("ul#usuarioConocido")
-
+document.querySelector("#crearTareaSubmit").addEventListener("click", crearTarea)
 document.getElementById("realizarTarea").addEventListener("click", () => {
   mostrarOneSection("section#realizarEntregaTarea");
 });
@@ -685,6 +688,7 @@ document.getElementById("verResueltos").addEventListener("click", () => {
   mostrarOneSection("section#verEjerciciosResultos");
 });
 
+// SOLO PARA ESTILOS, NADA QUE VER CON LA LÓGICA
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".sidenav");
   var selectElem = document.querySelectorAll("select");
@@ -714,4 +718,8 @@ document.addEventListener("DOMContentLoaded", function () {
     M.FormSelect.init(selectElem);
     // Do other stuff
   });
+  const imgElem = document.querySelector("#nivelDeTarea");
+  M.FormSelect.init(imgElem);
+  const nivelElem = document.querySelector("#imgSelect");
+  M.FormSelect.init(nivelElem);
 });

@@ -39,15 +39,13 @@ class Alumno {
 // }
 
 class Tarea {
-  constructor(unTitulo, unaDescripcion, unNivel, idDocente, notaMax) {
-    this.idTarea = docentesList[idDocente].lenght; //Falta agreagar id del docente logueado
+  constructor(idTarea, unTitulo, unaDescripcion, unNivel, idDocente, img) {
+    this.idTarea = idTarea; //Falta agreagar id del docente logueado
     this.titulo = unTitulo;
     this.descripcion = unaDescripcion;
     this.nivel = unNivel;
-    this.notaMax = notaMax; // falta parametrizar
-    // WIP this.imagen = unaImagen;
+    this.imagen = img;
     this.entregas = [];
-    this.estado = ESTADOS_TAREAS.NUEVO;
   }
 }
 
@@ -158,11 +156,12 @@ const docentesList = [
     ],
     tareasPlanteadas: [
       {
-        nivel: "inicial",
-        titulo: "Tarea 1 de Santi",
-        img: "ahdfisadf",
-        descripcion:
-          "Para que el alumno pueda salir de la plataforma y proteger sus datos y su cuenta, dándole privacidad a sus datos personales y del curso.",
+        idTarea = "",
+        titulo = "klfhwdf",
+        descripcion = "unaDescripcion",
+        nivel = "unNivel",
+        imagen = "img",
+        entregas = []
       },
     ],
   },
@@ -181,21 +180,6 @@ const docentesList = [
     tareasPlanteadas: [],
   },
 ];
-
-// // WIP = WORK IN PROGRESS
-// function crearTarea(profesorUsr, titulo, descripion, img, notaMax, nivel) {
-//   // SOLO PROFESOR
-//   const nuevaTarea = {
-//     idTarea: profesorUsr.tareasPlanteadas.length + 1,
-//     titulo, // DESTRUCTURING OBJ
-//     descripion,
-//     img,
-//     notaMax,
-//     nivel,
-//     entregas: [], // inicializa vacío
-//   };
-//   profesorUsr.tareasPlanteadas.push(nuevaTarea);
-// }
 // // WIP = WORK IN PROGRESS
 // function realizarEntrega(audio, comentario) {
 //   // SOLO ALUMNO

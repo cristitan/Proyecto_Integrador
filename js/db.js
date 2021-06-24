@@ -18,25 +18,21 @@ class Alumno {
   }
 }
 
-// class Entrega {
-//   constructor(
-//     usuarioAlumno,
-//     id_tarea,
-//     audio,
-//     devoluciones,
-//     nota_final,
-//     comentario,
-//     estado
-//   ) {
-//     this.usuarioAlumno = usuarioAlumno;
-//     this.id_tarea = id_tarea;
-//     this.audio = audio;
-//     this.devoluciones = devoluciones;
-//     this.nota_final = nota_final;
-//     this.comentario = comentario;
-//     this.estado = estado;
-//   }
-// }
+class Entrega {
+  constructor(
+    usuarioAlumno,
+    id_tarea,
+    audio,
+    devoluciones,
+    comentarioAlumno,
+  ) {
+    this.usuarioAlumno = usuarioAlumno;
+    this.id_tarea = id_tarea;
+    this.audio = audio;
+    this.devoluciones = devoluciones;
+    this.comentarioAlumno = comentarioAlumno;
+  }
+}
 
 class Tarea {
   constructor(idTarea, unTitulo, unaDescripcion, unNivel, idDocente, img) {
@@ -80,7 +76,29 @@ const alumnosList = [
     password: "mkmPass21",
     usuarioDocenteAsignado: "santiFagno",
     nivelAlumno: "inicial",
-    entregas: [1, 2, 3], // Esto deben ser objs
+    entregas: [
+      {
+        usuarioAlumno: "markmed",
+        id_tarea: 1,
+        audio: "assets/audio/ej1.m4a",
+        devoluciones: "", // obj
+        comentarioAlumno: "Hola profe, tuve un problema con la 5ta mayor",
+      },
+      {
+        usuarioAlumno: "markmed",
+        id_tarea: 3,
+        audio: "assets/audio/ej3.m4a",
+        devoluciones: "", // obj
+        comentarioAlumno: "Hola profe, sigo teniendo problemas con la 5ta mayor",
+      },
+      {
+        usuarioAlumno: "markmed",
+        id_tarea: 4,
+        audio: "assets/audio/ej4.m4a",
+        devoluciones: "", // obj
+        comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
+      },
+    ],
   },
   {
     nombre: "Emanuel Díaz",
@@ -88,7 +106,22 @@ const alumnosList = [
     password: "emaPass12",
     usuarioDocenteAsignado: "santiFagno",
     nivelAlumno: "inicial",
-    entregas: [1, 2, 3, 5],
+    entregas: [
+      {
+        usuarioAlumno: "emadiaz",
+        id_tarea: 1,
+        audio: "assets/audio/ej1.m4a",
+        devoluciones: "", // obj
+        comentarioAlumno: "Hola profe, tuve un problema con la 8va mayor",
+      },
+      {
+        usuarioAlumno: "markmed",
+        id_tarea: 3,
+        audio: "assets/audio/ej3.m4a",
+        devoluciones: "", // obj
+        comentarioAlumno: "Hola profe, sigo teniendo problemas con la 8va mayor",
+      },
+    ],
   },
   {
     nombre: "Cristian Poggi",
@@ -156,12 +189,12 @@ const docentesList = [
     ],
     tareasPlanteadas: [
       {
-        idTarea = "",
-        titulo = "klfhwdf",
-        descripcion = "unaDescripcion",
-        nivel = "unNivel",
-        imagen = "img",
-        entregas = []
+        idTarea: "",
+        titulo: "klfhwdf",
+        descripcion: "unaDescripcion",
+        nivel: "unNivel",
+        imagen: "img",
+        entregas: []
       },
     ],
   },

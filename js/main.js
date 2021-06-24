@@ -363,7 +363,7 @@ const actualizarDatos_DashboardAlumno = () => {
     const docenteAsignadoAlAlumno = docentesList.find((docente) => docente.usuario === dataUsuarioLogeado.usuarioDocenteAsignado);
     const cantidadTareasTotal = docenteAsignado.tareasPlanteadas.filter((tarea) => tarea.nivel === dataUsuarioLogeado.nivelAlumno);
     numeroTareasTotales.innerHTML = cantidadTareasTotal.length;
-
+    let tareasCorregidas = 0;
 
 
     console.log(docenteAsignado);
@@ -405,6 +405,13 @@ const actualizarDatos_DashboardAlumno = () => {
         }
       }
     }
+    
+    for (const entrega of dataUsuarioLogeado.entregas) {
+      if(!!entrega.devolucion.puntaje){
+        tareasCorregidas++
+      }
+    }
+    document.getElementById("dashboardAlumno_entregasCorregidas").innerHTML = tareasCorregidas
     for (const btn of contenedorListasTareas.querySelectorAll("button.btnEntregarTarea")) {
       btn.addEventListener("click", (e) => {
         const tareaAMostrar = getTarea(Number(e.target.getAttribute("data-idTarea")), dataUsuarioLogeado.usuarioDocenteAsignado)

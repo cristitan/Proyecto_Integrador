@@ -88,21 +88,21 @@ const alumnosList = [
         usuarioAlumno: "markmed",
         id_tarea: 1,
         audio: "assets/audio/ej1.m4a",
-        devoluciones: "", // obj
+        devolucion: {puntaje: 40, correccion: "Prueba de corrección"}, // obj
         comentarioAlumno: "Hola profe, tuve un problema con la 5ta mayor",
       },
       {
         usuarioAlumno: "markmed",
         id_tarea: 4,
         audio: "assets/audio/ej4.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Hola profe, sigo teniendo problemas con la 5ta mayor",
       },
       {
         usuarioAlumno: "markmed",
         id_tarea: 5,
         audio: "assets/audio/ej5.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
       },
     ],
@@ -118,14 +118,14 @@ const alumnosList = [
         usuarioAlumno: "emadiaz",
         id_tarea: 1,
         audio: "assets/audio/ej1.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Hola profe, tuve un problema con la 8va mayor",
       },
       {
         usuarioAlumno: "emadiaz",
         id_tarea: 4,
         audio: "assets/audio/ej4.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Hola profe, sigo teniendo problemas con la 8va mayor",
       },
     ],
@@ -141,21 +141,21 @@ const alumnosList = [
         usuarioAlumno: "crispog",
         id_tarea: 1,
         audio: "assets/audio/ej1.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Hola profe, tuve un problema con la 5ta menor",
       },
       {
         usuarioAlumno: "crispog",
         id_tarea: 4,
         audio: "assets/audio/ej4.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Hola profe, sigo teniendo problemas con la 2da menor",
       },
       {
         usuarioAlumno: "crispog",
         id_tarea: 5,
         audio: "assets/audio/ej5.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Profe, soy horrible con la 2da menor",
       },
     ],
@@ -171,7 +171,7 @@ const alumnosList = [
         usuarioAlumno: "elBana",
         id_tarea: 2,
         audio: "assets/audio/ej2.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Profe, ando mejorando con la 2da menor",
       }
     ],
@@ -187,7 +187,7 @@ const alumnosList = [
         usuarioAlumno: "elBana2",
         id_tarea: 1,
         audio: "assets/audio/ej3.m4a",
-        devoluciones: "", // obj
+        devolucion: "", // obj
         comentarioAlumno: "Profe, soy god con la 2da menor",
       }
     ],
@@ -216,21 +216,21 @@ const docentesList = [
             usuarioAlumno: "markmed",
             id_tarea: 1,
             audio: "assets/audio/ej1.m4a",
-            devoluciones: {puntaje: 40, correccion: "dflssfwsfuw"}, // obj
+            devolucion: {puntaje: 40, correccion: "Prueba de corrección"}, // obj
             comentarioAlumno: "Hola profe, tuve un problema con la 5ta mayor",
           },
           {
             usuarioAlumno: "emadiaz",
             id_tarea: 1,
             audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Hola profe, tuve un problema con la 8va mayor",
           },
           {
             usuarioAlumno: "crispog",
             id_tarea: 1,
             audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Hola profe, tuve un problema con la 5ta menor",
           },
         ],
@@ -246,7 +246,7 @@ const docentesList = [
             usuarioAlumno: "elBana",
             id_tarea: 2,
             audio: "assets/audio/ej2.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Profe, ando mejorando con la 2da menor",
           }
         ],
@@ -270,21 +270,21 @@ const docentesList = [
             usuarioAlumno: "crispog",
             id_tarea: 4,
             audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Hola profe, sigo teniendo problemas con la 2da menor",
           },
           {
             usuarioAlumno: "markmed",
             id_tarea: 4,
             audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Hola profe, sigo teniendo problemas con la 5ta mayor",
           },
           {
             usuarioAlumno: "emadiaz",
             id_tarea: 4,
             audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Hola profe, sigo teniendo problemas con la 8va mayor",
           },
         ],
@@ -300,14 +300,14 @@ const docentesList = [
             usuarioAlumno: "markmed",
             id_tarea: 5,
             audio: "assets/audio/ej5.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
           },
           {
             usuarioAlumno: "crispog",
             id_tarea: 5,
             audio: "assets/audio/ej5.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Profe, soy horrible con la 2da menor",
           },
         ],
@@ -323,7 +323,7 @@ const docentesList = [
             usuarioAlumno: "markmed",
             id_tarea: 5,
             audio: "assets/audio/ej5.m4a",
-            devoluciones: "", // obj
+            devolucion: "", // obj
             comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
           },
         ],

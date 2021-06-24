@@ -13,6 +13,8 @@ Primer obligatorio
 
 - [ ] 5. - Documento de testing
 
-- [ ] 6. - "Listado de información precargada"
+- [ ] 6. - PRECARGAR EJERCICIOS RESUELTOS 
 
-- [ ] 7. -  "El documento tiene que estar comentado"
+- [ ] 7. - "Listado de información precargada"
+
+- [ ] 8. -  "El documento tiene que estar comentado"

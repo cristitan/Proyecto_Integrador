@@ -489,23 +489,41 @@
 				<button id="btnVolverADashboard">Volver</button>
 				<div>
 					<br>
-					<div id="entregarTareaComentarioDiv">
-						<label>Comentario</label>
-						<textarea id="entregarTareaComentario" cols="60" rows="20"></textarea>
-					</div>
 					<div id="adjuntarArchivo">
 						<br>
 						<br>
 						<h3>Adjuntar archivo</h3>
 						<br>
 						<img src="/assets/imgs/subirEntrega.png" style="width: 20px;"alt="subir" >
-						<input type="file" name="Subir" id="entregarTareaSubirAudio">
+						<div class="row">
+							<div class="input-field col s12">
+								<select id="entregarTareaSubirAudio">
+									<option value="" disabled selected>Seleccione Audio</option>
+									<option value="assets/imgs/ej1.m4a" >
+										Audio Ejercicio1
+									</option>
+									<option value="assets/imgs/ej2.m4a">Audio Ejercicio2</option>
+									<option value="assets/imgs/ej3.m4a" >Audio Ejercicio3</option>
+									<option value="assets/imgs/ej4.m4a">Audio Ejercicio4</option>
+									<option value="assets/imgs/ej5.m4a">Audio Ejercicio5</option>
+									<option value="assets/imgs/ej6.m4a" >Audio Ejercicio6</option>
+									<option value="assets/imgs/ej7.m4a">Audio Ejercicio7</option>
+									<option value="assets/imgs/ej8.m4a">Audio Ejercicio8</option>
+									<option value="assets/imgs/ej9.m4a">Audio Ejercicio9</option>
+								</select>
+								<label>Audio</label>
+							  </div>
+						</div>
 						<br>
 						<br>
 					</div>
+					<div id="entregarTareaComentarioDiv">
+						<label>Comentario</label>
+						<textarea id="entregarTareaComentario" cols="60" rows="20"></textarea>
+					</div>
 					<br>
 					<br>
-					<button id="btnenviarEntrega" style="display: flex; align-self: flex-end;">Enviar tarea</button>
+					<button id="btnEnviarEntrega" style="display: flex; align-self: flex-end;">Enviar tarea</button>
 				</div>
 			</div>
 		</section>
@@ -849,7 +867,7 @@
 						</button>
 					</div>
 					<div class="col s10 offset-s1">
-						<ul class="collapsible popout">
+						<ul class="collapsible popout" id="tareasPlanteadasList">
 							<li>
 								<div class="collapsible-header">Titulo</div>
 								<div class="collapsible-body">

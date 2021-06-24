@@ -325,7 +325,7 @@ const actualizarDatos_DashboardAlumno = () => {
           <div class="col s3 centeredFlex" style="height: 55px;" >
             <button
             data-idTarea="${idTarea}"
-            class="btnEntregarTarea waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
+            class="btnEntregarTarea waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
             >Entregar</button>
           </div>
         </div>
@@ -407,6 +407,31 @@ const actualizarDatos_DashboardAlumno = () => {
   }
 };
 
+// ACtualizar lista de tareas docente
+const actualizarDatos_TareasDocente = (tarea) => {
+  const tituloTareaElem = document.querySelector(
+    "#tituloTarea"
+  );
+  const idTareaElem = document.querySelector(
+    "#idTareaActual"
+  );
+  const imgTareaElem = document.querySelector(
+    "#imgTareaMostrar"
+  );
+  const descripcionTareaElem = document.querySelector(
+    "#descripcionTareaMostrar"
+  );
+  tituloTareaElem.innerHTML = tarea.titulo;
+  idTareaElem.innerHTML = tarea.idTarea;
+  imgTareaElem.setAttribute("src", tarea.imagen);
+  descripcionTareaElem.innerHTML = tarea.descripcion;
+  // tarea.esEntregada
+
+  document.getElementById("btnEnviarEntrega").addEventListener("click", ()=>{
+    realizarEntrega();
+  })
+}
+// ACtualizar lista de tareas alumno
 const actualizarDatos_TareasAlumno = (tarea) => {
   const tituloTareaElem = document.querySelector(
     "#tituloTarea"
@@ -425,6 +450,10 @@ const actualizarDatos_TareasAlumno = (tarea) => {
   imgTareaElem.setAttribute("src", tarea.imagen);
   descripcionTareaElem.innerHTML = tarea.descripcion;
   // tarea.esEntregada
+
+  document.getElementById("btnEnviarEntrega").addEventListener("click", ()=>{
+    realizarEntrega();
+  })
 }
 
 /* REGISTROS */
@@ -500,7 +529,7 @@ function realizarEntrega() {
   const comentarioInputValue = document.querySelector(
     "#entregarTareaComentario"
   ).value;
-  const id_TareaActual = document.querySelector("#idTareaActual").innerHTML;
+  const id_TareaActual = Number(document.querySelector("#idTareaActual").innerHTML);
   //Inicializamos esto para verificar si ya existe la entrega luego
   let yaExisteEntrega = false;
 
@@ -526,7 +555,7 @@ function realizarEntrega() {
   // Si "no existe la entrega"; hacemos el push entre las entregas y le avisamos al usuario que ha subido su entrega correctamente.
   if (!yaExisteEntrega) {
     // guardo entrega en entregas de alumno
-    getAlumno(userLogeado.user).entregas.push(nuevaEntrega);
+    getAlumno(usuarioLogeado.usuarioId).entregas.push(nuevaEntrega);
 
     // guardo entrega en tarea planteada por docente
     getTarea(
@@ -849,6 +878,14 @@ iterar dataUsuarioLogeado.entregas[i].devolucion
 
 */
 
+// Cargar entrega:
+// lo mismo que actualizarDatos_TareasAlumno pero con entrega
+// spanIdTarea.innerHTML = entrega.id_tarea
+
+// //momento de crear devolucion
+// // buscar entrega para asignar devolucion
+// alumno.entregas[i].id_tarea === idTareaParam
+
 ocultarTodo();
 actualizarNavItems();
 // mostrarOneSection("section#login");
@@ -867,6 +904,10 @@ document
 //   mostrarOneSection("section#verEjerciciosResultos");
 // });
 
+document.getElementById("btnVolverADashboard").addEventListener("click", ()=>{
+  actualizarDatos_DashboardAlumno()
+  mostrarOneSection("section#dashboardAlumno")
+  })
 // SOLO PARA ESTILOS, NADA QUE VER CON LA LÓGICA
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".sidenav");
@@ -897,6 +938,9 @@ document.addEventListener("DOMContentLoaded", function () {
     M.FormSelect.init(selectElem);
     // Do other stuff
   });
+  var selectElemAudio = document.querySelectorAll("#entregarTareaSubirAudio");
+  M.FormSelect.init(selectElemAudio);
+  
 
   // var elemsModalEntregarTarea = document.querySelectorAll("#modalRealizarEntreg.modal");
   // var instancesModalEntregarTarea = M.Modal.init(elemsModalEntregarTarea);

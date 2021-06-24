@@ -191,105 +191,10 @@ const docentesList = [
     usuario: "santiFagno",
     password: "123",
     alumnosAsignados: [
-      {
-        nombre: "Marcos Medina",
-        usuario: "markmed",
-        password: "mkmPass21",
-        usuarioDocenteAsignado: "santiFagno",
-        nivelAlumno: "inicial",
-        entregas: [
-          {
-            usuarioAlumno: "markmed",
-            id_tarea: 1,
-            audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, tuve un problema con la 5ta mayor",
-          },
-          {
-            usuarioAlumno: "markmed",
-            id_tarea: 4,
-            audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, sigo teniendo problemas con la 5ta mayor",
-          },
-          {
-            usuarioAlumno: "markmed",
-            id_tarea: 5,
-            audio: "assets/audio/ej5.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
-          },
-        ], // Esto deben ser objs
-      },
-      {
-        nombre: "Emanuel Díaz",
-        usuario: "emadiaz",
-        password: "emaPass12",
-        usuarioDocenteAsignado: "santiFagno",
-        nivelAlumno: "inicial",
-        entregas: [
-          {
-            usuarioAlumno: "emadiaz",
-            id_tarea: 1,
-            audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, tuve un problema con la 8va mayor",
-          },
-          {
-            usuarioAlumno: "emadiaz",
-            id_tarea: 4,
-            audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, sigo teniendo problemas con la 8va mayor",
-          },
-        ],
-      },
-      {
-        nombre: "Cristian Poggi",
-        usuario: "crispog",
-        password: "crisPass4",
-        usuarioDocenteAsignado: "santiFagno",
-        nivelAlumno: "inicial",
-        entregas: [
-          {
-            usuarioAlumno: "crispog",
-            id_tarea: 1,
-            audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, tuve un problema con la 5ta menor",
-          },
-          {
-            usuarioAlumno: "crispog",
-            id_tarea: 4,
-            audio: "assets/audio/ej4.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Hola profe, sigo teniendo problemas con la 2da menor",
-          },
-          {
-            usuarioAlumno: "crispog",
-            id_tarea: 5,
-            audio: "assets/audio/ej5.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Profe, soy horrible con la 2da menor",
-          },
-        ],
-      },
-      {
-        nombre: "Adrian Nario",
-        usuario: "elBana",
-        password: "123",
-        usuarioDocenteAsignado: "santiFagno",
-        nivelAlumno: "intermedio",
-        entregas: [
-          {
-            usuarioAlumno: "elBana",
-            id_tarea: 2,
-            audio: "assets/audio/ej2.m4a",
-            devoluciones: "", // obj
-            comentarioAlumno: "Profe, ando mejorando con la 2da menor",
-          }
-        ],
-      },
+      alumnosList[0],
+      alumnosList[1],
+      alumnosList[2],
+      alumnosList[3],
     ],
     tareasPlanteadas: [
       {

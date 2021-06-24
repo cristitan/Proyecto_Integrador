@@ -103,6 +103,3 @@ document
   //   .addEventListener("click", () => {
   //     mostrarOneSection("section#reporteIndividualDocente");
   //   });
-  document.getElementById("btnVolverADashboard").addEventListener("click", ()=>{
-    mostrarOneSection("section#dashboardAlumno")
-    })

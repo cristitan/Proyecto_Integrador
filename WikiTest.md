@@ -1,3 +1,3 @@
-# H1 Guitar App Wiki
+# Guitar App Wiki
 
 

@@ -312,6 +312,22 @@ const docentesList = [
           },
         ],
       },
+      {
+        idTarea : 6,
+        titulo : "Tarea Precargada n° 6 ",
+        descripcion : "Esta sería una entrega de nivel Inicial ",
+        nivel : "inicial",
+        imagen : "assets/imgs/ej5.png",
+        entregas : [
+          {
+            usuarioAlumno: "markmed",
+            id_tarea: 5,
+            audio: "assets/audio/ej5.m4a",
+            devoluciones: "", // obj
+            comentarioAlumno: "Profe, soy horrible con la 5ta mayor",
+          },
+        ],
+      },
     ],
   },
   {

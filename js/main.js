@@ -91,10 +91,8 @@ function validarPass(password) {
     return true;
   } else {
     mostrarAlerta(
-      `Contraseña inválida. Corrija: ${
-        !tieneLargo && "cantidad de caracteres,"
-      } ${!tieneMinuscula && "al menos una minúscula,"} ${
-        !tieneMayuscula && "al menos una mayuscula,"
+      `Contraseña inválida. Corrija: ${!tieneLargo && "cantidad de caracteres,"
+      } ${!tieneMinuscula && "al menos una minúscula,"} ${!tieneMayuscula && "al menos una mayuscula,"
       } ${!tieneNumero && "al menos un número,"}`,
       "error"
     );
@@ -147,7 +145,7 @@ function obtenerTopAlumnos(arrayAlumnosAsignados) {
     if (
       alumnosOrdenados[i + 1] &&
       alumnosOrdenados[i].entregas.length ===
-        alumnosOrdenados[i + 1].entregas.length
+      alumnosOrdenados[i + 1].entregas.length
     ) {
       topAlumnos.push(alumnosOrdenados[i + 1]);
     } else {
@@ -347,7 +345,27 @@ const actualizarDatos_DashboardAlumno = () => {
     const listaTareasRealizadas = contenedorListasTareas.querySelector(
       "div#tareasRealizadas ul"
     );
+    const numeroTareasRealizadas = dashboard.querySelector(
+      "p#dashboardAlumno_tareasRealizadas"
+    );
+
+    const numeroTareasTotales = dashboard.querySelector(
+      "p#dashboardAlumno_tareasTotales"
+    );
+    
     const docenteAsignado = getDocente(dataUsuarioLogeado.usuarioDocenteAsignado)
+
+    //Para mostrar entregas
+
+    numeroTareasRealizadas.innerHTML = dataUsuarioLogeado.entregas.length;
+
+    //Para mostrar tareas totales para ese alumno
+
+    const docenteAsignadoAlAlumno = docentesList.find((docente) => docente.usuario === dataUsuarioLogeado.usuarioDocenteAsignado);
+    const cantidadTareasTotal = docenteAsignado.tareasPlanteadas.filter((tarea) => tarea.nivel === dataUsuarioLogeado.nivelAlumno);
+    numeroTareasTotales.innerHTML = cantidadTareasTotal.length;
+
+
 
     console.log(docenteAsignado);
     // reinicio numero de entregas hechas para el docente
@@ -360,7 +378,7 @@ const actualizarDatos_DashboardAlumno = () => {
 
     // Actualizo listas de tareas
     for (const tarea of docenteAsignado.tareasPlanteadas) {
-      if(tarea.nivel === dataUsuarioLogeado.nivelAlumno){
+      if (tarea.nivel === dataUsuarioLogeado.nivelAlumno) {
         let existeEntrega = false;
         listaTareasTodo.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
         for (const entrega of dataUsuarioLogeado.entregas) {
@@ -377,7 +395,7 @@ const actualizarDatos_DashboardAlumno = () => {
       }
     }
     for (const btn of contenedorListasTareas.querySelectorAll("button.btnEntregarTarea")) {
-      btn.addEventListener("click", (e)=>{
+      btn.addEventListener("click", (e) => {
         const tareaAMostrar = getTarea(Number(e.target.getAttribute("data-idTarea")), dataUsuarioLogeado.usuarioDocenteAsignado)
         mostrarOneSection("section#entregarTarea")
         actualizarDatos_TareasAlumno(tareaAMostrar)
@@ -427,7 +445,7 @@ const actualizarDatos_TareasDocente = (tarea) => {
   descripcionTareaElem.innerHTML = tarea.descripcion;
   // tarea.esEntregada
 
-  document.getElementById("btnEnviarEntrega").addEventListener("click", ()=>{
+  document.getElementById("btnEnviarEntrega").addEventListener("click", () => {
     realizarEntrega();
   })
 }
@@ -451,7 +469,7 @@ const actualizarDatos_TareasAlumno = (tarea) => {
   descripcionTareaElem.innerHTML = tarea.descripcion;
   // tarea.esEntregada
 
-  document.getElementById("btnEnviarEntrega").addEventListener("click", ()=>{
+  document.getElementById("btnEnviarEntrega").addEventListener("click", () => {
     realizarEntrega();
   })
 }
@@ -904,10 +922,10 @@ document
 //   mostrarOneSection("section#verEjerciciosResultos");
 // });
 
-document.getElementById("btnVolverADashboard").addEventListener("click", ()=>{
+document.getElementById("btnVolverADashboard").addEventListener("click", () => {
   actualizarDatos_DashboardAlumno()
   mostrarOneSection("section#dashboardAlumno")
-  })
+})
 // SOLO PARA ESTILOS, NADA QUE VER CON LA LÓGICA
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".sidenav");
@@ -940,7 +958,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   var selectElemAudio = document.querySelectorAll("#entregarTareaSubirAudio");
   M.FormSelect.init(selectElemAudio);
-  
+
 
   // var elemsModalEntregarTarea = document.querySelectorAll("#modalRealizarEntreg.modal");
   // var instancesModalEntregarTarea = M.Modal.init(elemsModalEntregarTarea);

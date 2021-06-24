@@ -1048,11 +1048,11 @@ iterar dataUsuarioLogeado.entregas[i].devolucion
 
 ocultarTodo();
 actualizarNavItems();
-// mostrarOneSection("section#login");
+mostrarOneSection("section#login");
 // mostrarOneSection("section#tareasPendienteAlumno")
 // mostrarOneSection("section#pantallaPrincipal")
 // mostrarOneSection("section#dashboardAlumno")
-mostrarOneSection("section#tareasDocente");
+// mostrarOneSection("section#tareasDocente");
 // mostrarOneSection("section#reporteIndividualDocente");
 // mostrarOneSection("section#entregarTarea");
 // mostrarNavItem("ul#usuarioConocido")

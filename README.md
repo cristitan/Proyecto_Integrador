@@ -18,3 +18,5 @@ Primer obligatorio
 - [ ] 7. - "Listado de información precargada"
 
 - [ ] 8. -  "El documento tiene que estar comentado"
+
+- [ ] 9. - FUNCION DE MOSTRAR TAREAS PLANTEADAS POR EL DOCENTE - EN DASHBOARD ALUMNO

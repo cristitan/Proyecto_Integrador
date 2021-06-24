@@ -451,6 +451,8 @@ const actualizarDatos_TareasDocente = () => {
           </div>
           <div class="col s4 offset-s2  centeredFlex" style="height: 55px;" >
             <button
+              data-entregaTareaId=${entrega.id_tarea}
+              data-usuarioAlumno=${entrega.usuarioAlumno}
               ${(existeDevolucion)?"disabled":""}
               class="irACrearDevolucion waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
             >${(existeDevolucion)?"Corregido":"Corregir"}</button>
@@ -499,7 +501,15 @@ const actualizarDatos_TareasDocente = () => {
     tareasPlanteadasListElem.innerHTML += agregarItemTarea(tarea)
   }
   for (const btn of document.querySelectorAll("button.irACrearDevolucion")){
-    btn.addEventListener("click", ()=>{
+    btn.addEventListener("click", (e)=>{
+      const usuarioAlumno = e.target.getAttribute("data-usuarioalumno")
+      const tareaId = Number(e.target.getAttribute("data-entregatareaid"))
+      
+      for (const entrega of getAlumno(usuarioAlumno).entregas) {
+        if(entrega.id_tarea === tareaId){
+          mostrarDatosEntrega(entrega)
+        }
+      }
       mostrarOneSection("section#crearDevolucion")
     })
   }
@@ -525,7 +535,7 @@ const actualizarDatos_TareasAlumno = (tarea) => {
 
 const mostrarDatosEntrega = (entrega) => {
   const tituloTareaElem = document.querySelector(
-    "#tituloTarea"
+    "#tituloTareaACorregir"
   );
   const idTareaElem = document.querySelector(
     "#idTareaACorregir"
@@ -542,10 +552,11 @@ const mostrarDatosEntrega = (entrega) => {
   const nombreAlumnoACorregirElem = document.querySelector(
     "#nombreAlumnoACorregir"
   );
+  const tarea = getTarea(entrega.id_tarea, getAlumno(entrega.usuarioAlumno).usuarioDocenteAsignado)
   const alumno = getAlumno(entrega.usuarioAlumno)
   tituloTareaElem.innerHTML = tarea.titulo;
   idTareaElem.innerHTML = tarea.idTarea;
-  audioEntregaElem.setAttribute("src", audio);
+  audioEntregaElem.setAttribute("src", entrega.audio);
   comentarioEntregaElem.innerHTML = entrega.comentarioAlumno;
   alumnoACorregirElem.innerHTML = alumno.usuario
   nombreAlumnoACorregirElem.innerHTML = alumno.nombre

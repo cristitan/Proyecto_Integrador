@@ -44,6 +44,14 @@ class Tarea {
   }
 }
 
+class Devolucion {
+  constructor(puntaje, correccion){
+    this.puntaje = puntaje;
+    this.correccion = correccion;
+    
+  }
+}
+
 const usuarioLogeado = {
   // REFERENCIAS
   tipo: "",

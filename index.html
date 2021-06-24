@@ -204,29 +204,6 @@
 
 		</section>
 
-		<section id="pantallaPrincipal">
-			<h1>EMA _ Principal</h1>
-			
-			<button id="realizarTarea" class="irPrincipal btn waves-effect waves-light">
-				<i class="material-icons right">send</i>
-				Realizar Tarea
-			</button>
-			<button id="verResueltos" class="irPrincipal btn waves-effect waves-light">
-				<i class="material-icons right">send</i>
-				Ver Tareas Resueltas
-			</button>
-		</section>
-		<section id="realizarEntregaTarea">
-			<h1>CRIS _ PANTALLA DE ENTREGA DE TAREA</h1>
-			<input type="text" id="comentario"/>
-			<input type="text" id="fwfwecomentario"/>
-			<input type="text" id="cwefwomentario"/>
-			
-		</section>
-		<section id="reporteIndividual">
-			<h1>MARC _ PANTALLA DE REPORTE Individual</h1>
-		</section>
-
 		<!-- ALUMNO -->
 		<section id="dashboardAlumno">
 			<div class="row">
@@ -304,7 +281,32 @@
 					</div>
 				</div>
 
-				<!--Parte de Ultimas tareas-->
+				<!-- <div id="modalRealizarEntrega" class="modal" >
+					<div class="modal-content">
+						<h4>Realizar Entrega</h4>
+						<div class="row">
+							<div class="input-field col s12">
+								<select id="nivelDeTarea">
+									<option value="" disabled selected>Seleccione Nivel</option>
+									<option value="inicial">Inicial</option>		
+									<option value="intermedio">Intermedio</option>		
+									<option value="avanzado">Avanzado</option>		
+								</select>
+								<label>Nivel</label>
+							</div>
+						</div>
+						<h4 id="tituloTarea">Título de la tarea </h4>
+						<p id="idTareaActual">Id de la tarea</p>
+						<img id="imgTareaMostrar">
+						<p id="descripcionTareaMostrar"></p>
+					</div>
+					<div class="modal-footer">
+						<button id="entregarTareaSubmit" class="waves-effect waves-light btn col s2 offset-s10 indigo-text text-lighten-5 indigo accent-1 roundedBorders2">
+							Entregar
+						</button>
+					</div>
+				</div> -->
+				<!--Parte de Tareas-->
 				<div class="row col s12 l10 offset-l1">
 					<div class="row">
 						<h5 class="col s12 l8 indigo-text text-accent-1">
@@ -330,30 +332,10 @@
 											</div>
 										</form>
 								</div>
-								<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;">
+								<div class="tabs-content carousel carousel-slider" style="height: 600px; margin-top: 30px;" id="tareasContenedor">
 									<div id="tareasTodo" class="col s12 row">
 										<ul class=" flow-text " style="font-size: 18px;">
-											<li>
-												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
-													  
-													<i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
-														account_circle
-													</i>
-													<div class="col s8" style="height: 55px;">
-														<span class="col s12">Titulo de tarea 1</span>
-														<span class="col s12" style="font-size: 16px;">Descripción larga de tarea mucho textooo xDD</span>
-													</div>
-													<div class="col s3 centeredFlex" style="height: 55px;" >
-															
-														<button  id="btnDocenteIrReporteIndividual" class="waves-effect waves-light btn col s5 ghostBtn roundedBorders2">
-															Ver Mas
-														</button>
-														<button
-														class="waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
-														>Entregar</button>
-													</div>
-												</div>
-											</li>
+											
 											<li>
 												<div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
 													  
@@ -476,6 +458,54 @@
 							</div>
 						</div>
 					</div>
+				</div>
+			</div>
+		</section>
+
+		<section id= "entregarTarea"> 
+ 
+			<div class="row">
+				<div class="col s12 row">
+					<h3 class="col s12 l8 indigo-text text-accent-1">
+						Realizar entrega > Alumno
+					</h3>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col s12 row">
+					<button class="volverDashboardAlumno waves-effect waves-light btn col s6 offset-s6 l2 offset-l10 indigo-text text-accent-2 roundedBorders2 ghostBtn">
+						Volver
+						<i class="material-icons left">arrow_back</i>
+					</button>
+				</div>
+			</div>
+			<div class="row red" style="margin: auto 10px;">
+				<h4 id="tituloTarea">Título de la tarea </h4>
+				<span id="idTareaActual" style="display: none;">Id de la tarea</span>
+				<img id="imgTareaMostrar">
+				<p id="descripcionTareaMostrar"></p>
+		   
+				<h2>Entregar Tarea</h2>
+				<button id="btnVolverADashboard">Volver</button>
+				<div>
+					<br>
+					<div id="entregarTareaComentarioDiv">
+						<label>Comentario</label>
+						<textarea id="entregarTareaComentario" cols="60" rows="20"></textarea>
+					</div>
+					<div id="adjuntarArchivo">
+						<br>
+						<br>
+						<h3>Adjuntar archivo</h3>
+						<br>
+						<img src="/assets/imgs/subirEntrega.png" style="width: 20px;"alt="subir" >
+						<input type="file" name="Subir" id="entregarTareaSubirAudio">
+						<br>
+						<br>
+					</div>
+					<br>
+					<br>
+					<button id="btnenviarEntrega" style="display: flex; align-self: flex-end;">Enviar tarea</button>
 				</div>
 			</div>
 		</section>
@@ -743,6 +773,7 @@
 				</div>
 			</div>
 		</section>
+
 		<section id="tareasDocente">
 			<div class="row">
 				<div class="col s12 row">
@@ -929,6 +960,7 @@
 			</div>
 
 		</section>
+
 		<section id="reporteIndividualDocente">
 			<div class="row">
 				<div class="col s12 row">

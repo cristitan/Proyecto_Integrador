@@ -102,7 +102,7 @@ function validarPass(password) {
   }
 }
 function validarTareas(titulo, descripcion, img, nivel) {
-  const sumaTotal = titulo.length + descripcion.length
+  const sumaTotal = titulo.length + descripcion.length;
   if (!titulo) {
     mostrarAlerta("El titulo no puede ir vacío", "error");
     return false;
@@ -111,8 +111,11 @@ function validarTareas(titulo, descripcion, img, nivel) {
     mostrarAlerta("La descripcion no puede ir vacía", "error");
     return false;
   }
-  if (sumaTotal < 20 || sumaTotal > 200){
-    mostrarAlerta("Entre el título y la descripción debe haber entre 20 y 200 caracteres", "error");  
+  if (sumaTotal < 20 || sumaTotal > 200) {
+    mostrarAlerta(
+      "Entre el título y la descripción debe haber entre 20 y 200 caracteres",
+      "error"
+    );
     return false;
   }
   if (!img) {
@@ -123,9 +126,8 @@ function validarTareas(titulo, descripcion, img, nivel) {
     mostrarAlerta("Seleccione un nivel", "error");
     return false;
   }
-  return true
+  return true;
 }
-
 
 function obtenerTopAlumnos(arrayAlumnosAsignados) {
   const alumnosOrdenados = arrayAlumnosAsignados.sort(function (a, b) {
@@ -174,7 +176,6 @@ function actualizarNavItems() {
 }
 
 //DASHBOARD Docente
-
 const actualizarDatos_DashboardDocente = () => {
   if (usuarioLogeado.tipo === "docente") {
     const agregarItemAlumno = (nombre, nivel, cantidadTareas) => {
@@ -246,7 +247,6 @@ const actualizarDatos_DashboardDocente = () => {
 
     const topAlumnos = obtenerTopAlumnos(dataUsuarioLogeado.alumnosAsignados);
 
-    const botonesDashboardDocenteVerPerfilAlumno = document.querySelectorAll(`body button.verPerfilAlumno`);
     // reinicio numero de entregas hechas para el docente
     let totalDeliveredExercises = 0;
 
@@ -295,9 +295,12 @@ const actualizarDatos_DashboardDocente = () => {
         alumno.entregas.length
       );
     }
+    const botonesDashboardDocenteVerPerfilAlumno = document.querySelectorAll(
+      `body button.verPerfilAlumno`
+    );
     for (const boton of botonesDashboardDocenteVerPerfilAlumno) {
       boton.addEventListener("click", () => {
-        mostrarAlerta("WIP. Vaya a <i><b>Reporte Individual</b></i>.", "alert")
+        mostrarAlerta("WIP. Vaya a <i><b>Reporte Individual</b></i>.", "alert");
       });
     }
   } else {
@@ -305,6 +308,124 @@ const actualizarDatos_DashboardDocente = () => {
     mostrarOneSection("section#pantallaError");
   }
 };
+//DASHBOARD Alumno
+const actualizarDatos_DashboardAlumno = () => {
+  if (usuarioLogeado.tipo === "alumno") {
+    const agregarItemTarea = (titulo, descripcion, idTarea) => {
+      return `
+      <li>
+        <div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+          <i class="col s1 small material-icons indigo-text text-accent-1 centeredFlex" style="font-size: 45px; vertical-align: bottom; height: 55px;">
+            account_circle
+          </i>
+          <div class="col s8" style="height: 55px;">
+            <span class="col s12">${titulo}</span>
+            <span class="col s12" style="font-size: 16px;">${descripcion}</span>
+          </div>
+          <div class="col s3 centeredFlex" style="height: 55px;" >
+            <button
+            data-idTarea="${idTarea}"
+            class="btnEntregarTarea waves-effect waves-light btn col s5 offset-s1 indigo accent-1 roundedBorders2" 
+            >Entregar</button>
+          </div>
+        </div>
+      </li>
+        `;
+    };
+    const dashboard = document.querySelector(
+      "body main section#dashboardAlumno"
+    );
+    const contenedorListasTareas = dashboard.querySelector(
+      "div#tareasContenedor"
+    );
+    const listaTareasTodo = contenedorListasTareas.querySelector(
+      "div#tareasTodo ul"
+    );
+    const listaTareasPendientes = contenedorListasTareas.querySelector(
+      "div#tareasPendientes ul"
+    );
+    const listaTareasRealizadas = contenedorListasTareas.querySelector(
+      "div#tareasRealizadas ul"
+    );
+    const docenteAsignado = getDocente(dataUsuarioLogeado.usuarioDocenteAsignado)
+
+    console.log(docenteAsignado);
+    // reinicio numero de entregas hechas para el docente
+    // let totalDeliveredExercises = 0;
+
+    // reinicio listas de tareas
+    listaTareasTodo.innerHTML = "";
+    listaTareasPendientes.innerHTML = "";
+    listaTareasRealizadas.innerHTML = "";
+
+    // Actualizo listas de tareas
+    for (const tarea of docenteAsignado.tareasPlanteadas) {
+      if(tarea.nivel === dataUsuarioLogeado.nivelAlumno){
+        let existeEntrega = false;
+        listaTareasTodo.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+        for (const entrega of dataUsuarioLogeado.entregas) {
+          if (tarea.idTarea === entrega.id_tarea) {
+            existeEntrega = true;
+            break;
+          }
+        }
+        if (existeEntrega) {
+          listaTareasRealizadas.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+        } else {
+          listaTareasPendientes.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+        }
+      }
+    }
+    for (const btn of contenedorListasTareas.querySelectorAll("button.btnEntregarTarea")) {
+      btn.addEventListener("click", (e)=>{
+        const tareaAMostrar = getTarea(Number(e.target.getAttribute("data-idTarea")), dataUsuarioLogeado.usuarioDocenteAsignado)
+        mostrarOneSection("section#entregarTarea")
+        actualizarDatos_TareasAlumno(tareaAMostrar)
+      })
+    }
+    // // Actualizo numero de entregas hechas para el docente
+    // entregasParaDocente.innerHTML = totalDeliveredExercises;
+    // //
+    // alumnosTopEntregas.innerHTML = "";
+    // for (const alumno of topAlumnos) {
+    //   alumnosTopEntregas.innerHTML += agregarItemTopAlumno(
+    //     alumno.nombre,
+    //     alumno.entregas.length
+    //   );
+    // }
+    // const botonesDashboardDocenteVerPerfilAlumno = document.querySelectorAll(
+    //   `body button.verPerfilAlumno`
+    // );
+    // for (const boton of botonesDashboardDocenteVerPerfilAlumno) {
+    //   boton.addEventListener("click", () => {
+    //     mostrarAlerta("WIP. Vaya a <i><b>Reporte Individual</b></i>.", "alert");
+    //   });
+    // }
+  } else {
+    mostrarAlerta("Al logearse, el tipo de usuario está mal", "error");
+    mostrarOneSection("section#pantallaError");
+  }
+};
+
+const actualizarDatos_TareasAlumno = (tarea) => {
+  const tituloTareaElem = document.querySelector(
+    "#tituloTarea"
+  );
+  const idTareaElem = document.querySelector(
+    "#idTareaActual"
+  );
+  const imgTareaElem = document.querySelector(
+    "#imgTareaMostrar"
+  );
+  const descripcionTareaElem = document.querySelector(
+    "#descripcionTareaMostrar"
+  );
+  tituloTareaElem.innerHTML = tarea.titulo;
+  idTareaElem.innerHTML = tarea.idTarea;
+  imgTareaElem.setAttribute("src", tarea.imagen);
+  descripcionTareaElem.innerHTML = tarea.descripcion;
+  // tarea.esEntregada
+}
 
 /* REGISTROS */
 // Docente
@@ -348,16 +469,14 @@ function cambiarNivelAlumno(alumnoData, nivel) {
   alumno.nivelAlumno = nivel;
 }
 
-/* ------------------------------------------  Registro de Tarea  -------------------------------------- */
+// crear Tarea - docente
 function crearTarea() {
-  
   const titulo = document.querySelector("#tituloTarea").value;
   const descripcion = document.querySelector("#descripcionTarea").value;
   const img = document.querySelector("#imgSelect").value;
   const nivel = document.querySelector("#nivelDeTarea").value;
 
-  
-  if(validarTareas(titulo, descripcion, img, nivel)){
+  if (validarTareas(titulo, descripcion, img, nivel)) {
     const nuevaTarea = new Tarea(
       dataUsuarioLogeado.tareasPlanteadas.length + 1,
       titulo,
@@ -371,13 +490,73 @@ function crearTarea() {
   }
 }
 
+// realizar entrega a tarea especifica - alumno
+function realizarEntrega() {
+  // SOLO ALUMNO
+  //Obtenemos el audio y el comentario del alumno
+  const audioInputValue = document.querySelector(
+    "#entregarTareaSubirAudio"
+  ).value;
+  const comentarioInputValue = document.querySelector(
+    "#entregarTareaComentario"
+  ).value;
+  const id_TareaActual = document.querySelector("#idTareaActual").innerHTML;
+  //Inicializamos esto para verificar si ya existe la entrega luego
+  let yaExisteEntrega = false;
+
+  //Al llamar esta función gracias al botón de realizar entrega: se crea una Entrega que va a ser chequeada
+  const nuevaEntrega = new Entrega(
+    usuarioLogeado.usuarioId,
+    id_TareaActual,
+    audioInputValue,
+    comentarioInputValue
+  );
+
+  // Acá hacemos un for para que chequee si la id de esta nuevaEntrega coincide con alguna ya existente para el usuario.
+  // Si ya existe, el valor yaExisteEntrega se vuelve true
+  for (let i = 0; i < dataUsuarioLogeado.entregas.length; i++) {
+    if (dataUsuarioLogeado.entregas[i].id_tarea === id_TareaActual) {
+      mostrarAlerta(
+        "Error: no puede realizar más de una entrega para la misma tarea",
+        "error"
+      );
+      yaExisteEntrega = true;
+    }
+  }
+  // Si "no existe la entrega"; hacemos el push entre las entregas y le avisamos al usuario que ha subido su entrega correctamente.
+  if (!yaExisteEntrega) {
+    // guardo entrega en entregas de alumno
+    getAlumno(userLogeado.user).entregas.push(nuevaEntrega);
+
+    // guardo entrega en tarea planteada por docente
+    getTarea(
+      id_TareaActual,
+      dataUsuarioLogeado.usuarioDocenteAsignado
+    ).entregas.push(nuevaEntrega);
+    mostrarAlerta("Perfecto, su entrega ha sido subida", "success");
+  }
+}
+// if(yaExisteEntrega){
+//   botonEntrgar.disable = true
+// }
+// else{
+//   botnEntregar.addEventListener("click", realizarEntrega)
+// }
+
+function getTarea(idTareaParam, usuarioDocenteParam) {
+  let tareasPlanteadas = getDocente(usuarioDocenteParam).tareasPlanteadas;
+  for (const tarea of tareasPlanteadas) {
+    if (tarea.idTarea === idTareaParam) {
+      return tarea;
+    }
+  }
+}
+
 function listarTareas() {
   for (let i = 0; i < tareasList.length; i++) {
     console.log(tareasList[i]);
   }
 }
-
-
 
 // Alumno
 function registrarAlumno() {
@@ -433,7 +612,6 @@ function selectDocentes() {
   var selectElem = document.querySelectorAll("select#docente_asignado");
   M.FormSelect.init(selectElem);
 }
-
 
 //Funcion para desplegar los alumno en el select de reporte individual
 function selectReporteAlumnos() {
@@ -566,6 +744,7 @@ function login(userNameParam, passwordParam, tipoUsuario) {
   );
   actualizarNavItems();
   if (tipoUsuario === "alumno") {
+    actualizarDatos_DashboardAlumno();
     mostrarOneSection("section#dashboardAlumno");
   } else {
     actualizarDatos_DashboardDocente();
@@ -605,10 +784,10 @@ document
     e.preventDefault();
     const userNameDocente = document.querySelector(
       "body main section#login input#login_docente_usuario"
-    ).value; // CORREGIR
+    ).value;
     const passwordDocente = document.querySelector(
       "body main section#login input#login_docente_password"
-    ).value; // CORREGIR
+    ).value;
 
     login(userNameDocente, passwordDocente, "docente");
     // mostrarOneSection("section#dashboardDocente");
@@ -672,21 +851,21 @@ iterar dataUsuarioLogeado.entregas[i].devolucion
 
 ocultarTodo();
 actualizarNavItems();
-mostrarOneSection("section#login")
+// mostrarOneSection("section#login");
 // mostrarOneSection("section#tareasPendienteAlumno")
 // mostrarOneSection("section#pantallaPrincipal")
 // mostrarOneSection("section#dashboardAlumno")
 // mostrarOneSection("section#tareasDocente")
 // mostrarOneSection("section#reporteIndividualDocente");
+mostrarOneSection("section#entregarTarea");
 // mostrarNavItem("ul#usuarioConocido")
-document.querySelector("#crearTareaSubmit").addEventListener("click", crearTarea)
-document.getElementById("realizarTarea").addEventListener("click", () => {
-  mostrarOneSection("section#realizarEntregaTarea");
-});
+document
+  .querySelector("#crearTareaSubmit")
+  .addEventListener("click", crearTarea);
 
-document.getElementById("verResueltos").addEventListener("click", () => {
-  mostrarOneSection("section#verEjerciciosResultos");
-});
+// document.getElementById("verResueltos").addEventListener("click", () => {
+//   mostrarOneSection("section#verEjerciciosResultos");
+// });
 
 // SOLO PARA ESTILOS, NADA QUE VER CON LA LÓGICA
 document.addEventListener("DOMContentLoaded", function () {
@@ -718,6 +897,16 @@ document.addEventListener("DOMContentLoaded", function () {
     M.FormSelect.init(selectElem);
     // Do other stuff
   });
+
+  // var elemsModalEntregarTarea = document.querySelectorAll("#modalRealizarEntreg.modal");
+  // var instancesModalEntregarTarea = M.Modal.init(elemsModalEntregarTarea);
+
+  // var singleModalElemEntregarTarea = document.querySelector("#modalRealizarEntreg");
+  // var instanceModalEntregarTarea = M.Modal.getInstance(singleModalElemEntregarTarea);
+  // const modalbtnEntregarTarea = document.querySelector("#crearTareaBtn");
+  // modalbtnEntregarTarea.addEventListener("click", () => {
+  //   instanceModalEntregarTarea.open();
+  // });
   const imgElem = document.querySelector("#nivelDeTarea");
   M.FormSelect.init(imgElem);
   const nivelElem = document.querySelector("#imgSelect");

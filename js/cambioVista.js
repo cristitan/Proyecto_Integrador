@@ -91,12 +91,7 @@ document
     mostrarOneSection("section#registro");
   });
 
-  // Dashboard Docente
-  document
-  .querySelector("body main section#dashboardDocente button#btnDocenteIrTareas")
-  .addEventListener("click", () => {
-    mostrarOneSection("section#tareasDocente");
-  });
+
   // Reporte individual
   // document
   //   .querySelector("body main section#dashboardDocente button#btnDocenteIrReporteIndividual")

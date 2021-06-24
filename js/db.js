@@ -28,7 +28,7 @@ class Entrega {
     this.usuarioAlumno = usuarioAlumno;
     this.id_tarea = id_tarea;
     this.audio = audio;
-    this.devoluciones = [];
+    this.devolucion = {};
     this.comentarioAlumno = comentarioAlumno;
   }
 }
@@ -216,7 +216,7 @@ const docentesList = [
             usuarioAlumno: "markmed",
             id_tarea: 1,
             audio: "assets/audio/ej1.m4a",
-            devoluciones: "", // obj
+            devoluciones: {puntaje: 40, correccion: "dflssfwsfuw"}, // obj
             comentarioAlumno: "Hola profe, tuve un problema con la 5ta mayor",
           },
           {

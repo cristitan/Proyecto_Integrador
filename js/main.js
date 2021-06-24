@@ -336,9 +336,8 @@ const actualizarDatos_DashboardAlumno = () => {
     const contenedorListasTareas = dashboard.querySelector(
       "div#tareasContenedor"
     );
-    const listaTareasTodo = contenedorListasTareas.querySelector(
-      "div#tareasTodo ul"
-    );
+    const listaTareasTodo =
+      contenedorListasTareas.querySelector("div#tareasTodo ul");
     const listaTareasPendientes = contenedorListasTareas.querySelector(
       "div#tareasPendientes ul"
     );
@@ -380,7 +379,11 @@ const actualizarDatos_DashboardAlumno = () => {
     for (const tarea of docenteAsignado.tareasPlanteadas) {
       if (tarea.nivel === dataUsuarioLogeado.nivelAlumno) {
         let existeEntrega = false;
-        listaTareasTodo.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+        listaTareasTodo.innerHTML += agregarItemTarea(
+          tarea.titulo,
+          tarea.descripcion,
+          tarea.idTarea
+        );
         for (const entrega of dataUsuarioLogeado.entregas) {
           if (tarea.idTarea === entrega.id_tarea) {
             existeEntrega = true;
@@ -388,9 +391,17 @@ const actualizarDatos_DashboardAlumno = () => {
           }
         }
         if (existeEntrega) {
-          listaTareasRealizadas.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+          listaTareasRealizadas.innerHTML += agregarItemTarea(
+            tarea.titulo,
+            tarea.descripcion,
+            tarea.idTarea
+          );
         } else {
-          listaTareasPendientes.innerHTML += agregarItemTarea(tarea.titulo, tarea.descripcion, tarea.idTarea);
+          listaTareasPendientes.innerHTML += agregarItemTarea(
+            tarea.titulo,
+            tarea.descripcion,
+            tarea.idTarea
+          );
         }
       }
     }
@@ -426,40 +437,78 @@ const actualizarDatos_DashboardAlumno = () => {
 };
 
 // ACtualizar lista de tareas docente
-const actualizarDatos_TareasDocente = (tarea) => {
-  const tituloTareaElem = document.querySelector(
-    "#tituloTarea"
-  );
-  const idTareaElem = document.querySelector(
-    "#idTareaActual"
-  );
-  const imgTareaElem = document.querySelector(
-    "#imgTareaMostrar"
-  );
-  const descripcionTareaElem = document.querySelector(
-    "#descripcionTareaMostrar"
-  );
-  tituloTareaElem.innerHTML = tarea.titulo;
-  idTareaElem.innerHTML = tarea.idTarea;
-  imgTareaElem.setAttribute("src", tarea.imagen);
-  descripcionTareaElem.innerHTML = tarea.descripcion;
-  // tarea.esEntregada
+const actualizarDatos_TareasDocente = () => {
+  const agregarItemEntrega = (entrega) => {
+    const nombre = getAlumno(entrega.usuarioAlumno).nombre
+    const existeDevolucion = entrega.devolucion
+    return `
+      <li>
+        <div class="col s12 row indigo lighten-5 roundedBorders2" style="padding: 6px;">
+          <div class="col s6 centeredFlex" style="height: 55px;">
+            <span class="col s12">
+              Nombre: <b class="indigo-text text-accent-1">${nombre}</b>
+            </span>
+          </div>
+          <div class="col s4 offset-s2  centeredFlex" style="height: 55px;" >
+            <button
+              ${(existeDevolucion)?"disabled":""}
+              class="irACrearDevolucion waves-effect waves-light btn col s12 indigo accent-1 roundedBorders2" 
+            >${(existeDevolucion)?"Corregido":"Corregir"}</button>
+          </div>
+        </div>
+      </li>
+    `;
+  };
+  const agregarItemTarea = (tarea) => {
+    const {titulo, nivel} = tarea;
+    const cantidadEntregas = tarea.entregas.length
+    return `
+      <li>
+        <div class="collapsible-header">
+          <div class="col s6 centeredFlex" style="height: 55px;">
+            <span class="col s12 indigo-text text-accent-2">
+              ${titulo}
+            </span>
+          </div>
+          <div class="col s3 centeredFlex" style="height: 55px;">
+            <span class="col s12">
+              Nivel: <b class="indigo-text text-accent-1">${nivel}</b>
+            </span>
+          </div>
+          <div class="col s3 centeredFlex" style="height: 55px;">
+            <span class="col s12">
+              Entregas: <b class="indigo-text text-accent-1">${cantidadEntregas}</b>
+            </span>
+          </div>
+        </div>
+        <div class="collapsible-body row transparent">
+          <ul class="flow-text" style="font-size: 18px;">
+          ${tarea.entregas.map(entrega => (
+            agregarItemEntrega(entrega)
+          ))}
+          </ul>
+        <div>
+      </li>
+    `;
+  };
+  const tareasPlanteadasListElem = document.getElementById("tareasPlanteadasList")
 
-  document.getElementById("btnEnviarEntrega").addEventListener("click", () => {
-    realizarEntrega();
-  })
-}
+
+  tareasPlanteadasListElem.innerHTML = ""
+  for (const tarea of dataUsuarioLogeado.tareasPlanteadas) {
+    tareasPlanteadasListElem.innerHTML += agregarItemTarea(tarea)
+  }
+  for (const btn of document.querySelectorAll("button.irACrearDevolucion")){
+    btn.addEventListener("click", ()=>{
+      mostrarOneSection("section#crearDevolucion")
+    })
+  }
+};
 // ACtualizar lista de tareas alumno
 const actualizarDatos_TareasAlumno = (tarea) => {
-  const tituloTareaElem = document.querySelector(
-    "#tituloTarea"
-  );
-  const idTareaElem = document.querySelector(
-    "#idTareaActual"
-  );
-  const imgTareaElem = document.querySelector(
-    "#imgTareaMostrar"
-  );
+  const tituloTareaElem = document.querySelector("#tituloTarea");
+  const idTareaElem = document.querySelector("#idTareaActual");
+  const imgTareaElem = document.querySelector("#imgTareaMostrar");
   const descripcionTareaElem = document.querySelector(
     "#descripcionTareaMostrar"
   );
@@ -471,7 +520,87 @@ const actualizarDatos_TareasAlumno = (tarea) => {
 
   document.getElementById("btnEnviarEntrega").addEventListener("click", () => {
     realizarEntrega();
+  });
+};
+
+const mostrarDatosEntrega = (entrega) => {
+  const tituloTareaElem = document.querySelector(
+    "#tituloTarea"
+  );
+  const idTareaElem = document.querySelector(
+    "#idTareaACorregir"
+  );
+  const audioEntregaElem = document.querySelector(
+    "#audioEntregaACorregir"
+  );
+  const comentarioEntregaElem = document.querySelector(
+    "#comentarioAlumnoACorregir"
+  );
+  const alumnoACorregirElem = document.querySelector(
+    "#usuarioAlumnoACorregir"
+  );
+  const nombreAlumnoACorregirElem = document.querySelector(
+    "#nombreAlumnoACorregir"
+  );
+  const alumno = getAlumno(entrega.usuarioAlumno)
+  tituloTareaElem.innerHTML = tarea.titulo;
+  idTareaElem.innerHTML = tarea.idTarea;
+  audioEntregaElem.setAttribute("src", audio);
+  comentarioEntregaElem.innerHTML = entrega.comentarioAlumno;
+  alumnoACorregirElem.innerHTML = alumno.usuario
+  nombreAlumnoACorregirElem.innerHTML = alumno.nombre
+
+  document.getElementById("btnEnviarDevolucion").addEventListener("click", () => {
+    realizarDevolucion();
   })
+}
+
+function realizarDevolucion() {
+  const puntaje = Number(document.querySelector("#puntajeDevolucion").value);
+  const comentario = document.querySelector("#comentarioDevolucion").value;
+  const idTareaCorregir = document.querySelector("#idTareaACorregir").innerHTML
+  const usuarioAlumno = document.querySelector("#usuarioAlumnoACorregir").innerHTML
+  const alumno = getAlumno(usuarioAlumno)
+
+  let existeDevolucion = false
+
+  for (const entrega of alumno.entregas) {
+    if (entrega.id_tarea === idTareaCorregir) {
+      if(entrega.devolucion.puntaje){
+        existeDevolucion = true
+        mostrarAlerta("Error. Ya existe una corrección para esta tarea", "error")
+        return false
+      }
+    }
+  }
+// si no hay devolucion hecha:
+  if (!existeDevolucion) {
+    let nuevaDevolucion = new Devolucion(
+      puntaje,
+      comentario,
+    )
+    for (const entrega of alumno.entregas) {
+      if (entrega.id_tarea === idTareaCorregir) {
+        entrega.devolucion = nuevaDevolucion
+      }
+    }
+    for (const tareaDocente of getDocente(alumno.usuarioDocenteAsignado).tareasPlanteadas) {
+      if (tareaDocente.idTarea === idTareaCorregir) {
+        for (const entrega of tareaDocente.entregas) {
+          if (entrega.usuarioAlumno === usuarioAlumno) { // SI MATCHEA QUIERE DECIR QUE ESTOY CORRIGIENDO ESA ENTREGA
+            entrega.devolucion = nuevaDevolucion
+          }
+        }
+      }
+    }
+    
+    mostrarAlerta("Se hecho la devolución correctamente", "success")    
+
+  }
+  
+
+
+
 }
 
 /* REGISTROS */
@@ -547,7 +676,9 @@ function realizarEntrega() {
   const comentarioInputValue = document.querySelector(
     "#entregarTareaComentario"
   ).value;
-  const id_TareaActual = Number(document.querySelector("#idTareaActual").innerHTML);
+  const id_TareaActual = Number(
+    document.querySelector("#idTareaActual").innerHTML
+  );
   //Inicializamos esto para verificar si ya existe la entrega luego
   let yaExisteEntrega = false;
 
@@ -910,9 +1041,9 @@ actualizarNavItems();
 // mostrarOneSection("section#tareasPendienteAlumno")
 // mostrarOneSection("section#pantallaPrincipal")
 // mostrarOneSection("section#dashboardAlumno")
-// mostrarOneSection("section#tareasDocente")
+mostrarOneSection("section#tareasDocente");
 // mostrarOneSection("section#reporteIndividualDocente");
-mostrarOneSection("section#entregarTarea");
+// mostrarOneSection("section#entregarTarea");
 // mostrarNavItem("ul#usuarioConocido")
 document
   .querySelector("#crearTareaSubmit")
@@ -922,10 +1053,18 @@ document
 //   mostrarOneSection("section#verEjerciciosResultos");
 // });
 
+  // Dashboard Docente
+  document
+  .querySelector("body main section#dashboardDocente button#btnDocenteIrTareas")
+  .addEventListener("click", () => {
+    actualizarDatos_TareasDocente()
+    mostrarOneSection("section#tareasDocente");
+  });
+
 document.getElementById("btnVolverADashboard").addEventListener("click", () => {
-  actualizarDatos_DashboardAlumno()
-  mostrarOneSection("section#dashboardAlumno")
-})
+  actualizarDatos_DashboardAlumno();
+  mostrarOneSection("section#dashboardAlumno");
+});
 // SOLO PARA ESTILOS, NADA QUE VER CON LA LÓGICA
 document.addEventListener("DOMContentLoaded", function () {
   var elems = document.querySelectorAll(".sidenav");
@@ -956,9 +1095,12 @@ document.addEventListener("DOMContentLoaded", function () {
     M.FormSelect.init(selectElem);
     // Do other stuff
   });
+
+  var elemsCollapsible = document.querySelectorAll(".collapsible");
+  var instancesCollapsible = M.Collapsible.init(elemsCollapsible);
+
   var selectElemAudio = document.querySelectorAll("#entregarTareaSubirAudio");
   M.FormSelect.init(selectElemAudio);
-
 
   // var elemsModalEntregarTarea = document.querySelectorAll("#modalRealizarEntreg.modal");
   // var instancesModalEntregarTarea = M.Modal.init(elemsModalEntregarTarea);
